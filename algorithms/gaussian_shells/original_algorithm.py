@@ -120,6 +120,9 @@ for mean, cov in zip(means, covs):
             statusfile.write("Could not create component:\n")
             statusfile.write("mean: %s\n" %mean)
             statusfile.write("cov: %s\n" %cov)
+    # delete components with negative det
+    if mcmcmix_components[-1].det_sigma <= 0.:
+        mcmcmix_components.pop()
 mcmcmix = pypmc.density.mixture.MixtureDensity(mcmcmix_components)
 
 plt.figure()
@@ -163,6 +166,8 @@ for group in chain_groups:
                 this_data = data_full_chain[start:stop]
                 long_patches_means.append( np.mean(this_data, axis=0) )
                 long_patches_covs.append ( np.cov (this_data, rowvar=0) )
+                start += next_len
+                stop  += next_len
     else:
         # form one long chain and set k_g = 1
         k_g = 1
@@ -180,6 +185,8 @@ for group in chain_groups:
                 this_data = data_full_chain[start:stop]
                 long_patches_means.append( np.mean(this_data, axis=0) )
                 long_patches_covs.append ( np.cov (this_data, rowvar=0) )
+                start += next_len
+                stop  += next_len
 
 
 hierarchical_init = create_gaussian_mixture(long_patches_means, long_patches_covs)
@@ -192,7 +199,11 @@ plotfile.savefig()
 # ----------------------- hierarchical clustering --------------------------------------
 
 hc = pypmc.mix_adapt.hierarchical.Hierarchical(mcmcmix, hierarchical_init, verbose=True)
-hc.run(kill=kill_in_hc)
+hc_converged = hc.run(kill=kill_in_hc)
+if hc_converged:
+    statusfile.write('hierarchical clustering converged in step %i\n' %(hc_converged) )
+else:
+    statusfile.write('hierarchical clustering did not converge\n')
 reduced_proposal = hc.g
 
 # cannot trust component weights from Markov chain --> make them uniform
