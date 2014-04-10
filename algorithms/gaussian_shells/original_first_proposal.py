@@ -143,8 +143,8 @@ reduced_proposal.normalize()
 
 print 'have %i live components after hierarchical clustering\n' %(reduced_proposal.weights!=0).sum()
 
-# save number of chain groups; if and in which step hierarchical clustering converged
-params.update( [('number_of_chain_groups', len(chain_groups)), ('hc_converge_step', hc_converged)] )
+# save number of chain groups; if and in which step hierarchical clustering converged; number of components after hierarchical
+params.update( [('number_of_chain_groups', len(chain_groups)), ('hc_converge_step', hc_converged), ('final_number_of_components', len(reduced_proposal))] )
 
 # ----------------------- replace algorithm above -----------------------
 
