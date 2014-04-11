@@ -9,7 +9,7 @@ from mcmc import create_mcmc_samples
 from load_save import save_first_proposal
 
 # load parameters
-from params import params
+from params_original import params
 locals().update(params)
 
 # load the target function
