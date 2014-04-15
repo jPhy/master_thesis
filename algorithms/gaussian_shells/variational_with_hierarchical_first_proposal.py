@@ -88,7 +88,10 @@ else:
     raise ValueError("I don't know what you mean by `vb_initialization` = \"%s\"" %vb_initialization)
 
 # run the variational bayes
-vb_converged = vb.run(N_max_vb, verbose=True, rel_tol=vb_rel_tol, abs_tol=vb_abs_tol)
+try:
+    vb_converged = vb.run(N_max_vb, verbose=True, rel_tol=vb_rel_tol, abs_tol=vb_abs_tol, prune=vb_prune)
+except NameError:
+    vb_converged = vb.run(N_max_vb, verbose=True, rel_tol=vb_rel_tol, abs_tol=vb_abs_tol)
 
 # get a proposal out of the variational bayes ...
 hierarchical_init = vb.make_mixture()
@@ -107,8 +110,10 @@ if run_second_vb:
     elif vb2_initialization == "initial_guess":
         vb2 = pypmc.mix_adapt.variational.GaussianInference(data, initial_guess=hc.g)
     # initial_guess_large_nu --> use internal "initial_guess" keyword and set a large value for nu
-    elif vb2_initialization == "initial_guess_large_nu":
+    elif vb2_initialization == "initial_guess_large_nu": #!!!BUG!!!
         vb2 = pypmc.mix_adapt.variational.GaussianInference(data, initial_guess=mcmcmix, nu=(np.zeros(len(mcmcmix))+100.) )
+    elif vb2_initialization == "initial_guess_large_nu_corrected":
+        vb2 = pypmc.mix_adapt.variational.GaussianInference(data, initial_guess=hc.g, nu=(np.zeros(len(hc.g))+100.) )
     # else --> unrecognized initialization scheme
     else:
         raise ValueError("I don't know what you mean by `vb2_initialization` = \"%s\"" %vb2_initialization)

@@ -52,19 +52,60 @@ data = np.vstack(values)[::N_thin]
 # package_default --> use standard values in package `pypmc`
 if vb_initialization == "package_default":
     vb = pypmc.mix_adapt.variational.GaussianInference(data, vb_initial_K)
+elif vb_initialization == 'initial_guess_large_nu':
+    # create a gaussian mixture from patches of length L
+    # careful: L somehow scales with dimension
+    patches = []
+    for val in values:
+        patches.extend([val[patch_start:patch_start + L] for patch_start in range(0, len(val), L)])
+    patches = np.array(patches)
+    means   = np.array([patch.mean(axis=0) for patch in patches])
+    covs    = np.array([np.cov(patch, rowvar=0) for patch in patches])
+    mcmcmix_components = []
+    for mean, cov in zip(means, covs):
+        try:
+            mcmcmix_components.append(pypmc.density.gauss.Gauss(mean, cov))
+        except np.linalg.LinAlgError:
+            cov = np.diag(np.diag(cov))
+            try:
+                mcmcmix_components.append(pypmc.density.gauss.Gauss(mean, cov))
+            except np.linalg.LinAlgError:
+                print "Could not create component:"
+                print 'mean:', mean
+                print 'cov:', cov
+    mcmcmix = pypmc.density.mixture.MixtureDensity(mcmcmix_components)
+    vb = pypmc.mix_adapt.variational.GaussianInference(data, initial_guess=mcmcmix, nu=(np.zeros(len(mcmcmix))+100.) )
+elif vb_initialization == 'means_only':
+    # create a gaussian mixture from patches of length L
+    # careful: L somehow scales with dimension
+    patches = []
+    for val in values:
+        patches.extend([val[patch_start:patch_start + L] for patch_start in range(0, len(val), L)])
+    patches = np.array(patches)
+    means   = np.array([patch.mean(axis=0) for patch in patches])
+    vb = pypmc.mix_adapt.variational.GaussianInference(data, len(means), m=means)
 # else --> unrecognized initialization scheme
 else:
     raise ValueError("I don't know what you mean by `vb_initialization` = \"%s\"" %vb_initialization)
 
 # run the variational bayes
-vb_converged = vb.run(N_max_vb, verbose=True, rel_tol=vb_rel_tol, abs_tol=vb_abs_tol)
+try:
+    vb_converged = vb.run(N_max_vb, verbose=True, rel_tol=vb_rel_tol, abs_tol=vb_abs_tol, prune=vb_prune)
+except NameError:
+    vb_converged = vb.run(N_max_vb, verbose=True, rel_tol=vb_rel_tol, abs_tol=vb_abs_tol)
 
 # extract gaussian mixture from GaussianInference instance
 reduced_proposal = vb.make_mixture()
 
-# cannot trust component weights from Markov chain --> make them uniform
-reduced_proposal.weights[:] = 1.
-reduced_proposal.normalize()
+try:
+    abandon_weights
+except NameError:
+    abandon_weights = True
+
+if abandon_weights:
+    # cannot trust component weights from Markov chain --> make them uniform
+    reduced_proposal.weights[:] = 1.
+    reduced_proposal.normalize()
 
 # save number of components; if and in which step variational bayes converged
 params.update( [('final_number_of_components', len(reduced_proposal)), ('vb_converge_step', vb_converged)] )
