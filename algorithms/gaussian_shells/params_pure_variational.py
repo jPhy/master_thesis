@@ -10,16 +10,18 @@ N_adapt = 500, # adapt the Markov chains every N_adapt steps (not during burn-in
 
 N_thin = 10, # use only every `N_thin`-th sample for the variational bayes (1 means all)
 
-# how variational bayes is initialized, known keywords: ['package_default', 'initial_guess_large_nu', 'means_only'] (see actual program for details)
-vb_initialization = 'initial_guess_large_nu',
-L = 500, # patch length; only needed for vb_initialization 'initial_guess_large_nu' and 'means_only'
+# how variational bayes is initialized, known keywords: ['package_default', 'initial_guess_large_nu', 'means_only', 'long_patches'] (see actual program for details)
+vb_initialization = 'long_patches',
+critical_r = 2., # the critical R-value for chain grouping (only needed if vb_initialization = 'long_patches')
+K_g = 25, # number of components per chain_group (only neede for vb_initialization 'long_patches')
+#L = 500, # patch length; only needed for vb_initialization 'initial_guess_large_nu' and 'means_only'
 N_max_vb = 1000, # maximum number of steps in variational bayes
 #vb_initial_K = 2,
 vb_rel_tol = 10**-10,
 vb_abs_tol = 10**-5,
 abandon_weights = False,
 )
-params.update((('vb_prune', params['L']/params['N_thin']),)) # prune components with N_k less than ``vb_prune``
+# params.update((('vb_prune', params['L']/params['N_thin']),)) # prune components with N_k less than ``vb_prune``
 
 
 # ----------------------------------------

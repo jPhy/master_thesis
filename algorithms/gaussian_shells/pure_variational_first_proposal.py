@@ -84,6 +84,66 @@ elif vb_initialization == 'means_only':
     patches = np.array(patches)
     means   = np.array([patch.mean(axis=0) for patch in patches])
     vb = pypmc.mix_adapt.variational.GaussianInference(data, len(means), m=means)
+elif vb_initialization == 'long_patches':
+    # group chains and create long patches
+    chain_groups = pypmc.mix_adapt.r_value.r_group([np.mean(chain_values[:], axis=0) for chain_values in values],
+                                                   [np.cov(chain_values[:], rowvar=0) for chain_values in values],
+                                                   len(values[0]), critical_r)
+
+    print 'found %i chain grous\n' %len(chain_groups)
+
+    long_patches_means = []
+    long_patches_covs = []
+    for group in chain_groups:
+        # we want K_g components from k_g = len(group) chains
+        k_g = len(group)
+        if K_g >= k_g:
+            # find minimal lexicographic integer partition
+            n = [K_g // k_g for i in range(k_g)]
+            remainder = K_g % k_g
+            for i in range(remainder):
+                n[i] += 1
+            for i, chain_index in enumerate(group):
+                # need to partition in n[i] parts
+                data_full_chain = values[chain_index]
+                chain_length = len(data_full_chain)
+                # find minimal lexicographic integer partition of chain_length into n[i]
+                this_patch_lengths = [chain_length // n[i] for j in range(n[i])]
+                remainder = chain_length % n[i]
+                for j in range(remainder):
+                    this_patch_lengths[j] += 1
+                start = 0
+                stop  = this_patch_lengths[0]
+                for next_len in this_patch_lengths:
+                    this_data = data_full_chain[start:stop]
+                    long_patches_means.append( np.mean(this_data, axis=0) )
+                    long_patches_covs.append ( np.cov (this_data, rowvar=0) )
+                    start += next_len
+                    stop  += next_len
+        else:
+            # form one long chain and set k_g = 1
+            k_g = 1
+            # make one large chain
+            data_full_chain = np.vstack([values[i] for i in group])
+            chain_length = len(data_full_chain)
+            # need to partition into K_g parts -- > minimal lexicographic integer partition
+            this_patch_lengths = [chain_length // K_g for j in range(K_g)]
+            remainder = chain_length % K_g
+            for j in range(remainder):
+                this_patch_lengths[j] += 1
+            start = 0
+            stop  = this_patch_lengths[0]
+            for next_len in this_patch_lengths:
+                    this_data = data_full_chain[start:stop]
+                    long_patches_means.append( np.mean(this_data, axis=0) )
+                    long_patches_covs.append ( np.cov (this_data, rowvar=0) )
+                    start += next_len
+                    stop  += next_len
+    mcmcmix = create_gaussian_mixture(long_patches_means, long_patches_covs)
+    vb = pypmc.mix_adapt.variational.GaussianInference(data, initial_guess=mcmcmix, nu=(np.zeros(len(mcmcmix))+100.) )
+    # set vb_prune
+    vb_prune = .5 * len(data)/len(mcmcmix)
+    params.update((('vb_prune', vb_prune),))
 # else --> unrecognized initialization scheme
 else:
     raise ValueError("I don't know what you mean by `vb_initialization` = \"%s\"" %vb_initialization)
