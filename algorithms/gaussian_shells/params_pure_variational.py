@@ -3,10 +3,10 @@ import pypmc
 
 params = dict(
 random_seed = np.random.randint(2**62),
-dim = 2,
+dim = 10,
 k = 10, # number of markov chains
 N_burn_in = 10**3, # number of burn-in samples
-N_MCMC = 10**4, # number of steps per chain
+N_MCMC = 2*10**4, # number of steps per chain
 N_adapt = 500, # adapt the Markov chains every N_adapt steps (not during burn-in)
 
 N_thin = 10, # use only every `N_thin`-th sample for the variational bayes (1 means all)
