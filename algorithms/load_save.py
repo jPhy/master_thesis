@@ -45,8 +45,17 @@ def save_first_proposal(proposal, creation_parameters):
 def load_first_proposal(i):
     """Load proposal number ``i`` saved by :py:func:`.save_first_proposal`.
     The proposal is read off the file "./first_proposals/i.prop"
+    Can also parse negative ``i`` (standard python interpretation of
+    negative numbers).
 
     """
+    if i < 0:
+        # find out filename for proposal (standard python interpretation of negative numbers)
+        j = 0
+        while os.path.exists('./first_proposals/'+ str(j) + '.prop'):
+            j += 1
+        i = j + i
+    propfilename = './first_proposals/'+ str(i) + '.prop'
     propfilename = './first_proposals/'+ str(i) + '.prop'
     with open(propfilename, 'r') as propfile:
         proposal = cPickle.load(propfile)
