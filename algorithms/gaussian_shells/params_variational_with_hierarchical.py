@@ -1,5 +1,6 @@
 from __future__ import division
 import numpy as np
+import pypmc
 
 params = dict(
 random_seed = np.random.randint(2**62),
@@ -29,3 +30,4 @@ run_second_vb = False,
 abandon_weights = False, # delete the component weights obtained from the markov-chains (True proved to be worse in all experiments)
 )
 params.update((('vb_prune', params['L']/params['N_thin']),))
+params.update((('pypmc_version', pypmc.__version__),))

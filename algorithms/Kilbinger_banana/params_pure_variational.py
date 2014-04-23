@@ -1,4 +1,5 @@
 import numpy as np
+import pypmc
 
 params = dict(
 random_seed = np.random.randint(2**62),
@@ -22,6 +23,7 @@ vb_abs_tol = 10**-5,
 abandon_weights = False,
 )
 # params.update((('vb_prune', params['L']/params['N_thin']),)) # prune components with N_k less than ``vb_prune``
+params.update((('pypmc_version', pypmc.__version__),))
 
 
 # ----------------------------------------

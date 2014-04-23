@@ -1,4 +1,5 @@
 import numpy as np
+import pypmc
 
 params = dict(
 random_seed = np.random.randint(2**62),
@@ -12,6 +13,7 @@ K_g = 25, # components per group
 L = 200,
 critical_r = 2.,
 )
+params.update((('pypmc_version', pypmc.__version__),))
 
 
 # ----------------------------------------
