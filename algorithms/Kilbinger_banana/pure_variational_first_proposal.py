@@ -140,7 +140,10 @@ elif vb_initialization == 'long_patches':
                     start += next_len
                     stop  += next_len
     mcmcmix = create_gaussian_mixture(long_patches_means, long_patches_covs)
-    vb = pypmc.mix_adapt.variational.GaussianInference(data, initial_guess=mcmcmix, nu=(np.zeros(len(mcmcmix))+100.) )
+    try:
+        vb = pypmc.mix_adapt.variational.GaussianInference(data, initial_guess=mcmcmix, nu=(np.zeros(len(mcmcmix))+100.) )
+    except ValueError:
+        vb = pypmc.mix_adapt.variational.GaussianInference(data, initial_guess=mcmcmix)
     # set vb_prune
     vb_prune = .5 * len(data)/len(mcmcmix)
     params.update((('vb_prune', vb_prune),))
