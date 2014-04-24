@@ -180,8 +180,9 @@ if abandon_weights:
     reduced_proposal.weights[:] = 1.
     reduced_proposal.normalize()
 
-# save number of components; if and in which step variational bayes converged
-params.update( [('final_number_of_components', len(reduced_proposal)), ('vb_converge_step', vb_converged)] )
+# save number of components; if and in which step variational bayes converged; output of vb.posterior2prior
+params.update( [('final_number_of_components', len(reduced_proposal)), ('vb_converge_step', vb_converged),
+                ('vb_posterior2prior', vb.posterior2prior())] )
 
 # ----------------------- replace algorithm above -----------------------
 
