@@ -3,7 +3,7 @@ import pypmc
 
 params = dict(
 random_seed = np.random.randint(2**62),
-dim = 20,
+dim = 10,
 k = 10, # number of markov chains
 N_burn_in = 10**3, # number of burn-in samples
 N_MCMC = 2*10**4, # number of steps per chain
@@ -15,7 +15,7 @@ N_thin = 10, # use only every `N_thin`-th sample for the variational bayes (1 me
 vb_initialization = 'long_patches',
 # cov_rescale_factor = 2., # the factor multiplied to the empirical long-patch covariances (only needed if vb_initialization = 'long_patches_rescaled_cov')
 critical_r = 2., # the critical R-value for chain grouping (only needed if vb_initialization = 'long_patches')
-K_g = 25, # number of components per chain_group (only neede for vb_initialization 'long_patches')
+K_g = 2, # number of components per chain_group (only neede for vb_initialization 'long_patches')
 #L = 500, # patch length; only needed for vb_initialization 'initial_guess_large_nu' and 'means_only'
 N_max_vb = 1000, # maximum number of steps in variational bayes
 #vb_initial_K = 2,

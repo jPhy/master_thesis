@@ -172,7 +172,7 @@ elif method == 'PMC_pripos':
 
 elif method == 'VB_pripos':
 
-    sampler = pypmc.sampler.importance_sampling.ImporanceSampler(log_target, first_proposal)
+    sampler = pypmc.sampler.importance_sampling.ImportanceSampler(log_target, first_proposal)
     previous_perp = - np.inf
     converge_step = None
 
