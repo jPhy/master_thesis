@@ -84,7 +84,7 @@ elif vb_initialization == 'means_only':
     patches = np.array(patches)
     means   = np.array([patch.mean(axis=0) for patch in patches])
     vb = pypmc.mix_adapt.variational.GaussianInference(data, len(means), m=means)
-elif vb_initialization == 'long_patches':
+elif vb_initialization == 'long_patches' or vb_initialization == 'long_patches_rescaled_cov':
     # group chains and create long patches
     chain_groups = pypmc.mix_adapt.r_value.r_group([np.mean(chain_values[:], axis=0) for chain_values in values],
                                                    [np.cov(chain_values[:], rowvar=0) for chain_values in values],
@@ -117,7 +117,12 @@ elif vb_initialization == 'long_patches':
                 for next_len in this_patch_lengths:
                     this_data = data_full_chain[start:stop]
                     long_patches_means.append( np.mean(this_data, axis=0) )
-                    long_patches_covs.append ( np.cov (this_data, rowvar=0) )
+                    if vb_initialization == 'long_patches_rescaled_cov':
+                        long_patches_covs.append ( np.cov(this_data, rowvar=0) * cov_rescale_factor)
+                    elif vb_initialization == 'long_patches':
+                        long_patches_covs.append ( np.cov(this_data, rowvar=0) )
+                    else:
+                        raise RuntimeError('Unknown Error')
                     start += next_len
                     stop  += next_len
         else:
@@ -136,7 +141,12 @@ elif vb_initialization == 'long_patches':
             for next_len in this_patch_lengths:
                     this_data = data_full_chain[start:stop]
                     long_patches_means.append( np.mean(this_data, axis=0) )
-                    long_patches_covs.append ( np.cov (this_data, rowvar=0) )
+                    if vb_initialization == 'long_patches_rescaled_cov':
+                        long_patches_covs.append ( np.cov(this_data, rowvar=0) * cov_rescale_factor)
+                    elif vb_initialization == 'long_patches':
+                        long_patches_covs.append ( np.cov(this_data, rowvar=0) )
+                    else:
+                        raise RuntimeError('Unknown Error')
                     start += next_len
                     stop  += next_len
     mcmcmix = create_gaussian_mixture(long_patches_means, long_patches_covs)
@@ -170,8 +180,9 @@ if abandon_weights:
     reduced_proposal.weights[:] = 1.
     reduced_proposal.normalize()
 
-# save number of components; if and in which step variational bayes converged
-params.update( [('final_number_of_components', len(reduced_proposal)), ('vb_converge_step', vb_converged)] )
+# save number of components; if and in which step variational bayes converged; output of vb.posterior2prior
+params.update( [('final_number_of_components', len(reduced_proposal)), ('vb_converge_step', vb_converged),
+                ('vb_posterior2prior', vb.posterior2prior())] )
 
 # ----------------------- replace algorithm above -----------------------
 
