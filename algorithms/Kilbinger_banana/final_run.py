@@ -95,6 +95,19 @@ def live_components(proposal):
     "Return the number of non-zero weighted components of a mixture Density"
     return (proposal.weights!=0).sum()
 
+try:
+    min_steps
+except NameError:
+    min_steps = 0
+
+try:
+    abandon_first_weights
+except NameError:
+    abandon_first_weights = False
+
+if abandon_first_weights:
+    first_proposal.weights[:] = 1.
+    first_proposal.normalize()
 
 if method == "original":
 
@@ -115,7 +128,7 @@ if method == "original":
         this_perp = pypmc.tools.convergence.perp(weighted_samples[:,0])
 
         # stop if convergence criterion reached
-        if (this_perp - previous_perp) / this_perp < .05:
+        if i >= min_steps and (this_perp - previous_perp) / this_perp < .05:
             converge_step = i
             print 'PMC converged in step ' + str(i)
             break
@@ -153,7 +166,7 @@ elif method == 'PMC_pripos':
         this_perp = pypmc.tools.convergence.perp(sampler.std_weights[-1][:,0])
 
         # stop if convergence criterion reached
-        if (this_perp - previous_perp) / this_perp < .05:
+        if i >= min_steps and (this_perp - previous_perp) / this_perp < .05:
             converge_step = i
             print 'PMC converged in step ' + str(i)
             break
@@ -189,7 +202,7 @@ elif method == 'VB_pripos':
         this_perp = pypmc.tools.convergence.perp(weighted_samples[:,0])
 
         # stop if convergence criterion reached
-        if (this_perp - previous_perp) / this_perp < .05:
+        if i >= min_steps and (this_perp - previous_perp) / this_perp < .05:
             converge_step = i
             print 'converged in step ' + str(i)
             break
@@ -237,7 +250,7 @@ elif method == 'VB_cornuet':
         this_perp = pypmc.tools.convergence.perp(sampler.std_weights[-1][:,0])
 
         # stop if convergence criterion reached
-        if (this_perp - previous_perp) / this_perp < .05:
+        if i >= min_steps and (this_perp - previous_perp) / this_perp < .05:
             converge_step = i
             print 'converged in step ' + str(i)
             break
@@ -264,6 +277,68 @@ elif method == 'VB_cornuet':
         print 'have %i live components in step %i\n' %(live_components(sampler.proposal), i)
 
     params.update( [('final_number_of_components', live_components(sampler.proposal)), ('converge_step', converge_step)] )
+
+elif method == 'VB_cornuet_corrected':
+
+    sampler = pypmc.sampler.importance_sampling.DeterministicIS(log_target, first_proposal, std_weights=True)
+    previous_perp = - np.inf
+    converge_step = None
+
+    for i in range(max_sampling_steps):
+        print "step", i
+
+        # run len(sampler.proposal) * N_c steps
+        sampler.run(N_c * live_components(sampler.proposal), trace_sort=True)
+
+        # get ALL weighted samples
+        weighted_samples = sampler.history[:]
+
+        # calculate perplexity using the latest run only
+        this_perp = pypmc.tools.convergence.perp(sampler.std_weights[-1][:,0])
+
+        # stop if convergence criterion reached
+        if i >= min_steps and (this_perp - previous_perp) / this_perp < .05:
+            converge_step = i
+            print 'converged in step ' + str(i)
+            break
+        else:
+            previous_perp = this_perp
+
+        # update the proposal using VB
+        if i == 0:
+            if first_VB_prior:
+                # cannot rely on alpha0
+                cleaned_prior = first_proposal.creation_parameters['vb_posterior2prior'].copy()
+                cleaned_prior.pop('alpha0')
+                vb = pypmc.mix_adapt.variational.GaussianInference(weighted_samples[:,1:], initial_guess=sampler.proposal,
+                                                                   weights=weighted_samples[:,0], **cleaned_prior)
+            else:
+                vb = pypmc.mix_adapt.variational.GaussianInference(weighted_samples[:,1:], initial_guess=sampler.proposal,
+                                                                   weights=weighted_samples[:,0])
+        else:
+            if first_VB_prior:
+                vb = pypmc.mix_adapt.variational.GaussianInference(weighted_samples[:,1:], initial_guess=sampler.proposal,
+                                                               weights=weighted_samples[:,0], **cleaned_prior) #no posterior2prior here!
+            else:
+                vb = pypmc.mix_adapt.variational.GaussianInference(weighted_samples[:,1:], initial_guess=sampler.proposal,
+                                                               weights=weighted_samples[:,0])
+        vb.run(max_vb_steps, abs_tol=10**-5, rel_tol=10**-10, prune=mincount, verbose=True)
+        sampler.proposal = vb.make_mixture()
+
+        print 'have %i live components in step %i\n' %(live_components(sampler.proposal), i)
+
+    params.update( [('final_number_of_components', live_components(sampler.proposal)), ('converge_step', converge_step)] )
+
+elif method == 'weights_only':
+
+    sampler = pypmc.sampler.importance_sampling.ImportanceSampler(log_target, first_proposal)
+    latent = sampler.run(N_c * live_components(sampler.proposal), trace_sort=True)
+    weights = sampler.history[:][:,0]
+    comp_weights = np.zeros(len(sampler.proposal))
+    for l,w in zip(latent,weights):
+        comp_weights[l] += w
+    sampler.proposal.weights = comp_weights
+    sampler.proposal.normalize()
 
 else:
     raise ValueError("I don't know what you mean by `method` = \"%s\"" %method)
