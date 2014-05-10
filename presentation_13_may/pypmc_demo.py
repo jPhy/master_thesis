@@ -1,12 +1,11 @@
-import numpy as np
 import pypmc
 from pypmc.tools import plot_mixture
 
 # choose a dimension
-dim = 10
+dim = 2
 
 # choose a target function
-from sin_over_x import LogTarget; log_target = LogTarget(dim)
+from gaussian_shells import LogTarget; log_target = LogTarget(dim)
 
 # Markov chain prerun --> run 10 Markov chains with different initial points
 
@@ -80,13 +79,6 @@ hc_sampler.run(10**5)
 vb_sampler.run(10**5)
 merge_sampler.run(10**5)
 
-print "hc perplexity", pypmc.tools.convergence.perp(hc_sampler.history[:][:,0])
-print "hc ESS", pypmc.tools.convergence.ess(hc_sampler.history[:][:,0])
-print "vb perplexity", pypmc.tools.convergence.perp(vb_sampler.history[:][:,0])
-print "vb ESS", pypmc.tools.convergence.ess(vb_sampler.history[:][:,0])
-print "merge perplexity", pypmc.tools.convergence.perp(merge_sampler.history[:][:,0])
-print "merge ESS", pypmc.tools.convergence.ess(merge_sampler.history[:][:,0])
-
 # plot importance samples
 plt.figure(); plt.title('Hierarchical')
 plt.hist2d(hc_sampler.history[:][:,1], hc_sampler.history[:][:,2], weights=hc_sampler.history[:][:,0], cmap='gray_r', bins=100)
@@ -98,6 +90,13 @@ plt.figure(); plt.title('VB mixtures')
 plt.hist2d(merge_sampler.history[:][:,1], merge_sampler.history[:][:,2], weights=merge_sampler.history[:][:,0], cmap='gray_r', bins=100)
 
 plt.draw()
+
+print "hc perplexity", pypmc.tools.convergence.perp(hc_sampler.history[:][:,0])
+print "hc ESS", pypmc.tools.convergence.ess(hc_sampler.history[:][:,0])
+print "vb perplexity", pypmc.tools.convergence.perp(vb_sampler.history[:][:,0])
+print "vb ESS", pypmc.tools.convergence.ess(vb_sampler.history[:][:,0])
+print "merge perplexity", pypmc.tools.convergence.perp(merge_sampler.history[:][:,0])
+print "merge ESS", pypmc.tools.convergence.ess(merge_sampler.history[:][:,0])
 
 
 
