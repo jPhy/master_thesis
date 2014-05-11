@@ -55,15 +55,15 @@ vbmix = vb.make_mixture()
 # for hierarchical clustering and VBMerge form "short_patches"
 short_patches = pypmc.tools.patch_data(stacked_data, L=100)
 
-# run variational bayes with mixture --> use the long patches as initial guess
-merge = pypmc.mix_adapt.variational.VBMerge(short_patches, len(stacked_data), initial_guess=long_patches)
-merge.run(1000, abs_tol=1e-5, rel_tol=1e-10, prune=.5*len(vb.data)/vb.K, verbose=True)
-mergemix = merge.make_mixture()
-
 # run hierarchical clustering
 hc = pypmc.mix_adapt.hierarchical.Hierarchical(short_patches, long_patches, verbose=True)
 hc.run()
 hcmix = hc.g
+
+# run variational bayes with mixture --> use the long patches as initial guess
+merge = pypmc.mix_adapt.variational.VBMerge(short_patches, len(stacked_data), initial_guess=long_patches)
+merge.run(1000, abs_tol=1e-5, rel_tol=1e-10, prune=.5*len(vb.data)/vb.K, verbose=True)
+mergemix = merge.make_mixture()
 
 # plot the mixtures from these algorithms
 plt.figure(); plt.title('Hierarchical'); plot_mixture(hc.g)
@@ -91,13 +91,14 @@ plt.hist2d(merge_sampler.history[:][:,1], merge_sampler.history[:][:,2], weights
 
 plt.draw()
 
+%cpaste
 print "hc perplexity", pypmc.tools.convergence.perp(hc_sampler.history[:][:,0])
 print "hc ESS", pypmc.tools.convergence.ess(hc_sampler.history[:][:,0])
 print "vb perplexity", pypmc.tools.convergence.perp(vb_sampler.history[:][:,0])
 print "vb ESS", pypmc.tools.convergence.ess(vb_sampler.history[:][:,0])
 print "merge perplexity", pypmc.tools.convergence.perp(merge_sampler.history[:][:,0])
 print "merge ESS", pypmc.tools.convergence.ess(merge_sampler.history[:][:,0])
-
+--
 
 
 
@@ -125,6 +126,7 @@ vb_sampler.proposal = vb2.make_mixture()
 
 vb_sampler.run(10**5)
 
+%cpaste
 print "old vb perplexity", pypmc.tools.convergence.perp(vb_sampler.std_weights[0])
 print "old vb ESS", pypmc.tools.convergence.ess(vb_sampler.std_weights[0])
 print "new vb perplexity", pypmc.tools.convergence.perp(vb_sampler.std_weights[1])
@@ -135,7 +137,7 @@ print "combined vb ESS", pypmc.tools.convergence.ess(vb_sampler.history[:][:,0])
 
 print "Total effective samples with Cornuet:", pypmc.tools.convergence.ess(vb_sampler.history[:][:,0]) * len(vb_sampler.history[:])
 print "Total effective samples without Cornuet:", pypmc.tools.convergence.ess(vb_sampler.std_weights[0]) * len(vb_sampler.history[0]) + pypmc.tools.convergence.ess(vb_sampler.std_weights[1]) * len(vb_sampler.history[1])
-
+--
 
 
 # optional: to call pmc
