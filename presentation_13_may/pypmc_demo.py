@@ -63,6 +63,8 @@ hcmix = hc.g
 # run variational bayes with mixture --> use the long patches as initial guess
 merge = pypmc.mix_adapt.variational.VBMerge(short_patches, len(stacked_data), initial_guess=long_patches)
 merge.run(1000, abs_tol=1e-5, rel_tol=1e-10, prune=.5*len(vb.data)/vb.K, verbose=True)
+# Note: ``prune`` should be ``vb.N/vb.K`` but ``.5*len(vb.data)/vb.K`` is smaller (due to taking every 50th sample only)
+#       and still merge tends to prune too much --> overall message remains valid
 mergemix = merge.make_mixture()
 
 # plot the mixtures from these algorithms
