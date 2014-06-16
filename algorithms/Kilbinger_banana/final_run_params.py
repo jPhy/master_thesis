@@ -3,15 +3,15 @@ import pypmc
 
 params = dict(
 random_seed = np.random.randint(2**62),
-dim = 20,
-method = 'VB_cornuet_corrected', # the algorithm to be executed, known are ['original', 'PMC_pripos', 'VB_pripos', 'VB_cornuet', 'VB_cornuet_corrected', 'weights_only']
+dim = 10,
+method = 'PMC_pripos', # the algorithm to be executed, known are ['original', 'PMC_pripos', 'VB_pripos', 'VB_cornuet', 'VB_cornuet_corrected', 'weights_only']
 first_proposal_index = 'average_variational', # the proposal to be taken from database, can be int or ['good, average' _ 'original, variational']
 #abandon_first_weights = True, # delete the component weights in ``first_proposal`` before sampling
 max_sampling_steps = 20, # the maximum number of sampling runs
 N_c = 5000, # number of samples per component
 max_vb_steps = 100, # the maximum number of steps VB is allowed to run in each sampling (only if method = 'VB_...')
-first_VB_prior = True, # use component means and covs in ``first_proposal`` as prior (only if method = 'VB_...' and first_proposal_index = '..._variational')
-#rb = True, # use rao-blackwellized PMC? (only if method = 'original' or 'PMC_cornuet')
+#first_VB_prior = True, # use component means and covs in ``first_proposal`` as prior (only if method = 'VB_...' and first_proposal_index = '..._variational')
+rb = True, # use rao-blackwellized PMC? (only if method = 'original' or 'PMC_cornuet')
 mincount = 20, # the minimum number of samples a component must have produced
 min_steps = 2, # the minimum number of sampling steps to be performed
 )
