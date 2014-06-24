@@ -1,0 +1,2 @@
+include graphics as svg.
+matplotlib figures: save as .svg in matplotlib and then print to .svg from Inkscape, hereby make sure that paper is oriented "Portrait"
