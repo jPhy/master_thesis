@@ -56,4 +56,7 @@ plt.plot(points[:,0], target_values)
 
 plt.hist(values[:,0], color='black', bins=20, normed=True)
 
+plt.xlabel('$x$')
+plt.ylabel('$P(x)$')
+
 plt.savefig('figure.svg')
