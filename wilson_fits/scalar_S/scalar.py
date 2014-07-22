@@ -50,7 +50,7 @@ stacked_data = np.vstack(mcmc_data)
 plt.figure(); plt.hexbin(stacked_data[:,0], stacked_data[:,1], cmap='gray_r')
 plt.title('scalar')
 plt.xlabel('Re{cS}')
-plt.ylabel('Re{cS}')
+plt.ylabel('Im{cS}')
 plt.draw()
 
 

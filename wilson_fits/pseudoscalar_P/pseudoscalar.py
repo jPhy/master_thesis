@@ -50,7 +50,7 @@ stacked_data = np.vstack(mcmc_data)
 plt.figure(); plt.hexbin(stacked_data[:,0], stacked_data[:,1], cmap='gray_r')
 plt.title('pseudoscalar')
 plt.xlabel('Re{cP}')
-plt.ylabel('Re{cP}')
+plt.ylabel('Im{cP}')
 plt.draw()
 
 
