@@ -1,12 +1,12 @@
 strict convergence criterion: 
 chain_groups components_VB Perplexity_VB ESS_VB
- means: [ 1.          4.05555556  0.78662314  0.47438357]
- std_dev: [ 0.          0.41617618  0.02703196  0.10496999]
+ means: [ 1.          3.9         0.77752288  0.45189334]
+ std_dev: [ 0.          0.43808583  0.03042215  0.12897822]
 
 
 
 
 loose convergence criterion: 
 chain_groups components_VB Perplexity_VB ESS_VB
- means: [ 1.          4.33333333  0.76481059  0.37857111]
- std_dev: [ 0.          0.59408853  0.05361558  0.19181479]
+ means: [ 1.          4.39        0.77563126  0.41071597]
+ std_dev: [ 0.          0.6012613   0.04847824  0.16456742]
