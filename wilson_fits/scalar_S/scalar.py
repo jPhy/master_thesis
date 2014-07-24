@@ -1,13 +1,20 @@
+import sys, os
+sys.path.insert( 0, os.path.abspath('..') )
+
 import pypmc, eos, numpy as np
+from nuisance import get_nuisance
 from pypmc.tools import plot_mixture
 from pypmc.tools.convergence import perp, ess
 
 # define log posterior function
 constraints = ["B^0_s->mu^+mu^-::BR@LHCb-2013D", "B^0_s->mu^+mu^-::BR@CMS-2013B"]
+nuisance = get_nuisance(constraints)
 priors = [eos.LogPrior.Flat("Re{cS}", range_min=-15, range_max=15),
-          eos.LogPrior.Flat("Im{cS}", range_min=-15, range_max=15)]
+          eos.LogPrior.Flat("Im{cS}", range_min=-15, range_max=15)] + nuisance
 dim = len(priors)
-ind = pypmc.tools.indicator.hyperrectangle([-15]*2, [15]*2)
+ind_lower = [p.range_min for p in priors]
+ind_upper = [p.range_max for p in priors]
+ind = pypmc.tools.indicator.hyperrectangle(ind_lower, ind_upper)
 options = {"scan-mode": "cartesian", "model": "WilsonScan", "form-factors": "BZ2004"}
 
 ana = eos.Analysis(constraints, priors, options)
@@ -19,14 +26,19 @@ log_target = pypmc.tools.indicator.merge_function_with_indicator(ana, ind, -np.i
 # Markov chain prerun --> run 10 Markov chains with different initial points
 
 # define a proposal for the initial Markov chain run
-mc_prop = pypmc.density.gauss.LocalGauss(np.eye(dim)*.1)
+mc_prop = pypmc.density.gauss.LocalGauss(np.diag([.1, .1] + [0.0001 * (p.upper - p.lower) for p in nuisance]))
 
 # define initial points for the Markov chain run
-starts = np.random.uniform(-5.,5.,size=10*dim).reshape((10,dim))
+def draw_uniform_in_support():
+    sample = np.empty(dim)
+    for d in range(dim):
+        sample[d] = np.random.uniform(priors[d].range_min, priors[d].range_max)
+    return sample
+starts = np.array([draw_uniform_in_support() for i in range(10)])
 # log_target(starts[i]) must not be -inf!
 for start in starts:
     while log_target(start) == -np.inf:
-        start[:] = np.random.uniform(-5.,5.,size=dim)
+        start[:] = draw_uniform_in_support()
 
 # define the Markov chains
 mcs = [pypmc.sampler.markov_chain.AdaptiveMarkovChain(log_target, mc_prop, start) for start in starts]
