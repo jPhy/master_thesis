@@ -1,19 +1,17 @@
 import pypmc
 from pypmc.tools import plot_mixture
 
-# choose a dimension
 dim = 4
 
-# choose a target function
+# target function
 from two_bananas import LogTarget; log_target = LogTarget(dim)
 
 # Markov chain prerun --> run 2 Markov chains, one in each mode
 
-# define a proposal for the initial Markov chain run
+# define initial proposal for the Markov chain run
 mc_prop = pypmc.density.gauss.LocalGauss(np.eye(dim)*.1)
 
 # define initial points for the Markov chain run (one in each mode)
-
 starts = [
               np.array([  2.21400968,   6.37248868, -11.88389791,  -5.91889878]),
               np.array([-10.62816039,  -3.2020552 ,   0.04447288,   5.3784658 ])
@@ -115,6 +113,17 @@ vb_sampler.proposal = vb2.make_mixture()
 
 vb_sampler.run(10**5)
 
+
+plt.figure()
+plt.title('improved Importance Samples')
+plt.hist2d(vb_sampler.history[1][:,2], vb_sampler.history[1][:,3], weights=vb_sampler.std_weights[1][:,0], cmap='gray_r', bins=100)
+plt.xlabel('$x_2$')
+plt.ylabel('$x_3$')
+plt.xlim(-30,10)
+plt.ylim(-30,30)
+plt.draw()
+
+
 %cpaste
 print "old vb perplexity", pypmc.tools.convergence.perp(vb_sampler.std_weights[0])
 print "old vb ESS", pypmc.tools.convergence.ess(vb_sampler.std_weights[0])
@@ -127,12 +136,3 @@ print "combined vb ESS", pypmc.tools.convergence.ess(vb_sampler.history[:][:,0])
 print "Total effective samples with Cornuet:", pypmc.tools.convergence.ess(vb_sampler.history[:][:,0]) * len(vb_sampler.history[:])
 print "Total effective samples without Cornuet:", pypmc.tools.convergence.ess(vb_sampler.std_weights[0]) * len(vb_sampler.history[0]) + pypmc.tools.convergence.ess(vb_sampler.std_weights[1]) * len(vb_sampler.history[1])
 --
-
-plt.figure()
-plt.title('improved Importance Samples')
-plt.hist2d(vb_sampler.history[1][:,2], vb_sampler.history[1][:,3], weights=vb_sampler.std_weights[1][:,0], cmap='gray_r', bins=100)
-plt.xlabel('$x_2$')
-plt.ylabel('$x_3$')
-plt.xlim(-30,10)
-plt.ylim(-30,30)
-plt.draw()
