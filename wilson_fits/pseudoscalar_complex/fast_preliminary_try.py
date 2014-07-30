@@ -1,21 +1,21 @@
 import sys, os
 sys.path.insert( 0, os.path.abspath('..') )
 
-import pypmc, eos, numpy as np
+import pypmc, eos, constraints as constr, numpy as np
 from nuisance import get_nuisance
 from pypmc.tools import plot_mixture
 from pypmc.tools.convergence import perp, ess
 
 # define log posterior function
-constraints = ["B^0_s->mu^+mu^-::BR@LHCb-2013D", "B^0_s->mu^+mu^-::BR@CMS-2013B"]
+constraints = constr.Bs_to_ll
 nuisance = get_nuisance(constraints)
-priors = [eos.LogPrior.Flat("Re{cS}", range_min=-15, range_max=15),
-          eos.LogPrior.Flat("Im{cS}", range_min=-15, range_max=15)] + nuisance
+priors = [eos.LogPrior.Flat("Re{cP}", range_min=-15, range_max=15),
+          eos.LogPrior.Flat("Im{cP}", range_min=-15, range_max=15)] + nuisance
 dim = len(priors)
 ind_lower = [p.range_min for p in priors]
 ind_upper = [p.range_max for p in priors]
 ind = pypmc.tools.indicator.hyperrectangle(ind_lower, ind_upper)
-options = {"scan-mode": "cartesian", "model": "WilsonScan", "form-factors": "BZ2004"}
+options = {"scan-mode": "cartesian", "model": "WilsonScan", "form-factors": "KMPW2010"}
 
 ana = eos.Analysis(constraints, priors, options)
 
@@ -26,7 +26,7 @@ log_target = pypmc.tools.indicator.merge_function_with_indicator(ana, ind, -np.i
 # Markov chain prerun --> run 10 Markov chains with different initial points
 
 # define a proposal for the initial Markov chain run
-mc_prop = pypmc.density.gauss.LocalGauss(np.diag([.1, .1] + [0.0001 * (p.upper - p.lower) for p in nuisance]))
+mc_prop = pypmc.density.gauss.LocalGauss(np.diag([.01, .01] + [0.0001 * (p.upper - p.lower) for p in nuisance]))
 
 # define initial points for the Markov chain run
 def draw_uniform_in_support():
@@ -60,29 +60,41 @@ stacked_data = np.vstack(mcmc_data)
 
 # plot stacked_data
 plt.figure(); plt.hexbin(stacked_data[:,0], stacked_data[:,1], cmap='gray_r')
-plt.title('scalar')
-plt.xlabel('Re{cS}')
-plt.ylabel('Im{cS}')
+plt.title('pseudoscalar')
+plt.xlabel('Re{cP}')
+plt.ylabel('Im{cP}')
 plt.draw()
 
 
 # find proposal function
 
-# form "long_patches"
-long_patches = pypmc.mix_adapt.r_value.make_r_gaussmix(mcmc_data)
+# form "short_patches"
+short_patches = pypmc.tools.patch_data(stacked_data, L=100)
+importance_prop = pypmc.density.mixture.MixtureDensity(short_patches.components[::500])
 
-# run variational bayes
-vb = pypmc.mix_adapt.variational.GaussianInference(stacked_data[::50], initial_guess=long_patches)
-vb_prune = .5*len(vb.data)/vb.K
-vb.run(1000, abs_tol=1e-5, rel_tol=1e-10, prune=vb_prune, verbose=True)
-vbmix = vb.make_mixture()
+# produce a proposal function for Importance Sampling
+for i in range(25):
+    print i
+    pypmc.mix_adapt.pmc.gaussian_pmc(stacked_data[::50], importance_prop, copy=False)
+    importance_prop.prune()
 
-# plot vbmix
-plt.figure(); plot_mixture(vbmix); plt.draw()
+vb = pypmc.mix_adapt.variational.GaussianInference(stacked_data[::50], initial_guess=importance_prop)
+vb.run(1000, abs_tol=1e-5, rel_tol=1e-5, verbose=True)
+importance_prop = vb.make_mixture()
+
+for i in range(25):
+    print i
+    pypmc.mix_adapt.pmc.gaussian_pmc(stacked_data[::50], importance_prop, copy=False)
+    importance_prop.prune()
+
+
+
+# plot proposal
+plt.figure(); plot_mixture(importance_prop); plt.draw()
 
 
 # run importance sampling
-sampler = pypmc.sampler.importance_sampling.DeterministicIS(log_target, vbmix)
+sampler = pypmc.sampler.importance_sampling.DeterministicIS(log_target, importance_prop)
 sampler.run(10**5)
 
 # plot importance samples
