@@ -1,12 +1,29 @@
 import eos
+from copy import deepcopy
 
-# scenarios
-# ---------
 def get_nuisance(constraints):
-    if constraints == ["B^0_s->mu^+mu^-::BR@LHCb-2013D", "B^0_s->mu^+mu^-::BR@CMS-2013B"]:
-        return CKM_all + quark_masses + decay_constants + form_factors + subleading_B_to_Pll
-    else:
-        raise ValueError( "No nuisance parameters set for constraints: " + str(constraints) )
+    copied_constraints = deepcopy(constraints)
+    out = set(CKM_all + quark_masses)
+
+    if "B->K::f_+@HPQCD-2013A" in copied_constraints:
+        copied_constraints.remove("B->K::f_+@HPQCD-2013A")
+        out.update(form_factors)
+
+    for constraint in constraints:
+
+        if constraint.startswith("B^0_s->mu^+mu^-"):
+            copied_constraints.remove(constraint)
+            out.update(decay_constants)
+
+        if constraint.startswith("B^+->K^+mu^+mu^-"):
+            copied_constraints.remove(constraint)
+            out.update(form_factors + subleading_B_to_Pll)
+
+    if copied_constraints:
+        raise ValueError("Unparsable constraints: " + str(constraints) )
+
+    return list(out)
+
 
 
 # defines the allowed parameter range in terms of sigmas for Gaussian and LogGamma distributions
