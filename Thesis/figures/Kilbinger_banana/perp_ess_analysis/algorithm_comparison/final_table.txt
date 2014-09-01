@@ -1,3 +1,13 @@
+1250 samples: 
+chain_groups components_PMC Perplexity_PMC ESS_PMC components_VB Perplexity_VB ESS_VB components_HC Perplexity_HC ESS_HC
+ means: [  1.08        12.73         0.29286443   0.04691361   3.4          0.63595571
+   0.16743363  16.2          0.56519266   0.19506793]
+ std_dev: [ 0.27265992  3.70054596  0.09216878  0.03588419  0.55048188  0.08008426
+  0.11622344  4.08989887  0.08273953  0.10263457]
+
+
+
+
 2500 samples: 
 chain_groups components_PMC Perplexity_PMC ESS_PMC components_VB Perplexity_VB ESS_VB components_HC Perplexity_HC ESS_HC
  means: [  1.           8.57         0.68097339   0.29939661   3.98         0.77732858
@@ -14,3 +24,13 @@ chain_groups components_PMC Perplexity_PMC ESS_PMC components_VB Perplexity_VB E
    0.6046724   15.           0.6219457    0.41810623]
  std_dev: [ 0.          0.98365429  0.02126579  0.15097715  0.48241815  0.02398391
   0.14631675  0.          0.0128967   0.08996554]
+
+
+
+
+7500 samples: 
+chain_groups components_PMC Perplexity_PMC ESS_PMC components_VB Perplexity_VB ESS_VB components_HC Perplexity_HC ESS_HC
+ means: [  1.           5.31         0.89313521   0.71140423   4.65         0.87366227
+   0.66523594  15.           0.6170912    0.44843197]
+ std_dev: [ 0.          0.70632067  0.03471366  0.15246675  0.47937249  0.04023653
+  0.16520544  0.          0.02618263  0.08879532]
