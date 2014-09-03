@@ -1,0 +1,26 @@
+original_algorithm_5_components: 
+chain_groups components_first perp_first ess_first components_final perp_final ess_final N_importance
+ means: [  1.00000000e+00   5.00000000e+00   6.16212335e-01   3.86528144e-01
+   4.99000000e+00   6.32065444e-01   1.93654638e-01   7.91400000e+03]
+ std_dev: [  0.00000000e+00   0.00000000e+00   2.09561047e-02   1.14792975e-01
+   1.00000000e-01   6.62785314e-02   1.20371718e-01   1.61063511e+03]
+
+
+
+
+original_algorithm_15_components: 
+chain_groups components_first perp_first ess_first components_final perp_final ess_final N_importance
+ means: [  1.00000000e+00   1.50000000e+01   6.24204648e-01   4.07802913e-01
+   1.48500000e+01   8.18140305e-01   4.10492331e-01   3.57900000e+04]
+ std_dev: [  0.00000000e+00   0.00000000e+00   1.28059683e-02   1.03832018e-01
+   3.58870281e-01   3.93644423e-02   1.69976797e-01   6.79378058e+03]
+
+
+
+
+vb_only: 
+chain_groups components_first perp_first ess_first components_final perp_final ess_final N_importance
+ means: [  1.00000000e+00   4.48000000e+00   8.46064003e-01   5.87231040e-01
+   4.48000000e+00   8.68070634e-01   6.14537149e-01   6.00000000e+03]
+ std_dev: [ 0.          0.50211673  0.07690491  0.18721889  0.50211673  0.03246871
+  0.18916293  0.        ]
