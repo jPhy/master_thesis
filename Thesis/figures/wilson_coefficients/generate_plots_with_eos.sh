@@ -39,3 +39,7 @@ mv $OUTFILENAME Thesis_plots/C10p_CP.svg
 $plot --single-2D 1 5 --use-KDE --bandwidth .045
 mv $OUTFILENAME Thesis_plots/C10p_CPp.svg
 
+# subleading large recoil
+$plot --single-1D 21 --use-KDE --bandw .06
+mv $OUTFILENAME Thesis_plots/SL_large_recoil.svg
+
