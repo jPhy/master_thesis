@@ -43,3 +43,7 @@ mv $OUTFILENAME Thesis_plots/C10p_CPp.svg
 $plot --single-1D 21 --use-KDE --bandw .06
 mv $OUTFILENAME Thesis_plots/SL_large_recoil.svg
 
+# form factor parameter f^t(0)
+$plot --single-1D 17 --use-KDE --bandw .006
+mv $OUTFILENAME Thesis_plots/FF_ft0.svg
+
