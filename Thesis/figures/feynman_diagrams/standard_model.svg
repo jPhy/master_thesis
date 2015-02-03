@@ -22,14 +22,14 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="585.09195"
-     inkscape:cy="152.99258"
+     inkscape:zoom="5.6"
+     inkscape:cx="272.10694"
+     inkscape:cy="196.64417"
      inkscape:document-units="px"
      inkscape:current-layer="svg2"
      showgrid="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="948"
+     inkscape:window-width="1680"
+     inkscape:window-height="974"
      inkscape:window-x="0"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
@@ -388,10 +388,40 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
+  <g
+     transform="matrix(2.1132626,0,0,2.1132626,-2345.1728,-469.834)"
+     id="g3709">
+    <g
+       transform="matrix(1.25,0,0,-1.25,829.30623,1162.4274)"
+       id="g3287">
+      <text
+         id="text3289"
+         transform="matrix(1,0,0,-1,303.2,660.3)">
+        <tspan
+           id="tspan3291"
+           y="0"
+           x="0"
+           style="font-size:12px;font-style:italic;font-variant:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Liberation Serif;-inkscape-font-specification:LiberationSerif-Italic">Z</tspan>
+      </text>
+    </g>
+    <g
+       transform="matrix(1.25,0,0,-1.25,829.30623,1162.4274)"
+       id="g3293">
+      <text
+         id="text3295"
+         transform="matrix(1,0,0,-1,310.7,666.3)">
+        <tspan
+           id="tspan3297"
+           y="0"
+           x="0"
+           style="font-size:7.19999981px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Liberation Serif;-inkscape-font-specification:LiberationSerif">0</tspan>
+      </text>
+    </g>
+  </g>
   <path
      id="path6643"
      title="0.1*t+cos(0.0015*t) 0.3 * sin(t)"
@@ -554,19 +584,6 @@
          x="0"
          y="0"
          id="tspan8021">,</tspan>
-    </text>
-  </g>
-  <g
-     id="g8023"
-     transform="matrix(2.7071448,0,0,-2.7071448,-617.64727,1666.0311)">
-    <text
-       transform="matrix(1,0,0,-1,305.1,525.8)"
-       id="text8025">
-      <tspan
-         style="font-size:12px;font-style:italic;font-variant:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Liberation Serif;-inkscape-font-specification:LiberationSerif-Italic"
-         x="0"
-         y="0"
-         id="tspan8027">Z</tspan>
     </text>
   </g>
   <g
