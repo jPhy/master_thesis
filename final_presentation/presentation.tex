@@ -1,0 +1,176 @@
+%% 30min talk
+
+\documentclass[english]{beamer}
+\usetheme{Warsaw}
+\setbeamertemplate{navigation symbols}{} % remove the navigation symbols
+\setbeamertemplate{headline}{} % remove headline
+\setbeamertemplate{footline}[frame number]
+
+\usepackage{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+\usepackage{wasysym}
+
+\title{Beyond-the-standard-model contributions to rare B decays analyzed with variational-Bayes enhanced adaptive importance sampling}
+\author{Stephan Jahn}
+\date{\today} %TODO: insert date
+
+% ----------------------------------------------------------------------
+
+\begin{document}
+
+\newcommand{\slide}[2][t]{\begin{frame}[#1] \frametitle{\insertsection} #2 \end{frame}}
+
+% ----------------------- title page, unnumbered -----------------------
+
+{
+\setbeamertemplate{footline}{}
+\frame[nopagenumbering]{\titlepage}
+}
+
+% -------------------------- overview section --------------------------
+
+\section{Overview}
+
+\slide[t]{
+
+    Bayes' formula:
+    \newline \newline
+    $$ P(\theta | \mathcal{D}, \mathrm{M} ) = \frac{P(\mathcal{D}|\theta, \mathrm{M})P(\theta | \mathrm{M})}{P(\mathcal{D} | \mathrm{M} )} $$
+
+    \only<2->{ \
+        \newline \newline \
+        for the Wilson coefficients: %TODO: relocate; this is not an overview \
+        \
+        \newline \newline \
+        \
+        $$ \theta = \lbrace \mathcal{C}_{7 , 9 , 10 , S , P , T , T5 , ...}^{(\prime)} \rbrace $$
+        $$ \mathcal{D} = \mathrm{experimental~data} $$
+        $$ \mathrm{M} = \mathrm{EFT , SM , ...} $$
+    }
+
+}
+
+
+\slide[t]{
+
+{\large\textbf{Goals}}
+
+\only<2->{\begin{itemize}}
+\only<2->{\item map out the posterior distribution} %TODO: place a figure below
+\only<3->{\item compare models via posterior odds (Bayes factors)} %TODO: need to explain these
+\only<3->{\begin{itemize} \item[] \only<4->{\smiley{} find new physics} \item[] \only<5->{\frownie{} confirm the SM} \end{itemize}}
+\only<2->{\end{itemize}}
+
+}
+
+
+
+
+
+\slide[t]{
+
+\begin{columns}[t] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
+
+\column{.45\textwidth} % Left column and width
+
+{\large\textbf{Difficulties}}
+
+\only<2->{\begin{itemize}}
+\only<2->{\item curse of dimensionality}
+\only<3->{\item multimodality}
+\only<2->{\end{itemize}}
+
+\only<4->{\Huge \textcolor{red}{no standard algorithm so far}} %TODO: move to end and emphasize as result
+
+\column{.5\textwidth} % Right column and width
+
+\vspace{2cm}
+
+%TODO: figure
+figure of typical targets e.g. C\_10 C\_10prime plot to be shown permanently
+
+\end{columns}
+
+}
+
+% ------------------------------ toc page ------------------------------
+
+\begin{frame}
+\frametitle{Contents}
+\tableofcontents
+\end{frame}
+
+% ----------------------------- VB section -----------------------------
+
+\section{Adaptive importance sampling with the variational-Bayes approach} %TODO: write
+
+\slide{ %TODO: remove or modify this slide
+
+    \textlangle empty\textrangle
+
+}
+
+\subsection{Adaptive importance sampling}
+
+\slide{ %TODO: remove or modify this slide
+
+    \frametitle{\insertsubsectionhead}
+
+    \only<1-2> {placeholder 1}
+    \only<2> {placeholder 2}
+    \only<-3> {placeholder 3}
+    \only<4> {placeholder 4}
+
+}
+
+\subsection{Variational Bayes}
+
+\slide{ %TODO: remove or modify this slide
+
+    \frametitle{\insertsubsectionhead}
+
+    \only<1-2> {placeholder 1}
+    \only<2> {placeholder 2}
+    \only<-3> {placeholder 3}
+    \only<4> {placeholder 4}
+
+}
+
+% ------------------------- B-physics section --------------------------
+
+\section{Scalar and tensorial contributions to $ b \to s \mu^+ \mu^- $} %TODO: write
+
+\slide{ %TODO: remove or modify this slide
+
+    \textlangle empty\textrangle
+
+}
+
+\subsection{(pseudo-)scalar contributions}
+
+\slide{ %TODO: remove or modify this slide
+
+    \frametitle{\insertsubsectionhead}
+
+    \only<1-2> {placeholder 1}
+    \only<2> {placeholder 2}
+    \only<-3> {placeholder 3}
+    \only<4> {placeholder 4}
+
+}
+
+\subsection{(pseudo-)tensor contributions}
+
+\slide{ %TODO: remove or modify this slide
+
+    \frametitle{\insertsubsectionhead}
+
+    \only<1-2> {placeholder 1}
+    \only<2> {placeholder 2}
+    \only<-3> {placeholder 3}
+    \only<4> {placeholder 4}
+
+}
+
+\end{document}
