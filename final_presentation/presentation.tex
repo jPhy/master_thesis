@@ -40,13 +40,13 @@
 
     \only<2->{ \
         \newline \newline \
-        for the Wilson coefficients: %TODO: relocate; this is not an overview \
+        our application: \
         \
         \newline \newline \
-        \
-        $$ \theta = \lbrace \mathcal{C}_{7 , 9 , 10 , S , P , T , T5 , ...}^{(\prime)} \rbrace $$
-        $$ \mathcal{D} = \mathrm{experimental~data} $$
-        $$ \mathrm{M} = \mathrm{EFT , SM , ...} $$
+
+        \only<3->{$$ \theta = \lbrace \mathcal{C}_{7 , 9 , 10 , S , P , T , T5 , ...}^{(\prime)} \rbrace $$}
+        \only<4->{$$ \mathcal{D} = \mathrm{experimental~data} $$}
+        \only<5->{$$ \mathrm{M} = \mathrm{EFT , SM , ...} $$}
     }
 
 }
@@ -56,11 +56,39 @@
 
 {\large\textbf{Goals}}
 
-\only<2->{\begin{itemize}}
-\only<2->{\item map out the posterior distribution} %TODO: place a figure below
-\only<3->{\item compare models via posterior odds (Bayes factors)} %TODO: need to explain these
-\only<3->{\begin{itemize} \item[] \only<4->{\smiley{} find new physics} \item[] \only<5->{\frownie{} confirm the SM} \end{itemize}}
-\only<2->{\end{itemize}}
+\begin{columns}[t] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
+
+\column{.45\textwidth} % Left column and width
+
+\only<2->{\begin{itemize}
+              \item draw marginal plots of the posterior
+              \
+              \newline
+
+              \hspace{-1.2cm} \includegraphics[width=1.01\textwidth]{figures/C10p_CP}
+
+          \end{itemize}}
+
+\column{.5\textwidth} % Right column and width
+
+\only<3->{\begin{itemize}
+          \item compare models $\mathrm{EFT} \leftrightarrow \mathrm{SM}$
+          \end{itemize}
+
+              $$ \frac{P(\mathrm{EFT}|\mathcal{D})}{P(\mathrm{SM}|\mathcal{D})} =
+                 \frac{P(\mathcal{D}|\mathrm{EFT})}{P(\mathcal{D}|\mathrm{SM})} \cdot \frac{P(\mathrm{EFT})}{P(\mathrm{SM})} $$
+
+              $$ P(\mathrm{M} | \mathcal{D} ) = \frac{P(\mathcal{D} | \mathrm{M})P(\mathrm{M})}{P(\mathcal{D})} $$
+
+          \begin{itemize}
+          \item[]
+              \begin{itemize}
+                  \item[] \only<4->{\hspace{-0.1\textwidth} $\frac{P(\mathrm{EFT}|\mathcal{D})}{P(\mathrm{SM}|\mathcal{D})} > 1$ new physics \smiley{} \newline}
+                  \item[] \only<5->{\hspace{-0.1\textwidth} $\frac{P(\mathrm{EFT}|\mathcal{D})}{P(\mathrm{SM}|\mathcal{D})} < 1$ confirm SM \frownie{}}
+              \end{itemize}
+          \end{itemize}}
+
+\end{columns}
 
 }
 
@@ -70,25 +98,32 @@
 
 \slide[t]{
 
+{\large\textbf{Difficulties}}
+
 \begin{columns}[t] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
 
 \column{.45\textwidth} % Left column and width
 
-{\large\textbf{Difficulties}}
+\vspace{0.65cm} % to center the text
 
 \only<2->{\begin{itemize}}
 \only<2->{\item curse of dimensionality}
 \only<3->{\item multimodality}
+\only<4->{\item degeneracies}
 \only<2->{\end{itemize}}
 
-\only<4->{\Huge \textcolor{red}{no standard algorithm so far}} %TODO: move to end and emphasize as result
+\only<5->{\Huge \textcolor{red}{no standard algorithm so far}}
 
 \column{.5\textwidth} % Right column and width
 
-\vspace{2cm}
+\vspace{-8mm}
 
-%TODO: figure
-figure of typical targets e.g. C\_10 C\_10prime plot to be shown permanently
+\begin{center}
+\only<3->{\includegraphics[height=0.4\textheight]{figures/C10_C10p}}
+
+\only<4->{\includegraphics[height=0.43\textheight]{figures/example_for_degeneracy}}
+\end{center}
+
 
 \end{columns}
 
@@ -104,6 +139,8 @@ figure of typical targets e.g. C\_10 C\_10prime plot to be shown permanently
 % ----------------------------- VB section -----------------------------
 
 \section{Adaptive importance sampling with the variational-Bayes approach} %TODO: write
+
+%TODO: mention pypmc in detail; that is a major outcome of the work
 
 \slide{ %TODO: remove or modify this slide
 
@@ -139,7 +176,7 @@ figure of typical targets e.g. C\_10 C\_10prime plot to be shown permanently
 
 % ------------------------- B-physics section --------------------------
 
-\section{Scalar and tensorial contributions to $ b \to s \mu^+ \mu^- $} %TODO: write
+\section{Scalar and tensor contributions to $ b \to s \mu^+ \mu^- $} %TODO: write
 
 \slide{ %TODO: remove or modify this slide
 
@@ -147,7 +184,7 @@ figure of typical targets e.g. C\_10 C\_10prime plot to be shown permanently
 
 }
 
-\subsection{(pseudo-)scalar contributions}
+\subsection{scalar contributions}
 
 \slide{ %TODO: remove or modify this slide
 
@@ -160,7 +197,7 @@ figure of typical targets e.g. C\_10 C\_10prime plot to be shown permanently
 
 }
 
-\subsection{(pseudo-)tensor contributions}
+\subsection{tensor contributions}
 
 \slide{ %TODO: remove or modify this slide
 
