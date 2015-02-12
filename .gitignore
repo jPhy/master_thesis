@@ -1,2 +1,11 @@
 # python binary files
 *.pyc
+
+# LaTeX temporary files
+final_presentation/presentation.aux
+final_presentation/presentation.log
+final_presentation/presentation.nav
+final_presentation/presentation.out
+final_presentation/presentation.pdf
+final_presentation/presentation.snm
+final_presentation/presentation.toc
