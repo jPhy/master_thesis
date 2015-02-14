@@ -20,6 +20,8 @@
 \begin{document}
 
 \newcommand{\slide}[2][t]{\begin{frame}[#1] \frametitle{\insertsection} #2 \end{frame}}
+\newcommand{\KLPq}[0]{KL( P\|{}q)}
+\newcommand{\varmuN}{var(\mu^{N})}
 
 % ----------------------- title page, unnumbered -----------------------
 
@@ -141,9 +143,7 @@
 
 \section{Adaptive importance sampling with the variational-Bayes approach} %TODO: write
 
-%TODO: mention pypmc in detail; that is a major outcome of the work
-
-\slide{ %TODO: remove or modify this slide
+\slide{ %TODO: maybe short summary here; importance sampling and variational Bayes then summary at the end
 
     \textlangle empty\textrangle
 
@@ -151,14 +151,63 @@
 
 \subsection{Adaptive importance sampling}
 
-\slide{ %TODO: remove or modify this slide
+\slide{
 
     \frametitle{\insertsubsectionhead}
 
-    \only<1-2> {placeholder 1}
-    \only<2> {placeholder 2}
-    \only<-3> {placeholder 3}
-    \only<4> {placeholder 4}
+    $$ \int P(x) dx = \int \frac{P(x)}{q(x)} q(x) dx
+    \approx \frac{1}{N} \sum^{N}_{x_i = 1} \equiv \mu^{{N}} ~~ where ~~ x_i \sim q(x) $$
+
+
+    \only<2->{squared uncertainty (variance):
+
+    $$ \varmuN = \frac{1}{N} \left[ \int \frac{P(x)}{q(x)} P(x) dx - \left(\int P(x) dx \right)^2 \right] $$}
+
+    \only<3->{\begin{itemize} \item minimize the uncertainty $\varmuN$ with respect to $q$}
+
+        \only<4->{\begin{itemize}
+                      \item[--] it suffices to minimize: ~~ $\mathrm{log} \left( \int \frac{P(x)}{q(x)} P(x) dx \right)$}
+        \only<5->{    \item[--] by Jensen's inequality:     $\geq \int \mathrm{log} \left( \frac{P(x)}{q(x)} \right) P(x) dx
+                                                            \only<6->{= \KLPq}$}
+        \only<6->{    \vspace{1.5mm}
+                      \item[--] known as the \emph{Kullback-Leibler divergence}}
+        \only<4->{\end{itemize}}
+
+    \only<3->{\end{itemize}}
+}
+
+\slide{
+
+    \frametitle{\insertsubsectionhead}
+
+    Note:
+
+        \begin{center}
+            \begin{tabular}{lcrcc}
+
+                \only<2->{$0 \leq \KLPq$   & and & $  \KLPq = 0$ & $\Leftrightarrow$ & $P=q$ \\}
+                \\ % empty row
+                \only<3->{$0 \leq \varmuN$ & and & $\varmuN = 0$ & $\Leftrightarrow$ & $P=q$ \\}
+
+            \end{tabular}
+        \end{center} \vspace{5mm}
+
+    \only<4->{
+
+      Remember:
+
+        \begin{center}
+
+                \only<4 >{~$\varmuN - const =                         \mathrm{log} \left( \int \frac{P(x)}{q(x)} P(x) dx \right)  \geq \KLPq$}
+                \only<5->{ $\varmuN - const = \underbrace{\textstyle{}\mathrm{log} \left( \int \frac{P(x)}{q(x)} P(x) dx \right)} \geq \KLPq$}
+
+        \end{center}
+
+      \only<5->{\vspace{-4mm} \hspace{35mm} \small minimization typically infeasible}
+
+    }
+
+    \only<6->{\vspace{4mm}{}\begin{center}\Large{}\textcolor{red}{minimize $\KLPq$ and hope to approach the unique global minimum $P=q$}{}\end{center}}
 
 }
 
