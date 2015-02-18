@@ -38,8 +38,8 @@
 
     Bayes' formula:
     \newline \newline
-    $$ P(\theta | \mathcal{D}, \mathrm{M} ) = \frac{P(\mathcal{D}|\theta, \mathrm{M})P(\theta | \mathrm{M})}{P(\mathcal{D} | \mathrm{M} )}
-       = \frac{P(\mathcal{D}|\theta, \mathrm{M})P(\theta | \mathrm{M})}{\int P(\mathcal{D}|\theta, \mathrm{M})P(\theta | \mathrm{M}) d\theta }$$
+    $$ P(\boldsymbol{\theta} | \mathcal{D}, \mathrm{M} ) = \frac{P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M})P(\boldsymbol{\theta} | \mathrm{M})}{P(\mathcal{D} | \mathrm{M} )}
+       = \frac{P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M})P(\boldsymbol{\theta} | \mathrm{M})}{\int P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M})P(\boldsymbol{\theta} | \mathrm{M}) d\boldsymbol{\theta} }$$
 
     \only<2->{ \
         \newline \newline \
@@ -47,8 +47,8 @@
         \
         \newline \newline \
 
-        \only<3->{$$ \theta = \lbrace \mathcal{C}_{7 , 9 , 10 , S , P , T , T5 , ...}^{(\prime)} \rbrace $$}
-        \only<4->{$$ \mathcal{D} = \mathrm{experimental~data} $$}
+        \only<3->{$$ \boldsymbol{\theta} = \lbrace \mathcal{C}_{7 , 9 , 10 , S , P , T , T5}^{(\prime)}  , ... \rbrace $$}
+        \only<4->{$$ \mathcal{D} = \mathrm{detector~events} $$}
         \only<5->{$$ \mathrm{M} = \mathrm{EFT , SM , ...} $$}
     }
 
@@ -243,7 +243,7 @@
 
 % ------------------------- B-physics section --------------------------
 
-\section{Scalar and tensor contributions to $ b \to s \mu^+ \mu^- $} %TODO: write
+\section{Scalar and tensor contributions to $ b \to s \mu^+ \mu^- $} %TODO: rewrite
 
 \slide{ %TODO: remove or modify this slide
 
@@ -252,12 +252,72 @@
 }
 
 % TODO: o explain approach: \theta = {nuisance, Wilson coeff.}; split of P(data, observable(theta,M))
-%       o present the 2d marginals as in thesis (only first figure) and all 1d marginals
+%       o present the 2d marginals as in thesis (only first figure)
 %       o mention sensitivity to prior of the form factors --> show plot as in thesis; mention preliminary fits and lattice constraint
 %       o mention tighter constraints in models with fixed vectorial Wilson coefficients
 %       o show subleading QCDF
 %       o calculate Bayes factor
 %   => conclusion: need better theoretical control of FF and subleading 1 / m_b to see significant
+
+\slide{
+
+    we want:
+    \newline \newline
+    $$ P(\boldsymbol{\theta} | \mathcal{D}, \mathrm{M} ) \overset{\mathrm{Bayes}}{\propto} P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M})P(\boldsymbol{\theta} | \mathrm{M}) $$
+     %  = P(\mathcal{D} | \boldsymbol{O} (\boldsymbol{\theta} , \mathrm{M} ))P(\boldsymbol{\theta} | \mathrm{M}) $$
+
+    \only<2->{ \begin{center} \vspace{3mm} \huge \textcolor{red}{we do not have the data $\mathcal{D}$ } \end{center} }
+
+    \only<3->{\vspace{3mm} experimentalists measure relevant observables $\boldsymbol{O}$:
+
+    $$ P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M}) = P(\mathcal{D} | \boldsymbol{O} (\boldsymbol{\theta} , \mathrm{M} )) $$
+
+    \only<4->{experimentalists' publications provide $ P(\mathcal{D} | \boldsymbol{O}) $ \newline}
+    \only<5->{theory provides $ \boldsymbol{O}(\boldsymbol{\theta} , \mathrm{M}) $ }
+
+    }
+
+}
+
+\slide{
+
+    experimentalists' publications provide:
+    \newline \newline
+    $$ P(\mathcal{D} | \boldsymbol{O}) =
+    \int d \boldsymbol{\nu}_{ex} P(\mathcal{D} | \boldsymbol{O} , \boldsymbol{\nu}_{ex}) P(\boldsymbol{\nu}_{ex} | \boldsymbol{O}) $$
+
+    \only<2->{ \
+        \newline \newline \
+        we define a physical model $\mathrm{M}$ (EFT Lagrangian $ \mathcal{L} $): \
+        \
+        \newline \newline \
+
+        % TODO: write lagrangian
+
+        that provides
+
+        $$ \boldsymbol{O}( \boldsymbol{\theta} , \mathrm{M} ) $$
+
+        $$ \boldsymbol{\theta} = \lbrace \mathcal{C}_{7 , 9 , 10 , S , P , T , T5 , ...}^{(\prime)} \rbrace $$
+        % TODO: comment here: observables have more dependencies, e.g. CKM, quark masses, form factors, ...
+
+        \only<4->{$$ \mathcal{D} = \mathrm{detector~events} $$}
+
+
+        \only<5->{$$ \mathrm{M} = \mathrm{EFT , SM , ...} $$}
+        % TODO: comment here: what are "EFT" and "SM"
+
+     }
+
+}
+
+\slide[c]{
+
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{figures/Wilson_coeff_2d}
+    \end{center}
+
+}
 
 \subsection{Scalar contributions}
 
