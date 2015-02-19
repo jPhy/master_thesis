@@ -259,21 +259,52 @@
 %       o calculate Bayes factor
 %   => conclusion: need better theoretical control of FF and subleading 1 / m_b to see significant
 
-\slide{
+\slide{ %TODO: need an example of this; maybe branching fraction?
 
     we want:
-    \newline \newline
+    \newline
     $$ P(\boldsymbol{\theta} | \mathcal{D}, \mathrm{M} ) \overset{\mathrm{Bayes}}{\propto} P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M})P(\boldsymbol{\theta} | \mathrm{M}) $$
-     %  = P(\mathcal{D} | \boldsymbol{O} (\boldsymbol{\theta} , \mathrm{M} ))P(\boldsymbol{\theta} | \mathrm{M}) $$
+    %  = P(\mathcal{D} | \boldsymbol{O} (\boldsymbol{\theta} , \mathrm{M} ))P(\boldsymbol{\theta} | \mathrm{M}) $$
 
-    \only<2->{ \begin{center} \vspace{3mm} \huge \textcolor{red}{we do not have the data $\mathcal{D}$ } \end{center} }
+    \only<2->{
 
-    \only<3->{\vspace{3mm} experimentalists measure relevant observables $\boldsymbol{O}$:
+        \vspace{3mm}
 
-    $$ P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M}) = P(\mathcal{D} | \boldsymbol{O} (\boldsymbol{\theta} , \mathrm{M} )) $$
+        split theory and experiment - \emph{observables} $\boldsymbol{O}$:
 
-    \only<4->{experimentalists' publications provide $ P(\mathcal{D} | \boldsymbol{O}) $ \newline}
-    \only<5->{theory provides $ \boldsymbol{O}(\boldsymbol{\theta} , \mathrm{M}) $ }
+        $$ P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M})
+          = P(\mathcal{D} | \boldsymbol{O} (\boldsymbol{\theta} , \mathrm{M} )) $$
+
+        \setbeamercolor{block title}{bg=blue, fg=white}
+
+        \vspace{-5.5mm}
+
+        \only<3->{
+
+            \begin{center}
+                \begin{columns}[t] % the "t" option specifies top vertical alignment
+
+                    \column{.5\textwidth}
+                        \begin{block}{\center theory}
+                            \begin{center}
+                                \only<-3>{ ~ \vspace{8.4mm} ~ }
+                                \only<4->{~~~\emph{calculate} observables \newline
+                                $ \boldsymbol{O}(\boldsymbol{\theta} , \mathrm{M}) $}
+                            \end{center}
+                        \end{block}
+
+                    \column{.5\textwidth}
+                        \begin{block}{\center experiment}
+                            \begin{center}
+                                \only<-4>{ ~ \vspace{8.4mm} ~ }
+                                \only<5->{~~~~~\emph{measure} observables \newline
+                                $P\left(\mathcal{D} | \boldsymbol{O} \right)$ }
+                            \end{center}
+                        \end{block}
+
+                \end{columns}
+            \end{center}
+        }
 
     }
 
