@@ -10,6 +10,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{textcomp}
 \usepackage{wasysym}
+\usepackage{diagmac2}
 
 \title{Beyond-the-standard-model contributions to rare B decays analyzed with variational-Bayes enhanced adaptive importance sampling}
 \author{Stephan Jahn}
@@ -19,9 +20,14 @@
 
 \begin{document}
 
+\setbeamercolor{block title}{bg=blue, fg=white}
+
 \newcommand{\slide}[2][t]{\begin{frame}[#1] \frametitle{\insertsection} #2 \end{frame}}
 \newcommand{\KLPq}[0]{KL( P\|{}q)}
 \newcommand{\varmuN}{var(\mu^{N})}
+\newcommand{\wilsoncten }{\mathcal{C} ^{      } _{10}}
+\newcommand{\wilsonctenp}{\mathcal{C} ^{\prime} _{10}}
+\newcommand{\errorasymm}[3]{#1 \substack{\hspace{.05em} \scriptscriptstyle + \hspace{.05em} #2 \\ \scriptscriptstyle -#3} } % asymmetric uncertainties
 
 % ----------------------- title page, unnumbered -----------------------
 
@@ -168,7 +174,7 @@
         \only<4->{\begin{itemize}
                       \item[--] it suffices to minimize: ~~ $\mathrm{log} \left( \int \frac{P(x)}{q(x)} P(x) dx \right)$}
         \only<5->{    \item[--] by Jensen's inequality:     $\geq \int \mathrm{log} \left( \frac{P(x)}{q(x)} \right) P(x) dx
-                                                            \only<6->{= \KLPq}$}
+                                                            \only<6->{\equiv \KLPq}$}
         \only<6->{    \vspace{1.5mm}
                       \item[--] known as the \emph{Kullback-Leibler divergence}}
         \only<4->{\end{itemize}}
@@ -268,16 +274,14 @@
 
     \only<2->{
 
-        \vspace{3mm}
+        \vspace{1.6mm}
 
         split theory and experiment - \emph{observables} $\boldsymbol{O}$:
 
         $$ P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M})
           = P(\mathcal{D} | \boldsymbol{O} (\boldsymbol{\theta} , \mathrm{M} )) $$
 
-        \setbeamercolor{block title}{bg=blue, fg=white}
-
-        \vspace{-5.5mm}
+        \vspace{-6.5mm}
 
         \only<3->{
 
@@ -292,6 +296,7 @@
                                 $ \boldsymbol{O}(\boldsymbol{\theta} , \mathrm{M}) $}
                             \end{center}
                         \end{block}
+                        \only<4->{\center \includegraphics[height=1.5cm]{figures/theorist}}
 
                     \column{.5\textwidth}
                         \begin{block}{\center experiment}
@@ -301,6 +306,7 @@
                                 $P\left(\mathcal{D} | \boldsymbol{O} \right)$ }
                             \end{center}
                         \end{block}
+                        \only<5->{\center \includegraphics[height=1.5cm]{figures/experimentalist}}
 
                 \end{columns}
             \end{center}
@@ -312,10 +318,110 @@
 
 \slide{
 
-    experimentalists' publications provide:
-    \newline \newline
-    $$ P(\mathcal{D} | \boldsymbol{O}) =
-    \int d \boldsymbol{\nu}_{ex} P(\mathcal{D} | \boldsymbol{O} , \boldsymbol{\nu}_{ex}) P(\boldsymbol{\nu}_{ex} | \boldsymbol{O}) $$
+    example:
+    \begin{itemize}
+        \item $ \boldsymbol{O} = \mathcal{B} \left( B_s \to \mu ^ + \mu ^ - \right) $, branching fration
+        \only<2->{\item $ \mathrm{M} = \mathrm{EFT} $, effective theory for $ b \to s \ell^+ \ell^- $ transitions}
+        \only<3->{\item $ \boldsymbol{\theta} = \lbrace \wilsoncten , \wilsonctenp , ... \rbrace$, model parameters}
+    \end{itemize}
+
+    \vspace{-3mm}
+
+    \only<4->{\begin{center}
+        \begin{columns}[t] % the "t" option specifies top vertical alignment
+
+            \column{.52\textwidth}
+                \begin{block}{\center theory}
+                    \begin{center}
+                        \only<4->{~~~~~~\includegraphics[height=1.5cm]{figures/theo_to_obs}}
+                        \newline \only<5->{$ \Rightarrow \mathcal{B} \left( B_s \to \mu ^ + \mu ^ - \right) \propto |\wilsoncten - \wilsonctenp|^2 $}
+                        \newline \only<-5>{\vspace{0.96mm}} \only<6->{$ \equiv \boldsymbol{O}(\boldsymbol{\theta} , \mathrm{M}) $}
+                    \end{center}
+                \end{block}
+                \center \href{http://arXiv.org/abs/hep-ph/0104284}{arXiv:hep-ph/0104284}
+
+            \column{.52\textwidth}
+                \begin{block}{\center experiment}
+                    \begin{center}
+                        \only<-6>{ ~ \vspace{25.53mm} ~ }
+                        \only<7->{~~~~~\includegraphics[height=1.5cm]{figures/exp_to_obs}
+                        \newline \only<8->{$ \Rightarrow \mathcal{B} \left( B_s \to \mu ^ + \mu ^ - \right) = \errorasymm{2.8}{0.7}{0.6} \cdot 10^{-9} $}
+                        \newline \only<-8>{\vspace{0.96mm}}\only<9->{$ \equiv P\left(\mathcal{D} | \boldsymbol{O} \right) $}}
+                    \end{center}
+                \end{block}
+                \center \href{http://arXiv.org/abs/1411.4413}{arXiv:1411.4413}
+
+        \end{columns}
+    \end{center} }
+
+}
+
+\slide{
+
+    \vspace{-5mm}
+
+    \begin{center}
+        \begin{columns}[t] % the "t" option specifies top vertical alignment
+
+            \column{.52\textwidth}
+                \begin{block}{\center theory}
+                    \begin{center}
+                        ~~~~~~\includegraphics[height=1.5cm]{figures/theo_to_obs}
+                        \newline $ \boldsymbol{O}(\boldsymbol{\theta} , \mathrm{M}) $
+                    \end{center}
+                \end{block}
+
+            \column{.52\textwidth}
+                \begin{block}{\center experiment}
+                    \begin{center}
+                        ~~~~~\includegraphics[height=1.5cm]{figures/exp_to_obs}
+                        \newline $ P\left(\mathcal{D} | \boldsymbol{O} \right) $
+                    \end{center}
+                \end{block}
+
+        \end{columns}
+    \end{center}
+
+    \vspace{-3mm}
+
+    \[\diagram{
+        \vertex 0,30:{}{\border{3pt}{4pt}\rect}
+        \vertex 180,30:{}{\border{3pt}{4pt}\rect}
+        \only<2->{\vertex 90,0:{P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M})}{\border{3pt}{4pt}\rect}}
+        \only<3->{\vertex 90,-70:{ \overset{ ~ }{P(\boldsymbol{\theta} | \mathcal{D}, \mathrm{M} )} }{\border{3pt}{4pt}\rect}}
+        \only<2->{
+            \setedge 0,30,90,0:
+            \shadeedge
+            \drawsolidedge
+            \drawedgehead{100}11
+            \setedge 180, 30, 90,0:
+            \shadeedge
+            \drawsolidedge
+            \drawedgehead{100}11
+            }
+        \only<3->{
+            \setedge 90,-10,90,-70:
+            \shadeedge
+            \drawsolidedge
+            \drawedgehead{100}11
+            \abutright -35:{\textstyle \mathrm{Bayes}}{\border{2pt}{2pt}\octagon{3pt}}
+            }
+        }
+    \]
+
+    % ~
+    % \newline
+    % $$ P(\boldsymbol{\theta} | \mathcal{D}, \mathrm{M} ) \overset{\mathrm{Bayes}}{\propto} P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M})P(\boldsymbol{\theta} | \mathrm{M}) $$
+
+}
+
+\slide{
+
+    % TODO: remove
+    % experimentalists' publications provide:
+    % \newline \newline
+    % $$ P(\mathcal{D} | \boldsymbol{O}) =
+    % \int d \boldsymbol{\nu}_{ex} P(\mathcal{D} | \boldsymbol{O} , \boldsymbol{\nu}_{ex}) P(\boldsymbol{\nu}_{ex} | \boldsymbol{O}) $$
 
     \only<2->{ \
         \newline \newline \
@@ -342,7 +448,7 @@
 
 }
 
-\slide[c]{
+\slide{
 
     \begin{center}
         \includegraphics[width=0.7\textwidth]{figures/Wilson_coeff_2d}
