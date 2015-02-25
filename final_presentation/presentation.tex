@@ -249,28 +249,57 @@
 
 % ------------------------- B-physics section --------------------------
 
-\section{Scalar and tensor contributions to $ b \to s \mu^+ \mu^- $} %TODO: rewrite
+% TODO: this is a big jump --> transition should be smooted
 
-\slide{ %TODO: remove or modify this slide
+\section{Scalar and tensor contributions to $ b \to s \mu^+ \mu^- $}
 
-    \textlangle empty\textrangle
+\subsection{Effective theory}
+
+\slide{
+
+    effective Lagrangian: \
+    \
+    \newline \newline \
+
+    $$ \mathcal{L}_{int} = \frac{4 G_F}{\sqrt{2}} \frac{\alpha_e}{4\pi} V_{tb}^{} V_{ts}^\ast \sum_i \mathcal{C}_i \mathcal{O}_i + \text{h.c.} $$
+
+    ~ \newline
+
+    \begin{center}
+      \begin{tabular}{cc}
+          $ \begin{aligned}
+                \mathcal{O}_{9} ^{(\prime)} & = \left[\bar{s} \gamma_\mu^{} P_{L(R)} b\right]\!\left[\bar{\ell} \gamma^\mu \ell\right] \\[10mm]
+                \mathcal{O}_S^{(\prime)}    & = \left[\bar{s} P_{R(L)} b\right]\!\left[\bar{\ell} \ell\right] \\[5mm]
+                \mathcal{O}_T               & = \left[\bar{s} \sigma_{\mu\nu}^{} b\right]\!\left[\bar{\ell} \sigma^{\mu\nu} \ell\right]
+          \end{aligned} $ & $ \begin{aligned}
+                \mathcal{O}_{10}^{(\prime)} & = \left[\bar{s} \gamma_\mu^{} P_{L(R)} b\right]\!\left[\bar{\ell} \gamma^\mu \gamma_5 \ell\right] \\[10mm]
+                \mathcal{O}_P^{(\prime)}    & = \left[\bar{s} P_{R(L)} b\right]\!\left[\bar{\ell} \gamma_5 \ell\right] \\[5mm]
+                \mathcal{O}_{T5}            & = \left[\bar{s} \sigma_{\mu\nu}^{} b\right]\!\left[\bar{\ell} \sigma^{\mu\nu} \gamma_5 \ell\right]
+          \end{aligned} $
+     \end{tabular}
+    \end{center}
 
 }
 
-% TODO: o explain approach: \theta = {nuisance, Wilson coeff.}; split of P(data, observable(theta,M))
-%       o present the 2d marginals as in thesis (only first figure)
+\subsection{Methodology}
+
+% TODO: x means done; o means to be done
+%
+%       x explain approach: \theta = {nuisance, Wilson coeff.}; split of P(data, observable(theta,M))
+%       x present the 2d marginals as in thesis (only first figure)
 %       o mention sensitivity to prior of the form factors --> show plot as in thesis; mention preliminary fits and lattice constraint
 %       o mention tighter constraints in models with fixed vectorial Wilson coefficients
 %       o show subleading QCDF
 %       o calculate Bayes factor
-%   => conclusion: need better theoretical control of FF and subleading 1 / m_b to see significant
+%       o => conclusion: need better theoretical control of FF and subleading 1 / m_b to see significant
 
-\slide{ %TODO: need an example of this; maybe branching fraction?
+\slide{
+
+    \frametitle{\insertsubsectionhead}
 
     we want:
     \newline
     $$ P(\boldsymbol{\theta} | \mathcal{D}, \mathrm{M} ) \overset{\mathrm{Bayes}}{\propto} P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M})P(\boldsymbol{\theta} | \mathrm{M}) $$
-    %  = P(\mathcal{D} | \boldsymbol{O} (\boldsymbol{\theta} , \mathrm{M} ))P(\boldsymbol{\theta} | \mathrm{M}) $$
 
     \only<2->{
 
@@ -318,6 +347,8 @@
 
 \slide{
 
+    \frametitle{\insertsubsectionhead}
+
     example:
     \begin{itemize}
         \item $ \boldsymbol{O} = \mathcal{B} \left( B_s \to \mu ^ + \mu ^ - \right) $, branching fration
@@ -357,6 +388,8 @@
 }
 
 \slide{
+
+    \frametitle{\insertsubsectionhead}
 
     \vspace{-5mm}
 
@@ -411,40 +444,11 @@
 
 }
 
-\slide{
-
-    % TODO: remove
-    % experimentalists' publications provide:
-    % \newline \newline
-    % $$ P(\mathcal{D} | \boldsymbol{O}) =
-    % \int d \boldsymbol{\nu}_{ex} P(\mathcal{D} | \boldsymbol{O} , \boldsymbol{\nu}_{ex}) P(\boldsymbol{\nu}_{ex} | \boldsymbol{O}) $$
-
-    \only<2->{ \
-        \newline \newline \
-        we define a physical model $\mathrm{M}$ (EFT Lagrangian $ \mathcal{L} $): \
-        \
-        \newline \newline \
-
-        % TODO: write lagrangian
-
-        that provides
-
-        $$ \boldsymbol{O}( \boldsymbol{\theta} , \mathrm{M} ) $$
-
-        $$ \boldsymbol{\theta} = \lbrace \mathcal{C}_{7 , 9 , 10 , S , P , T , T5 , ...}^{(\prime)} \rbrace $$
-        % TODO: comment here: observables have more dependencies, e.g. CKM, quark masses, form factors, ...
-
-        \only<4->{$$ \mathcal{D} = \mathrm{detector~events} $$}
-
-
-        \only<5->{$$ \mathrm{M} = \mathrm{EFT , SM , ...} $$}
-        % TODO: comment here: what are "EFT" and "SM"
-
-     }
-
-}
+\subsection{Constraints on $\mathcal{C}_{10} ^{(\prime)} , \mathcal{C}_S ^{(\prime)} , \mathcal{C}_P ^{(\prime)} , \mathcal{C}_T , \mathrm{and} ~~ \mathcal{C}_{T5}$ }
 
 \slide{
+
+    \frametitle{\insertsubsectionhead}
 
     \begin{center}
         \includegraphics[width=0.7\textwidth]{figures/Wilson_coeff_2d}
@@ -452,20 +456,7 @@
 
 }
 
-\subsection{Scalar contributions}
-
-\slide{ %TODO: remove or modify this slide
-
-    \frametitle{\insertsubsectionhead}
-
-    \only<1-2> {placeholder 1}
-    \only<2> {placeholder 2}
-    \only<-3> {placeholder 3}
-    \only<4> {placeholder 4}
-
-}
-
-\subsection{Tensor contributions}
+\subsection{Theory uncertainty}
 
 \slide{ %TODO: remove or modify this slide
 
