@@ -213,7 +213,7 @@
 
 \subsection{Variational Bayes}
 
-\slide{ %TODO: remove or modify this slide
+\slide{ %TODO: write about VB
 
     \frametitle{\insertsubsectionhead}
 
@@ -230,7 +230,7 @@
 
 }
 
-\slide{ %TODO: remove or modify this slide
+\slide{
 
     \frametitle{{\fontfamily{qcr}\selectfont pypmc}}
 
@@ -249,13 +249,18 @@
 
 % ------------------------- B-physics section --------------------------
 
-% TODO: this is a big jump --> transition should be smooted
-
 \section{Scalar and tensor contributions to $ b \to s \mu^+ \mu^- $}
+
+\begin{frame}
+\frametitle{\insertsectionhead}
+\tableofcontents[currentsection]
+\end{frame}
 
 \subsection{Effective theory}
 
 \slide{
+
+    \frametitle{\insertsubsectionhead}
 
     effective Lagrangian: \
     \
@@ -288,7 +293,6 @@
 %       x explain approach: \theta = {nuisance, Wilson coeff.}; split of P(data, observable(theta,M))
 %       x present the 2d marginals as in thesis (only first figure)
 %       o mention sensitivity to prior of the form factors --> show plot as in thesis; mention preliminary fits and lattice constraint
-%       o mention tighter constraints in models with fixed vectorial Wilson coefficients
 %       o show subleading QCDF
 %       o calculate Bayes factor
 %       o => conclusion: need better theoretical control of FF and subleading 1 / m_b to see significant
@@ -444,7 +448,20 @@
 
 }
 
-\subsection{Constraints on $\mathcal{C}_{10} ^{(\prime)} , \mathcal{C}_S ^{(\prime)} , \mathcal{C}_P ^{(\prime)} , \mathcal{C}_T , \mathrm{and} ~~ \mathcal{C}_{T5}$ }
+\subsection{Constraints on $\mathcal{C}_{10} ^{(\prime)} , \mathcal{C}_S ^{(\prime)} , \mathcal{C}_P ^{(\prime)} , \mathcal{C}_T , \text{and} ~ \mathcal{C}_{T5}$ }
+
+\slide[c]{ %TODO: desloppify
+
+    \frametitle{\insertsubsectionhead}
+
+    {\large\textbf{measurements:}}
+
+    \begin{itemize}
+        \item BtoKmumu angular analysis (LHCb 2014) %TODO: --> cite paper on arXiv
+        \item BsTOmumu branching fraction (LHCb+CMS 2014) % TODO: --> cite paper on arXiv (experimental citation in methodology subsection)
+    \end{itemize}
+
+}
 
 \slide{
 
@@ -456,17 +473,33 @@
 
 }
 
-\subsection{Theory uncertainty}
-
-\slide{ %TODO: remove or modify this slide
+\slide{
 
     \frametitle{\insertsubsectionhead}
 
-    \only<1-2> {placeholder 1}
-    \only<2> {placeholder 2}
-    \only<-3> {placeholder 3}
-    \only<4> {placeholder 4}
+    {\large\textbf{Inappropriate form factor uncertainty?}} % TODO: reformulate
+
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{figures/Wilson_coeff_2d} %TODO: put form factor plot ( f_T(0) ) here
+    \end{center}
 
 }
+
+\slide{
+
+    \frametitle{\insertsubsectionhead}
+
+    {\large\textbf{Large $\boldsymbol{1/m_b}$ corrections to QCDF?}} % TODO: reformulate
+
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{figures/Wilson_coeff_2d} %TODO: put form factor plot ( f_T(0) ) here
+    \end{center}
+
+}
+
+%TODO: conclusion:
+% we put updated, model-independent constraints on the scanned Wilson coefficients --> name them: C_S+prime, C_P+prime, C_T, CT5
+% need better theoretical control to distinguish between yet unknown corrections and new physics
+% the standard model can explain the latest LHCb data within the uncertainties
 
 \end{document}
