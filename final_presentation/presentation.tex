@@ -16,18 +16,23 @@
 \author{Stephan Jahn}
 \date{\today} %TODO: insert date
 
+
 % ----------------------------------------------------------------------
 
-\begin{document}
-
-\setbeamercolor{block title}{bg=blue, fg=white}
-
 \newcommand{\slide}[2][t]{\begin{frame}[#1] \frametitle{\insertsection} #2 \end{frame}}
-\newcommand{\KLPq}[0]{KL( P\|{}q)}
+\newcommand{\KLPp}[0]{KL( P\|{}p)}
+\newcommand{\KLqp}[0]{KL( q\|{}p)}
 \newcommand{\varmuN}{var(\mu^{N})}
 \newcommand{\wilsoncten }{\mathcal{C} ^{      } _{10}}
 \newcommand{\wilsonctenp}{\mathcal{C} ^{\prime} _{10}}
 \newcommand{\errorasymm}[3]{#1 \substack{\hspace{.05em} \scriptscriptstyle + \hspace{.05em} #2 \\ \scriptscriptstyle -#3} } % asymmetric uncertainties
+\newcommand{\gauss}{\mathcal{N}}
+\newcommand{\rmdx}[1]{\mbox{d} #1 \,} % differential d
+\newcommand{\samples}{\boldsymbol{X}}
+
+\setbeamercolor{block title}{bg=blue, fg=white}
+
+\begin{document}
 
 % ----------------------- title page, unnumbered -----------------------
 
@@ -81,19 +86,19 @@
 \column{.5\textwidth} % Right column and width
 
 \only<3->{\begin{itemize}
-          \item compare models $\mathrm{EFT} \leftrightarrow \mathrm{SM}$
+          \item compare models \newline $\mathrm{NP} \leftrightarrow \mathrm{SM}$
           \end{itemize}
 
-              $$ \frac{P(\mathrm{EFT}|\mathcal{D})}{P(\mathrm{SM}|\mathcal{D})} =
-                 \frac{P(\mathcal{D}|\mathrm{EFT})}{P(\mathcal{D}|\mathrm{SM})} \cdot \frac{P(\mathrm{EFT})}{P(\mathrm{SM})} $$
+              $$ \frac{P(\mathrm{NP}|\mathcal{D})}{P(\mathrm{SM}|\mathcal{D})} =
+                 \frac{P(\mathcal{D}|\mathrm{NP})}{P(\mathcal{D}|\mathrm{SM})} \cdot \frac{P(\mathrm{NP})}{P(\mathrm{SM})} $$
 
               $$ P(\mathrm{M} | \mathcal{D} ) = \frac{P(\mathcal{D} | \mathrm{M})P(\mathrm{M})}{P(\mathcal{D})} $$
 
           \begin{itemize}
           \item[]
               \begin{itemize}
-                  \item[] \only<4->{\hspace{-0.1\textwidth} $\frac{P(\mathrm{EFT}|\mathcal{D})}{P(\mathrm{SM}|\mathcal{D})} > 1$ new physics \smiley{} \newline}
-                  \item[] \only<5->{\hspace{-0.1\textwidth} $\frac{P(\mathrm{EFT}|\mathcal{D})}{P(\mathrm{SM}|\mathcal{D})} < 1$ confirm SM \frownie{}}
+                  \item[] \only<4->{\hspace{-0.1\textwidth} $\frac{P(\mathrm{NP}|\mathcal{D})}{P(\mathrm{SM}|\mathcal{D})} > 1$ new physics \smiley{} \newline}
+                  \item[] \only<5->{\hspace{-0.1\textwidth} $\frac{P(\mathrm{NP}|\mathcal{D})}{P(\mathrm{SM}|\mathcal{D})} < 1$ confirm SM \frownie{}}
               \end{itemize}
           \end{itemize}}
 
@@ -155,20 +160,20 @@
 
     \frametitle{\insertsubsectionhead}
 
-    $$ \int P(x) dx = \int \frac{P(x)}{q(x)} q(x) dx
-    \approx \frac{1}{N} \sum^{N}_{i = 1} \frac{P(x_i)}{q(x_i)} \equiv \mu^{{N}} ~~ where ~~ x_i \sim q $$
+    $$ \int P(x) dx = \int \frac{P(x)}{p(x)} p(x) dx
+    \approx \frac{1}{N} \sum^{N}_{n = 1} \frac{P(x_n)}{p(x_n)} \equiv \mu^{{N}} ~~ where ~~ x_n \sim p $$
 
 
     \only<2->{squared uncertainty (variance):
 
-    $$ \varmuN = \frac{1}{N} \left[ \int \frac{P(x)}{q(x)} P(x) dx - \left(\int P(x) dx \right)^2 \right] $$}
+    $$ \varmuN = \frac{1}{N} \left[ \int \frac{P(x)}{p(x)} P(x) dx - \left(\int P(x) dx \right)^2 \right] $$}
 
-    \only<3->{\begin{itemize} \item minimize the uncertainty $\varmuN$ with respect to $q$}
+    \only<3->{\begin{itemize} \item minimize the uncertainty $\varmuN$ with respect to $p$}
 
         \only<4->{\begin{itemize}
-                      \item[--] it suffices to minimize: ~~ $\mathrm{log} \left( \int \frac{P(x)}{q(x)} P(x) dx \right)$}
-        \only<5->{    \item[--] by Jensen's inequality:     $\geq \int \mathrm{log} \left( \frac{P(x)}{q(x)} \right) P(x) dx
-                                                            \only<6->{\equiv \KLPq}$}
+                      \item[--] it suffices to minimize: ~~ $\mathrm{log} \left( \int \frac{P(x)}{p(x)} P(x) dx \right)$}
+        \only<5->{    \item[--] by Jensen's inequality:     $\geq \int \mathrm{log} \left( \frac{P(x)}{p(x)} \right) P(x) dx
+                                                            \only<6->{\equiv \KLPp}$}
         \only<6->{    \vspace{1.5mm}
                       \item[--] known as the \emph{Kullback-Leibler divergence}}
         \only<4->{\end{itemize}}
@@ -185,9 +190,9 @@
         \begin{center}
             \begin{tabular}{lcrcc}
 
-                \only<2->{$0 \leq \KLPq$   & and & $  \KLPq = 0$ & $\Leftrightarrow$ & $P=q$ \\}
+                \only<2->{$0 \leq \KLPp$   & and & $  \KLPp = 0$ & $\Leftrightarrow$ & $P=p$ \\}
                 \\ % empty row
-                \only<3->{$0 \leq \varmuN$ & and & $\varmuN = 0$ & $\Leftrightarrow$ & $P=q$ \\}
+                \only<3->{$0 \leq \varmuN$ & and & $\varmuN = 0$ & $\Leftrightarrow$ & $P=p$ \\}
 
             \end{tabular}
         \end{center} \vspace{5mm}
@@ -198,8 +203,8 @@
 
         \begin{center}
 
-                \only<4 >{~$\varmuN - const =                         \mathrm{log} \left( \int \frac{P(x)}{q(x)} P(x) dx \right)  \geq \KLPq$}
-                \only<5->{ $\varmuN - const = \underbrace{\textstyle{}\mathrm{log} \left( \int \frac{P(x)}{q(x)} P(x) dx \right)} \geq \KLPq$}
+                \only<4 >{~$\varmuN - const =                         \mathrm{log} \left( \int \frac{P(x)}{p(x)} P(x) dx \right)  \geq \KLPp$}
+                \only<5->{ $\varmuN - const = \underbrace{\textstyle{}\mathrm{log} \left( \int \frac{P(x)}{p(x)} P(x) dx \right)} \geq \KLPp$}
 
         \end{center}
 
@@ -207,26 +212,92 @@
 
     }
 
-    \only<6->{\vspace{4mm}{}\begin{center}\Large{}\textcolor{red}{minimize $\KLPq$ and hope to approach the unique global minimum $P=q$}{}\end{center}}
+    \only<6->{\vspace{4mm}{}\begin{center}\Large{}\textcolor{red}{minimize $\KLPp$ and hope to approach the unique global minimum $P=p$}{}\end{center}}
 
 }
 
-\subsection{Variational Bayes}
+\subsection{Variational Bayes {\tiny (Gaussian mixture model)}}
 
-\slide{ %TODO: write about VB
+\slide{
 
     \frametitle{\insertsubsectionhead}
 
-    \only<1-2> {placeholder 1}
-    \only<2> {placeholder 2}
-    \only<-3> {placeholder 3}
-    \only<4> {placeholder 4}
+    \only<2->{
+
+        restrict $p$ to Gaussian mixtures
+
+        $$ p(x_n | \boldsymbol{\theta}) = \sum_{k=1}^K \pi_k \gauss(x_n | \mu_k, \Sigma_k) $$
+
+    }
+
+    \vspace{3mm}
+
+    \only<3->{
+        rewrite with \emph{latent variables} $\boldsymbol{Z}$:
+        \[z_{nk} =
+            \begin{cases}
+                \text{1 if }x_n\text{ from component k} \\
+                \text{0 else} \\
+            \end{cases}
+        \]
+    }
+
+    \vspace{-13mm}
+
+    \begin{columns}
+    \column{0.45\textwidth}
+
+        \only<4->{$$ p(x_n | \boldsymbol{Z} , \boldsymbol{\theta}) = \prod ^K _{k=1} \gauss(x_n | \mu_k, \Sigma_k)^{z_{nk}} $$}
+        \only<5->{$$ p(z_{nk}=1) = \pi_k = \prod ^K _{k=1} \pi_k^{z_{nk}} $$}
+
+    \column{0.45\textwidth}
+
+        \only<6->{$$ p(x_n | \boldsymbol{\theta}) = \sum_{\boldsymbol{Z}} p(x_n | \boldsymbol{Z} , \boldsymbol{\theta}) p(\boldsymbol{Z}) $$}
+
+     \end{columns}
+
 
 }
 
-\slide{ %TODO: maybe short summary here; importance sampling and variational Bayes then summary at the end
+\slide{
 
-    \textlangle empty\textrangle
+    \frametitle{\insertsubsectionhead}
+
+    \only<2->{without proof} \only<1>{\vspace{4.8mm}}
+
+        \[ \text{minimize} ~ \KLPp \uncover<2->{\Leftrightarrow \text{maximize} ~ \log p(\boldsymbol{X}) \equiv \prod^{N}_{n = 1} p(x_n)} \]
+
+    \only<3->{
+
+        \vspace{0.8cm}
+
+        rewrite with arbitrary probability distribution $q(\boldsymbol{Z} , \boldsymbol{\theta})$
+
+        \only<4->{\footnotesize \[ \log p(\boldsymbol{X}) = \underbrace{\int \rmdx{\boldsymbol{Z}} \rmdx{\boldsymbol{\theta}} q(\boldsymbol{Z} , \boldsymbol{\theta}) \log \left[\frac{p(\samples, \boldsymbol{Z} , \boldsymbol{\theta})}{q(\boldsymbol{Z} , \boldsymbol{\theta})}\right]} + \underbrace{\int \rmdx{\boldsymbol{Z}} \rmdx{\boldsymbol{\theta}} q(\boldsymbol{Z} , \boldsymbol{\theta}) \log \left[\frac{q(\boldsymbol{Z} , \boldsymbol{\theta})}{p(\boldsymbol{Z} , \boldsymbol{\theta} | \samples)} \right] } \]
+
+            \vspace{-2.5mm}
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ $\equiv \mathcal{L}\left[q\right]$ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ $\equiv \KLqp$
+
+        }
+
+    }
+
+    \only<5->{\huge \textcolor{red}{\vspace{-11.5mm} \begin{center} assumption $q(\boldsymbol{Z} , \boldsymbol{\theta}) = q(\boldsymbol{Z})q(\boldsymbol{\theta})$ \newline $\Rightarrow$ semianalytical solution \end{center}}}
+
+}
+
+\slide[c]{
+
+    \frametitle{\insertsubsectionhead}
+
+    further reading: \newline \newline
+    Christopher M. Bishop, \emph{Pattern Recognition and Machine Learning}, Springer 2006, chapter 10
+
+}
+
+\slide[c]{
+
+    \includegraphics[width=\textwidth]{figures/algorithm}
 
 }
 
@@ -266,7 +337,7 @@
     \
     \newline \newline \
 
-    $$ \mathcal{L}_{int} = \frac{4 G_F}{\sqrt{2}} \frac{\alpha_e}{4\pi} V_{tb}^{} V_{ts}^\ast \sum_i \mathcal{C}_i \mathcal{O}_i + \text{h.c.} $$
+    $$ \mathcal{L}_{int} = \frac{4 G_F}{\sqrt{2}} \frac{\alpha_e}{4\pi} V_{tb}^{} V_{ts}^\ast \sum_i \mathcal{C}_i \mathcal{O}_i + ... + \text{h.c.} $$
 
     ~ \newline
 
@@ -293,8 +364,7 @@
 %       x explain approach: \theta = {nuisance, Wilson coeff.}; split of P(data, observable(theta,M))
 %       x present the 2d marginals as in thesis (only first figure)
 %       o mention sensitivity to prior of the form factors --> show plot as in thesis; mention preliminary fits and lattice constraint
-%       o show subleading QCDF
-%       o calculate Bayes factor
+%       x show subleading QCDF
 %       o => conclusion: need better theoretical control of FF and subleading 1 / m_b to see significant
 
 \slide{
@@ -454,12 +524,52 @@
 
     \frametitle{\insertsubsectionhead}
 
-    {\large\textbf{measurements:}}
+    {\large\textbf{considered measurements:}}
+
+
+    %'B^+->K^+mu^+mu^-::BR[14.18,16.00]@CDF-2012',
+    %'B^+->K^+mu^+mu^-::BR[16.00,22.86]@CDF-2012',
+    %'B^+->K^+mu^+mu^-::A_FB[14.18,16.00]@CDF-2012',
+    %'B^+->K^+mu^+mu^-::A_FB[16.00,22.86]@CDF-2012',
+    %'B^+->K^+mu^+mu^-::BR[1.00,6.00]@CDF-2012',
+    %'B^+->K^+mu^+mu^-::A_FB[1.00,6.00]@CDF-2012',
+    %'B^0->K^*0mu^+mu^-::BR[1.00,6.00]@CDF-2012',
+    %'B^0->K^*0mu^+mu^-::BR[14.18,16.00]@CDF-2012',
+    %'B^0->K^*0mu^+mu^-::BR[16.00,19.21]@CDF-2012',
+    %'B^0->K^*0mu^+mu^-::BR[1.00,6.00]@CMS-2013A',
+    %'B^0->K^*0mu^+mu^-::BR[14.18,16.00]@CMS-2013A',
+    %'B^0->K^*0mu^+mu^-::BR[16.00,19.00]@CMS-2013A',
+    %'B^0->K^*0mu^+mu^-::BR[1.00,6.00]@LHCb-2013',
+    %'B^0->K^*0mu^+mu^-::BR[14.18,16.00]@LHCb-2013',
+    %'B^0->K^*0mu^+mu^-::BR[16.00,19.00]@LHCb-2013
+
+    \begin{itemize} %TODO: citations
+        \item $B\rightarrow K\mu^+\mu^-$ angular observables
+        \begin{itemize}
+            \item CDF~ 2012 ({\url{http://www-cdf.fnal.gov/physics/new/bottom/120628.blessed-b2smumu_96/public_b2smumu.pdf}})
+            \item LHCb 2012 ({\url{http://www-cdf.fnal.gov/physics/new/bottom/120628.blessed-b2smumu_96/public_b2smumu.pdf}})
+        \end{itemize}
+        \item $\mathcal{B}(B_s\rightarrow\mu^+\mu^-)$
+        \begin{itemize}
+            \item LHCb 2014 ({\href{http://arXiv.org/abs/1403.8044}{arXiv:1403.8044}})
+            \item CDF 2012 ({\url{http://www-cdf.fnal.gov/physics/new/bottom/120628.blessed-b2smumu_96/public_b2smumu.pdf}})
+            % angular observables $A_{FB}, F_H$,  LHCb 2014 ({\href{http://arXiv.org/abs/1403.8045}{arXiv:1403.8045}}) % TODO: write angular formula
+        \end{itemize}
+        \item $\mathcal{B}(B_s\rightarrow\mu^+\mu^-)$
+        \begin{itemize}
+            \item LHCb+CMS 2014 ({\href{http://arXiv.org/abs/hep-ph/0104284}{arXiv:hep-ph/0104284}})
+        \end{itemize}
+        \item $\mathcal{B}(B_s\rightarrow K^\ast\mu^+\mu^-)$ (LHCb, CMS, CDF2013)
+    \end{itemize}
+
+    {\large\textbf{theoretical approach:}}
 
     \begin{itemize}
         \item BtoKmumu angular analysis (LHCb 2014) %TODO: --> cite paper on arXiv
         \item BsTOmumu branching fraction (LHCb+CMS 2014) % TODO: --> cite paper on arXiv (experimental citation in methodology subsection)
+        \item Implementation --> EOS-package
     \end{itemize}
+
 
 }
 
@@ -473,14 +583,14 @@
 
 }
 
-\slide{
+\slide[t]{
 
     \frametitle{\insertsubsectionhead}
 
-    {\large\textbf{Inappropriate form factor uncertainty?}} % TODO: reformulate
+    {\large\textbf{Inappropriate form-factor prior?}}
 
     \begin{center}
-        \includegraphics[width=0.7\textwidth]{figures/Wilson_coeff_2d} %TODO: put form factor plot ( f_T(0) ) here
+        \includegraphics[width=0.9\textwidth]{figures/FF_ft0}
     \end{center}
 
 }
@@ -489,17 +599,32 @@
 
     \frametitle{\insertsubsectionhead}
 
-    {\large\textbf{Large $\boldsymbol{1/m_b}$ corrections to QCDF?}} % TODO: reformulate
+    {\large\textbf{Large $\boldsymbol{1/m_b}$ corrections to QCDF?}}
 
     \begin{center}
-        \includegraphics[width=0.7\textwidth]{figures/Wilson_coeff_2d} %TODO: put form factor plot ( f_T(0) ) here
+        \includegraphics[width=0.9\textwidth]{figures/SL_large_recoil}
     \end{center}
 
 }
+
+\section{Summary}
+
+\slide{ %TODO: desloppify
+
+    \begin{itemize}
+
+        \item model-independent search for new physics
+        \item updated constraints on $\mathcal{C}_{10} ^{(\prime)} , \mathcal{C}_S ^{(\prime)} , \mathcal{C}_P ^{(\prime)} , \mathcal{C}_T , \text{and} ~ \mathcal{C}_{T5}$
+        \item need better theoretical control
+        \item no significant deviation from the SM
+
+    \end{itemize}
 
 %TODO: conclusion:
 % we put updated, model-independent constraints on the scanned Wilson coefficients --> name them: C_S+prime, C_P+prime, C_T, CT5
 % need better theoretical control to distinguish between yet unknown corrections and new physics
 % the standard model can explain the latest LHCb data within the uncertainties
+
+}
 
 \end{document}
