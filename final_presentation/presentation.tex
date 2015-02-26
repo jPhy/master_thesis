@@ -13,7 +13,7 @@
 \usepackage{diagmac2}
 
 \title{Beyond-the-standard-model contributions to rare B decays analyzed with variational-Bayes enhanced adaptive importance sampling}
-\author{Stephan Jahn}
+\author{Stephan Jahn} %TODO: on DPG: include Fred and Christoph
 \date{\today} %TODO: insert date
 
 
@@ -359,14 +359,6 @@
 
 \subsection{Methodology}
 
-% TODO: x means done; o means to be done
-%
-%       x explain approach: \theta = {nuisance, Wilson coeff.}; split of P(data, observable(theta,M))
-%       x present the 2d marginals as in thesis (only first figure)
-%       o mention sensitivity to prior of the form factors --> show plot as in thesis; mention preliminary fits and lattice constraint
-%       x show subleading QCDF
-%       o => conclusion: need better theoretical control of FF and subleading 1 / m_b to see significant
-
 \slide{
 
     \frametitle{\insertsubsectionhead}
@@ -520,49 +512,12 @@
 
 \subsection{Constraints on $\mathcal{C}_{10} ^{(\prime)} , \mathcal{C}_S ^{(\prime)} , \mathcal{C}_P ^{(\prime)} , \mathcal{C}_T , \text{and} ~ \mathcal{C}_{T5}$ }
 
-\slide[c]{ %TODO: desloppify
+\slide{ %TODO: desloppify
+% TODO: write theory approaches, in particular write formula of angular observables
+
+    {\large\textbf{theory approach:}}
 
     \frametitle{\insertsubsectionhead}
-
-    {\large\textbf{considered measurements:}}
-
-
-    %'B^+->K^+mu^+mu^-::BR[14.18,16.00]@CDF-2012',
-    %'B^+->K^+mu^+mu^-::BR[16.00,22.86]@CDF-2012',
-    %'B^+->K^+mu^+mu^-::A_FB[14.18,16.00]@CDF-2012',
-    %'B^+->K^+mu^+mu^-::A_FB[16.00,22.86]@CDF-2012',
-    %'B^+->K^+mu^+mu^-::BR[1.00,6.00]@CDF-2012',
-    %'B^+->K^+mu^+mu^-::A_FB[1.00,6.00]@CDF-2012',
-    %'B^0->K^*0mu^+mu^-::BR[1.00,6.00]@CDF-2012',
-    %'B^0->K^*0mu^+mu^-::BR[14.18,16.00]@CDF-2012',
-    %'B^0->K^*0mu^+mu^-::BR[16.00,19.21]@CDF-2012',
-    %'B^0->K^*0mu^+mu^-::BR[1.00,6.00]@CMS-2013A',
-    %'B^0->K^*0mu^+mu^-::BR[14.18,16.00]@CMS-2013A',
-    %'B^0->K^*0mu^+mu^-::BR[16.00,19.00]@CMS-2013A',
-    %'B^0->K^*0mu^+mu^-::BR[1.00,6.00]@LHCb-2013',
-    %'B^0->K^*0mu^+mu^-::BR[14.18,16.00]@LHCb-2013',
-    %'B^0->K^*0mu^+mu^-::BR[16.00,19.00]@LHCb-2013
-
-    \begin{itemize} %TODO: citations
-        \item $B\rightarrow K\mu^+\mu^-$ angular observables
-        \begin{itemize}
-            \item CDF~ 2012 ({\url{http://www-cdf.fnal.gov/physics/new/bottom/120628.blessed-b2smumu_96/public_b2smumu.pdf}})
-            \item LHCb 2012 ({\url{http://www-cdf.fnal.gov/physics/new/bottom/120628.blessed-b2smumu_96/public_b2smumu.pdf}})
-        \end{itemize}
-        \item $\mathcal{B}(B_s\rightarrow\mu^+\mu^-)$
-        \begin{itemize}
-            \item LHCb 2014 ({\href{http://arXiv.org/abs/1403.8044}{arXiv:1403.8044}})
-            \item CDF 2012 ({\url{http://www-cdf.fnal.gov/physics/new/bottom/120628.blessed-b2smumu_96/public_b2smumu.pdf}})
-            % angular observables $A_{FB}, F_H$,  LHCb 2014 ({\href{http://arXiv.org/abs/1403.8045}{arXiv:1403.8045}}) % TODO: write angular formula
-        \end{itemize}
-        \item $\mathcal{B}(B_s\rightarrow\mu^+\mu^-)$
-        \begin{itemize}
-            \item LHCb+CMS 2014 ({\href{http://arXiv.org/abs/hep-ph/0104284}{arXiv:hep-ph/0104284}})
-        \end{itemize}
-        \item $\mathcal{B}(B_s\rightarrow K^\ast\mu^+\mu^-)$ (LHCb, CMS, CDF2013)
-    \end{itemize}
-
-    {\large\textbf{theoretical approach:}}
 
     \begin{itemize}
         \item BtoKmumu angular analysis (LHCb 2014) %TODO: --> cite paper on arXiv
@@ -570,7 +525,45 @@
         \item Implementation --> EOS-package
     \end{itemize}
 
+}
 
+\slide[c]{
+
+    \frametitle{\insertsubsectionhead}
+
+    {\large\textbf{considered measurements:}}
+
+    \begin{itemize}
+        \item $B\rightarrow K\mu^+\mu^-$ angular observables
+        \begin{itemize}
+            \item LHCb 2014 (\href{http://arXiv.org/abs/1403.8045}{arXiv:1403.8045})
+            \item CDF~ 2012 ($A_{FB}$ only)
+        \end{itemize}
+        \item $\mathcal{B}(B_s\rightarrow{}K\mu^+\mu^-)$
+        \begin{itemize}
+            \item LHCb 2014 ({\href{http://arXiv.org/abs/1403.8044}{arXiv:1403.8044}})
+            \item CDF~ 2012
+        \end{itemize}
+        \item $\mathcal{B}(B_s\rightarrow\mu^+\mu^-)$
+        \begin{itemize}
+            \item LHCb+CMS 2014 ({\href{http://arXiv.org/abs/hep-ph/0104284}{arXiv:hep-ph/0104284}})
+        \end{itemize}
+        \item $\mathcal{B}(B_s\rightarrow K^\ast\mu^+\mu^-)$
+        \begin{itemize}
+            \item LHCb 2013 ({\href{http://arXiv.org/abs/1304.6325}{arXiv:1304.6325}})
+            \item CMS~ 2013 ({\href{http://arXiv.org/abs/1308.3409}{arXiv:1308.3409}})
+            \item CDF~ 2012
+        \end{itemize}
+    \end{itemize}
+
+    \vspace{3mm}
+
+    \begin{columns}[t]
+        \column{.165\textwidth} % Left column and width
+            CDF 2012:
+        \column{.835\textwidth} % Left column and width
+            {\url{http://www-cdf.fnal.gov/physics/new/bottom/120628.blessed-b2smumu_96/public_b2smumu.pdf}}
+    \end{columns}
 }
 
 \slide{
