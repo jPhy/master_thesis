@@ -615,21 +615,36 @@
 
 \section{Summary}
 
-\slide{ %TODO: desloppify
+\slide[c]{
 
-    \begin{itemize}
+    \begin{columns}[t] % [t]: top alignment; [c]: center alignment
 
-        \item model-independent search for new physics
-        \item updated constraints on $\mathcal{C}_{10} ^{(\prime)} , \mathcal{C}_S ^{(\prime)} , \mathcal{C}_P ^{(\prime)} , \mathcal{C}_T , \text{and} ~ \mathcal{C}_{T5}$
-        \item need better theoretical control
-        \item no significant deviation from the SM
 
-    \end{itemize}
+        \column{0.5\textwidth}
+            \uncover<2->{
+                \begin{center}
+                    {\begin{center}\large\textbf{algorithm to sample and integrate in $\boldsymbol{dim=\mathcal{O}(40)}$}\end{center}}
+                    \vspace{9mm}
+                    \includegraphics[width=0.9\textwidth]{figures/algorithm}
+                \end{center}
+            }
 
-%TODO: conclusion:
-% we put updated, model-independent constraints on the scanned Wilson coefficients --> name them: C_S+prime, C_P+prime, C_T, CT5
-% need better theoretical control to distinguish between yet unknown corrections and new physics
-% the standard model can explain the latest LHCb data within the uncertainties
+
+        \column{0.5\textwidth}
+            \uncover<3->{
+                {\begin{center}\large\textbf{model-independent search for new physics}\end{center}}
+
+                \begin{itemize}
+                    \uncover<4->{\item updated constraints on $\mathcal{C}_{10} ^{(\prime)} , \mathcal{C}_S ^{(\prime)} , \mathcal{C}_P ^{(\prime)} , \mathcal{C}_T , \text{and} ~ \mathcal{C}_{T5}$}
+                    \newline
+                    \uncover<5->{\item no significant deviation from the SM}
+                    \newline
+                    \uncover<6->{\item need better theoretical control}
+                \end{itemize}
+            }
+
+
+    \end{columns}
 
 }
 
