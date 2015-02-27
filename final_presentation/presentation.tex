@@ -38,7 +38,7 @@
 
 {
 \setbeamertemplate{footline}{}
-\frame[nopagenumbering]{\titlepage}
+\frame[nopagenumbering,noframenumbering]{\titlepage}
 }
 
 % -------------------------- overview section --------------------------
@@ -226,7 +226,7 @@
 
         restrict $p$ to Gaussian mixtures
 
-        $$ p(x_n | \boldsymbol{\theta}) = \sum_{k=1}^K \pi_k \gauss(x_n | \mu_k, \Sigma_k) $$
+        $$ p(x_n | \boldsymbol{\theta}) = \sum_{k=1}^K \pi_k \gauss(x_n | \mu_k, \Sigma_k) , ~~ \boldsymbol{\theta} = \lbrace \pi_k , \mu_k, \Sigma_k \rbrace $$
 
     }
 
@@ -248,11 +248,11 @@
     \column{0.45\textwidth}
 
         \only<4->{$$ p(x_n | \boldsymbol{Z} , \boldsymbol{\theta}) = \prod ^K _{k=1} \gauss(x_n | \mu_k, \Sigma_k)^{z_{nk}} $$}
-        \only<5->{$$ p(z_{nk}=1) = \pi_k = \prod ^K _{k=1} \pi_k^{z_{nk}} $$}
+        \only<5->{$$ p(z_{nk}=1 |  \boldsymbol{\theta}) = \pi_k = \prod ^K _{k^\prime=1} \pi_{k^\prime}^{z_{nk^\prime}} $$}
 
     \column{0.45\textwidth}
 
-        \only<6->{$$ p(x_n | \boldsymbol{\theta}) = \sum_{\boldsymbol{Z}} p(x_n | \boldsymbol{Z} , \boldsymbol{\theta}) p(\boldsymbol{Z}) $$}
+        \only<6->{$$ p(x_n | \boldsymbol{\theta}) = \sum_{\boldsymbol{Z}} p(x_n | \boldsymbol{Z} , \boldsymbol{\theta}) p(\boldsymbol{Z} | \boldsymbol{\theta}) $$}
 
      \end{columns}
 
@@ -265,11 +265,13 @@
 
     \only<2->{without proof} \only<1>{\vspace{4.8mm}}
 
-        \[ \text{minimize} ~ \KLPp \uncover<2->{\Leftrightarrow \text{maximize} ~ \log p(\boldsymbol{X}) \equiv \prod^{N}_{n = 1} p(x_n)} \]
+        \[ \text{minimize} ~ \KLPp \uncover<2->{\Leftrightarrow \text{maximize} ~ \log p(\boldsymbol{X} | \boldsymbol{\theta}) \equiv \log \prod^{N}_{n = 1} p(x_n | \boldsymbol{\theta})} \]
 
     \only<3->{
 
-        \vspace{0.8cm}
+        \vspace{3mm}
+
+        impose a \emph{prior} $p(\boldsymbol{\theta})$ and
 
         rewrite with arbitrary probability distribution $q(\boldsymbol{Z} , \boldsymbol{\theta})$
 
@@ -282,7 +284,7 @@
 
     }
 
-    \only<5->{\huge \textcolor{red}{\vspace{-11.5mm} \begin{center} assumption $q(\boldsymbol{Z} , \boldsymbol{\theta}) = q(\boldsymbol{Z})q(\boldsymbol{\theta})$ \newline $\Rightarrow$ semianalytical solution \end{center}}}
+    \only<5->{\Large \textcolor{red}{\vspace{-8mm} \begin{center} assumption $q(\boldsymbol{Z} , \boldsymbol{\theta}) = q(\boldsymbol{Z})q(\boldsymbol{\theta})$ \\ $\Rightarrow$ EM-like algorithm \end{center}}}
 
 }
 
@@ -544,7 +546,7 @@
 
     \frametitle{\insertsubsectionhead}
 
-    {\large\textbf{considered measurements:}}
+    {\large\textbf{considered measurements $ \boldsymbol{P\left(\mathcal{D} | \boldsymbol{O} \right)} $:}}
 
     \begin{itemize}
         \item $B\rightarrow K\mu^+\mu^-$ angular observables
@@ -572,9 +574,9 @@
     \vspace{3mm}
 
     \begin{columns}[t]
-        \column{.165\textwidth} % Left column and width
+        \column{.165\textwidth}
             CDF 2012:
-        \column{.835\textwidth} % Left column and width
+        \column{.835\textwidth}
             {\url{http://www-cdf.fnal.gov/physics/new/bottom/120628.blessed-b2smumu_96/public_b2smumu.pdf}}
     \end{columns}
 }
@@ -605,7 +607,7 @@
 
     \frametitle{\insertsubsectionhead}
 
-    {\large\textbf{Large $\boldsymbol{1/m_b}$ corrections to QCDF?}}
+    {\large\textbf{Large $\boldsymbol{1/m_b}$ corrections to QCDF in $\boldsymbol{B \rightarrow K \mu^+ \mu^-}$?}}
 
     \begin{center}
         \includegraphics[width=0.9\textwidth]{figures/SL_large_recoil}
