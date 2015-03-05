@@ -43,6 +43,7 @@
 \newcommand{\gauss}{\mathcal{N}}
 \newcommand{\rmdx}[1]{\mbox{d} #1 \,} % differential d
 \newcommand{\samples}{\boldsymbol{X}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
 
 \renewcommand\CancelColor{\color{red}}
 
@@ -61,7 +62,7 @@
 \section{Scalar and tensor contributions to $ b \to s \mu^+ \mu^- $}
 
 % TOC-page --> do not show in a 12min talk
-\begin{frame} \frametitle{\insertsectionhead} \tableofcontents[currentsection] \end{frame} %TODO: remove
+\begin{frame} \frametitle{\insertsectionhead} \tableofcontents[currentsection] \end{frame} %TODO: comment out
 
 \subsection{Effective theory}
 
@@ -69,7 +70,7 @@
 
 \slide{
 
-    effective Lagrangian: \
+    effective Lagrangian (\only<1>{$\mathrm{SM}$}\only<2>{beyond-$\mathrm{SM}$}): \
     \
     \newline \newline \
 
@@ -94,14 +95,52 @@
 }
 
 \subsection{Sensitive Observables}
+\newcommand{\sqrtqsq}{\sqrt{q^2}}
 
 \slide{
 
-% TODO: write
+    \begin{itemize}
+
+        \item {\large\textbf{$\boldsymbol{B\rightarrow K\mu^+\mu^-}$ angular distribution} }
+
+        \uncover<2->{$$
+            \frac{1}{\Gamma} \frac{\mbox{d}\Gamma}{\mbox{d}\!\cos\theta}
+            = \frac{3}{4} (1 - \red{F_H}) \sin^2\!\theta
+            + \frac{1}{2} \red{F_H}
+            + \red{A_{FB}} \cos\theta
+        $$}
+
+        \begin{align*}
+            \uncover<3->{\red{A_{FB}} \propto &
+            \mbox{Re}\big[(\mathcal{C}_{P} + \mathcal{C}_{P} ^\prime)\, \mathcal{C}_{T5} ^\ast
+                        + (\mathcal{C}_{S} + \mathcal{C}_{S} ^\prime)\, \mathcal{C}_{T}  ^\ast
+                        + \mathcal{O}(m_\ell/\sqrtqsq)\big] \Big/ \Gamma}
+            \\
+            \uncover<4->{\red{F_H} \propto & \Big[
+              \ldots \left(|\mathcal{C}_{T}|^2 + |\mathcal{C}_{T5}|^2\right)
+             + \ldots \left(|\mathcal{C}_{S} + \mathcal{C}_{S} ^\prime)|^2 + |\mathcal{C}_{P} + \mathcal{C}_{P} ^\prime|^2 \right) \\
+             & + \mathcal{O}(m_\ell/\sqrtqsq)
+            \Big] \Big/ \Gamma} \\
+        \end{align*}
+
+        \vspace{-9mm}
+
+        \uncover<5->{$$ F_{H}^\mathrm{SM} = \mathcal{O}(m_\ell ^2/ q^2) ~~~~~ A_{FB}^\mathrm{SM} = 0 $$}
+
+        \item {\large\textbf{$\boldsymbol{B_s\rightarrow \mu^+\mu^-}$ branching fraction} }
+
+        \vspace{-4mm}
+
+        \uncover<6->{\begin{align*}
+            \red{\mathcal{B}(B_s\rightarrow\mu^+\mu^-)} \propto | \mathcal{C}_{S} - \mathcal{C}_{S} ^\prime |^2 +
+            |( \mathcal{C}_{P} - \mathcal{C}_{P} ^\prime ) + \frac{2 m_\ell}{M_B}( \wilsoncten - \wilsonctenp ) |^2
+        \end{align*}}
+
+    \end{itemize}
 
 }
 
-\subsection{Methodology} %TODD: Variational Bayes
+\subsection{Methodology}
 
 \slide{
 
@@ -341,6 +380,14 @@
 
 
     \end{columns}
+
+}
+
+\subsection{Outlook}
+
+\slide{
+
+%TODO: write the angular observables of BtoK* from draft
 
 }
 
