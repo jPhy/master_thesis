@@ -14,7 +14,7 @@
 \usepackage{cancel}
 \usepackage{xcolor}
 
-\title{variational Bayes applied to multimodal distributions in B physics}
+\title{Variational Bayes Applied to Multimodal Distributions in B Physics}
 \author{S.~Jahn\inst{1} \and F.~Beaujean\inst{2} \and C.~Bobeth\inst{3}}
 \institute{
     \inst{1}
@@ -70,7 +70,7 @@
 
 \slide{
 
-    effective Lagrangian (\only<1>{$\mathrm{SM}$}\only<2>{beyond-$\mathrm{SM}$}): \
+    effective Lagrangian for $ b \to s \mu^+ \mu^- $ (\only<1>{$\mathrm{SM}$}\only<2>{\red{beyond}-$\mathrm{SM}$}): \
     \
     \newline \newline \
 
@@ -80,8 +80,8 @@
 
     \begin{center}
       \begin{tabular}{cc}
-          \small $ \mathcal{O}_{9} ^{\uncover<2->{(\prime)}} = \left[\bar{s} \gamma_\mu^{} P_{L\uncover<2->{(R)}} b\right]\!\left[\bar{\ell} \gamma^\mu \ell\right] $
-                & \small $  \mathcal{O}_{10}^{\uncover<2->{(\prime)}} = \left[\bar{s} \gamma_\mu^{} P_{L\uncover<2->{(R)}} b\right]\!\left[\bar{\ell} \gamma^\mu \gamma_5 \ell\right] $ \\[1cm]
+          \small $ \mathcal{O}_{9} ^{\redsecond{(\prime)}} = \left[\bar{s} \gamma_\mu^{} P_{L\redsecond{(R)}} b\right]\!\left[\bar{\ell} \gamma^\mu \ell\right] $
+                & \small $  \mathcal{O}_{10}^{\redsecond{(\prime)}} = \left[\bar{s} \gamma_\mu^{} P_{L\redsecond{(R)}} b\right]\!\left[\bar{\ell} \gamma^\mu \gamma_5 \ell\right] $ \\[1cm]
           \Large $ \begin{aligned}
                 \redsecond{\mathcal{O}_S^{(\prime)}}    & \redsecond{= \left[\bar{s} P_{R\redsecond{(L)}} b\right]\!\left[\bar{\ell} \ell\right]} \\[5mm]
                 \redsecond{\mathcal{O}_T}               & \redsecond{= \left[\bar{s} \sigma_{\mu\nu}^{} b\right]\!\left[\bar{\ell} \sigma^{\mu\nu} \ell\right] }
@@ -94,7 +94,7 @@
 
 }
 
-\subsection{Sensitive Observables}
+\subsection{Sensitive observables}
 \newcommand{\sqrtqsq}{\sqrt{q^2}}
 
 \slide{
@@ -133,7 +133,7 @@
 
         \uncover<6->{\begin{align*}
             \red{\mathcal{B}(B_s\rightarrow\mu^+\mu^-)} \propto | \mathcal{C}_{S} - \mathcal{C}_{S} ^\prime |^2 +
-            |( \mathcal{C}_{P} - \mathcal{C}_{P} ^\prime ) + \frac{2 m_\ell}{M_B}( \wilsoncten - \wilsonctenp ) |^2
+            |( \mathcal{C}_{P} - \mathcal{C}_{P} ^\prime ) + \frac{2 m_\ell}{M_{B_s}}( \wilsoncten - \wilsonctenp ) |^2
         \end{align*}}
 
     \end{itemize}
@@ -192,114 +192,47 @@
 
 }
 
-\slide{
-
-    \vspace{-5mm}
-
-    \begin{center}
-        \begin{columns}[t] % the "t" option specifies top vertical alignment
-
-            \column{.52\textwidth}
-                \begin{block}{\center theory}
-                    \begin{center}
-                        ~~~~~~\includegraphics[height=1.5cm]{figures/theo_to_obs}
-                        \newline $ \boldsymbol{O}(\boldsymbol{\theta} , \mathrm{M}) $
-                    \end{center}
-                \end{block}
-
-            \column{.52\textwidth}
-                \begin{block}{\center experiment}
-                    \begin{center}
-                        ~~~~~\includegraphics[height=1.5cm]{figures/exp_to_obs}
-                        \newline $ P\left(\mathcal{D} | \boldsymbol{O} \right) $
-                    \end{center}
-                \end{block}
-
-        \end{columns}
-    \end{center}
-
-    \vspace{-3mm}
-
-    \[\diagram{
-        \vertex 0,30:{}{\border{3pt}{4pt}\rect}
-        \vertex 180,30:{}{\border{3pt}{4pt}\rect}
-        \only<2->{\vertex 90,0:{P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M})}{\border{3pt}{4pt}\rect}}
-        \only<3->{\vertex 90,-70:{ \overset{ ~ }{P(\boldsymbol{\theta} | \mathcal{D}, \mathrm{M} )} }{\border{3pt}{4pt}\rect}}
-        \only<2->{
-            \setedge 0,30,90,0:
-            \shadeedge
-            \drawsolidedge
-            \drawedgehead{100}11
-            \setedge 180, 30, 90,0:
-            \shadeedge
-            \drawsolidedge
-            \drawedgehead{100}11
-            }
-        \only<3->{
-            \setedge 90,-10,90,-70:
-            \shadeedge
-            \drawsolidedge
-            \drawedgehead{100}11
-            \abutright -35:{\textstyle \mathrm{Bayes}}{\border{2pt}{2pt}\octagon{3pt}}
-            }
-        }
-    \]
-
-}
-
-\subsection{Sampling algorithm}
-
-\slide{
-
-    \includegraphics[width=\textwidth]{figures/algorithm}
-
-}
-
-\subsection{Joint fit of $\mathcal{C}_{10} ^{(\prime)} , \mathcal{C}_S ^{(\prime)} , \mathcal{C}_P ^{(\prime)} , \mathcal{C}_T , \text{and} ~ \mathcal{C}_{T5}$ }
+\subsection{Measurements $ P\left(\mathcal{D} | \boldsymbol{O} \right) $}
 
 \slide[c]{
 
-    {\large\textbf{considered measurements $ \boldsymbol{P\left(\mathcal{D} | \boldsymbol{O} \right)} $:}}
-
     \begin{itemize}
-        \item $B\rightarrow K\mu^+\mu^-$ angular observables
+        \item $B\rightarrow K\mu^+\mu^-$: $\mathcal{B} , \red{A_{FB}} , \red{F_H}$
         \begin{itemize}
-            \item LHCb 2014 (\href{http://arXiv.org/abs/1403.8045}{arXiv:1403.8045})
-            \item CDF~ 2012 ($A_{FB}$ only)
+            \item \red{LHCb 2014 {\tiny (\href{http://arXiv.org/abs/1403.8044}{arXiv:1403.8044} , \href{http://arXiv.org/abs/1403.8045}{arXiv:1403.8045})}}
+            \item CDF~ 2012 {\tiny (\url{http://www-cdf.fnal.gov/physics/new/bottom/120628.blessed-b2smumu_96})}
         \end{itemize}
-        \item $\mathcal{B}(B\rightarrow{}K\mu^+\mu^-)$
+
+        \item $B_s\rightarrow\mu^+\mu^-$: $\mathcal{B}$
+
         \begin{itemize}
-            \item LHCb 2014 ({\href{http://arXiv.org/abs/1403.8044}{arXiv:1403.8044}})
-            \item CDF~ 2012
+            \item \red{LHCb+CMS 2014 {\tiny({\href{http://arXiv.org/abs/1411.4413}{arXiv:1411.4413}})}}
         \end{itemize}
-        \item $\mathcal{B}(B_s\rightarrow\mu^+\mu^-)$
+
+        \item $B\rightarrow K^\ast\mu^+\mu^-$: $\mathcal{B}$
+
         \begin{itemize}
-            \item LHCb+CMS 2014 ({\href{http://arXiv.org/abs/hep-ph/0104284}{arXiv:hep-ph/0104284}})
-        \end{itemize}
-        \item $\mathcal{B}(B\rightarrow K^\ast\mu^+\mu^-)$
-        \begin{itemize}
-            \item LHCb 2013 ({\href{http://arXiv.org/abs/1304.6325}{arXiv:1304.6325}})
-            \item CMS~ 2013 ({\href{http://arXiv.org/abs/1308.3409}{arXiv:1308.3409}})
-            \item CDF~ 2012
+            \item LHCb 2013 {\tiny({\href{http://arXiv.org/abs/1304.6325}{arXiv:1304.6325}})}
+            \item CMS~ 2013 {\tiny({\href{http://arXiv.org/abs/1308.3409}{arXiv:1308.3409}})}
+            \item CDF~ 2012 {\tiny (\url{http://www-cdf.fnal.gov/physics/new/bottom/120628.blessed-b2smumu_96})}
         \end{itemize}
     \end{itemize}
 
-    \vspace{3mm}
-
-    \begin{columns}[t]
-        \column{.165\textwidth}
-            CDF 2012:
-        \column{.835\textwidth}
-            {\url{http://www-cdf.fnal.gov/physics/new/bottom/120628.blessed-b2smumu_96/public_b2smumu.pdf}}
-    \end{columns}
 }
 
-\slide{
+\subsection{Parameters $\boldsymbol{\theta}$}
 
-    {\large\textbf{parameters $\boldsymbol{\theta}$:}}
+\slide[c]{
+
+    {\large\textbf{scan parameters}}
 
     \begin{itemize}
-        \item Wilson coefficients $\mathcal{C}_{10} ^{(\prime)} , \mathcal{C}_S ^{(\prime)} , \mathcal{C}_P ^{(\prime)} , \mathcal{C}_T , \text{and} ~ \mathcal{C}_{T5}$
+        \item \red{Wilson coefficients $\mathcal{C}_{10} ^{(\prime)} , \mathcal{C}_S ^{(\prime)} , \mathcal{C}_P ^{(\prime)} , \mathcal{C}_T , \text{and} ~ \mathcal{C}_{T5}$}
+    \end{itemize}
+
+    \uncover<2->{{\large\textbf{nuisance parameters}}
+
+    \begin{itemize}
         \item CKM matrix (4 parameters)
         \item charm and bottom quark mass (2 parameters)
         \item form factors
@@ -309,28 +242,46 @@
               \end{itemize}
         \item $B_s$ decay constant $f_{B_s}$
         \item subleading corrections (11 parameters)
-    \end{itemize}
+    \end{itemize}}
 
     \vspace{5mm}
 
-    {\large\textbf{theory calculation $\boldsymbol{O(\theta , M)}$:}}
+    \uncover<3->{{\large\textbf{theory calculation $\boldsymbol{O(\theta , M)}$:}}
 
     \vspace{2.5mm}
-    \Large open-source implementation: EOS-package \newline \large \url{http://project.het.physik.tu-dortmund.de/eos/}
+    \Large open-source implementation: EOS-package \newline \large \url{http://project.het.physik.tu-dortmund.de/eos/}}
 
 }
 
-\slide{
+\subsection{Joint fit of $\mathcal{C}_{10} ^{(\prime)} , \mathcal{C}_S ^{(\prime)} , \mathcal{C}_P ^{(\prime)} , \mathcal{C}_T , \text{and} ~ \mathcal{C}_{T5}$ }
 
-    \begin{center}
-        \includegraphics[width=0.7\textwidth]{figures/Wilson_coeff_2d}
-    \end{center}
+\slide[c]{
+
+    \vspace{6mm}
+
+    \begin{columns}[c]
+        \column{0.65\textwidth}
+            \includegraphics[width=\textwidth]{figures/Wilson_coeff_2d}
+
+        \column{0.35\textwidth}
+            \begin{itemize}
+                \uncover<2->{\item first \emph{simultaneous} fit}
+                \uncover<3->{\item interference $\mathcal{C}_{10} ^{(\prime)} \leftrightarrow \mathcal{C}_{S,P} ^{(\prime)}$
+                        in $ \mathcal{B}(B_s\rightarrow \mu^+\mu^-) $
+                            \begin{itemize}
+                                \uncover<4->{\item[$\Rightarrow$] larger uncertainty than obtained for fixed $\mathcal{C}_{10} ^{(\prime)} = \mathcal{C}_{10} ^{(\prime) \mathrm{SM}}$ \newline {\tiny \href{http://arXiv.org/abs/1205.5811}{arXiv:1205.5811}, \href{http://arXiv.org/abs/1206.0273}{arXiv:1206.0273}, \href{http://arXiv.org/abs/1407.7044}{arXiv:1407.7044}}}
+                            \end{itemize}
+                      }
+            \end{itemize}
+            \vspace{6.5mm}
+
+    \end{columns}
 
 }
+
+\subsection{Nuisance parameters}
 
 \slide[t]{
-
-    {\large\textbf{Inappropriate form-factor prior?}}
 
     \begin{center}
         \includegraphics[width=0.9\textwidth]{figures/FF_ft0}
@@ -340,10 +291,48 @@
 
 \slide{
 
-    {\large\textbf{Large $\boldsymbol{1/m_b}$ corrections to QCDF in $\boldsymbol{B \rightarrow K \mu^+ \mu^-}$?}}
-
     \begin{center}
         \includegraphics[width=0.9\textwidth]{figures/SL_large_recoil}
+    \end{center}
+
+}
+
+\subsection{Sampling algorithm}
+
+\slide[t]{
+
+{\large\textbf{Difficulties}}
+
+\begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
+
+\column{.45\textwidth} % Left column and width
+
+\begin{itemize}
+    \uncover<2->{\item curse of dimensionality}
+    \uncover<3->{\item multimodality}
+    \uncover<4->{\item degeneracies}
+\end{itemize}
+
+\uncover<5->{\Huge \textcolor{red}{no standard algorithm so far}}
+
+\column{.6\textwidth} % Right column and width
+
+
+\begin{center}
+\uncover<3->{\includegraphics[height=0.7\textheight]{figures/C10_C10p}}
+\end{center}
+
+
+\end{columns}
+
+}
+
+\slide{
+
+    \includegraphics[width=\textwidth]{figures/algorithm}
+
+    \begin{center}
+        \url{https://pypi.python.org/pypi/pypmc}
     \end{center}
 
 }
