@@ -3,4 +3,4 @@ presentation.pdf : %.pdf : %.tex clean
 
 .PHONY : clean
 clean:
-	find . -maxdepth 1 -type f -and \( -not -name '*.tex' \) -and \( -not -name 'Makefile' \) -delete
+	find . -maxdepth 1 -type f -and \( -not -name '*.tex' \) -and \( -not -name 'Makefile' \) -and \( -not -name '.gitignore' \) -delete
