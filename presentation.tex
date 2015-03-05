@@ -11,6 +11,8 @@
 \usepackage{textcomp}
 \usepackage{wasysym}
 \usepackage{diagmac2}
+\usepackage{cancel}
+\usepackage{xcolor}
 
 \title{variational Bayes applied to multimodal distributions in B physics}
 \author{S.~Jahn\inst{1} \and F.~Beaujean\inst{2} \and C.~Bobeth\inst{3}}
@@ -41,6 +43,8 @@
 \newcommand{\gauss}{\mathcal{N}}
 \newcommand{\rmdx}[1]{\mbox{d} #1 \,} % differential d
 \newcommand{\samples}{\boldsymbol{X}}
+
+\renewcommand\CancelColor{\color{red}}
 
 \setbeamercolor{block title}{bg=blue, fg=white}
 
@@ -110,7 +114,7 @@
         split theory and experiment - \emph{observables} $\boldsymbol{O}$:
 
         $$ P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M})
-          = P(\mathcal{D} | \boldsymbol{O} (\boldsymbol{\theta} , \mathrm{M} )) $$ %TODO: emphasize that there is a hidden assumption
+          = P(\mathcal{D} | \boldsymbol{O} (\boldsymbol{\theta} , \mathrm{M} ) , \underset{ \text{\textcolor{red}{\textbf{assumption} }} } {\cancel{\boldsymbol{\textcolor{red}{\theta , \mathrm{M}}}}} ) $$
 
         \vspace{-6.5mm}
 
@@ -134,7 +138,7 @@
                             \begin{center}
                                 \only<-4|handout:0>{ ~ \vspace{8.4mm} ~ }
                                 \only<5->{~~~~~\emph{measure} observables \newline
-                                $P\left(\mathcal{D} | \boldsymbol{O} \right)$ }
+                                $P\left(\mathcal{D} | \boldsymbol{O} , \cancel{ \textcolor{red}{\boldsymbol{\theta} , \mathrm{M} } } \right)$ }
                             \end{center}
                         \end{block}
                         \only<5->{\center \includegraphics[height=1.5cm]{figures/experimentalist}}
