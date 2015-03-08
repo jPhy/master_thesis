@@ -154,8 +154,11 @@
 
         split theory and experiment - \emph{observables} $\boldsymbol{O}$:
 
-        $$ P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M})
-          = P(\mathcal{D} | \boldsymbol{O} (\boldsymbol{\theta} , \mathrm{M} ) , \underset{ \text{\textcolor{red}{\textbf{assumption} }} } {\cancel{\boldsymbol{\textcolor{red}{\theta , \mathrm{M}}}}} ) $$
+        \only<-5|handout:0>{$$ P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M})
+          = P(\mathcal{D} | \boldsymbol{O} (\boldsymbol{\theta} , \mathrm{M} )) $$}
+
+        \only<6->{$$ P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M})
+          = P(\mathcal{D} | \boldsymbol{O} (\boldsymbol{\theta} , \mathrm{M} ) , \underset{ \text{\textcolor{red}{\textbf{assumption} }} } {\cancel{\boldsymbol{\textcolor{red}{\theta , \mathrm{M}}}}} ) $$}
 
         \vspace{-6.5mm}
 
@@ -179,7 +182,8 @@
                             \begin{center}
                                 \only<-4|handout:0>{ ~ \vspace{8.4mm} ~ }
                                 \only<5->{~~~~~\emph{measure} observables \newline
-                                $P\left(\mathcal{D} | \boldsymbol{O} , \cancel{ \textcolor{red}{\boldsymbol{\theta} , \mathrm{M} } } \right)$ }
+                                    \only<-5|handout:0>{$P\left(\mathcal{D} | \boldsymbol{O} \right)$}
+                                    \only<6->{$P\left(\mathcal{D} | \boldsymbol{O} , \cancel{ \textcolor{red}{\boldsymbol{\theta} , \mathrm{M} } } \right)$ }}
                             \end{center}
                         \end{block}
                         \only<5->{\center \includegraphics[height=1.5cm]{figures/experimentalist}}
