@@ -17,7 +17,6 @@
 \author{Stephan Jahn}
 \date{March 16, 2015}
 
-
 % ----------------------------------------------------------------------
 
 \newcommand{\slide}[2][t]{\begin{frame}[#1] \frametitle{\insertsection} #2 \end{frame}}
@@ -156,11 +155,14 @@
 
 \section{Adaptive importance sampling with the variational-Bayes approach}
 
-% \subsection{Adaptive importance sampling}
+\begin{frame}
+\frametitle{\insertsectionhead}
+\tableofcontents[currentsection]
+\end{frame}
 
 \slide[c]{
 
-    \frametitle{\insertsubsectionhead}
+    \frametitle{Adaptive importance sampling}
 
     $$ \int P(x) dx = \int \frac{P(x)}{p(x)} p(x) dx
     \approx \frac{1}{N} \sum^{N}_{n = 1} \frac{P(x_n)}{p(x_n)} \equiv \mu^{{N}} ~~ where ~~ x_n \sim p $$
@@ -208,10 +210,10 @@
 \tableofcontents[currentsection]
 \end{frame}
 
-% \subsection{Effective theory}
-
 \newcommand{\redsecond}[1]{\uncover<2->{\textcolor{red}{#1}}}
 \slide{
+
+    \frametitle{Effective theory}
 
     effective Lagrangian for $ b \to s \ell^+ \ell^- $ (\only<1>{$\mathrm{SM}$}\only<2>{\red{beyond}-$\mathrm{SM}$}): \
     \
@@ -237,10 +239,10 @@
 
 }
 
-% \subsection{Sensitive observables}
-
 \newcommand{\sqrtqsq}{\sqrt{q^2}}
 \slide{
+
+    \frametitle{Sensitive observables}
 
     \begin{itemize}
 
@@ -270,9 +272,9 @@
 
 }
 
-% \subsection{Methodology}
-
 \slide{
+
+    \frametitle{Methodology}
 
     we want:
     \newline
@@ -353,8 +355,6 @@
     \end{itemize}
 
 }
-
-% \subsection{Constraints on $\mathcal{C}_{10} ^{(\prime)} , \mathcal{C}_S ^{(\prime)} , \mathcal{C}_P ^{(\prime)} , \mathcal{C}_T , \text{and} ~ \mathcal{C}_{T5}$ }
 
 \slide[c]{
 
