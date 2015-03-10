@@ -41,6 +41,18 @@ def vb_update_movie(vb, iterations=1000, prune=1., rel_tol=1e-10, abs_tol=1e-5, 
             Output status information after each update.
 
         '''
+        def plot_mix(i):
+            plt.clf()
+            plt.title('Proposal density - iteration %i' %i)
+            plot_mixture(vb.make_mixture(), 1, 2, visualize_weights=True, cmap='jet')
+            plt.colorbar()
+            plt.xlabel('$x_2$')
+            plt.ylabel('$x_3$')
+            plt.xlim(-30,10)
+            plt.ylim(-30,30)
+            plt.draw()
+            return i
+
         old_K = None
         for i in range(1, iterations + 1):
             # recompute bound in 1st step or if components were removed
@@ -62,19 +74,11 @@ def vb_update_movie(vb, iterations=1000, prune=1., rel_tol=1e-10, abs_tol=1e-5, 
 
             # plot importance samples every 10th iteration
             if not i % 10:
-                plt.clf()
-                plt.title('Proposal density - iteration %i' %i)
-                plot_mixture(vb.make_mixture(), 1, 2, visualize_weights=True, cmap='jet')
-                plt.colorbar()
-                plt.xlabel('$x_2$')
-                plt.ylabel('$x_3$')
-                plt.xlim(-30,10)
-                plt.ylim(-30,30)
-                plt.draw()
+                plot_mix(i)
 
              # exact convergence
             if bound == old_bound:
-                return i
+                return plot_mix(i)
             # approximate convergence
             # but only if bound increased
             diff = bound - old_bound
@@ -82,13 +86,14 @@ def vb_update_movie(vb, iterations=1000, prune=1., rel_tol=1e-10, abs_tol=1e-5, 
                 # handle case when bound is close to 0
                 if abs(bound) < abs_tol:
                     if abs(diff) < abs_tol:
-                        return i
+                        return plot_mix(i)
                 else:
                     if abs(diff / bound) < rel_tol:
-                        return i
+                        return plot_mix(i)
 
             # save K *before* pruning
             old_K = vb.K
             vb.prune(prune)
         # not converged
+        plot_mix(i)
         return None
