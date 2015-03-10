@@ -85,6 +85,33 @@ print "vb perplexity", pypmc.tools.convergence.perp(vb_sampler.history[:][:,0])
 print "vb ESS", pypmc.tools.convergence.ess(vb_sampler.history[:][:,0])
 --
 
+# plot from a different perspective
+plt.figure()
+plt.title('other 2D marginal')
+plt.hist2d(vb_sampler.history[:][:,3], vb_sampler.history[:][:,4], weights=vb_sampler.std_weights[:][:,0], cmap='gray_r', bins=100)
+plot_mixture(vb.make_mixture(), 2, 3, visualize_weights=True, cmap='jet')
+plt.xlabel('$x_3$')
+plt.ylabel('$x_4$')
+plt.draw()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
