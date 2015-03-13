@@ -56,11 +56,11 @@
 
     \only<2->{ \
         \newline \newline \
-        our application: \
+        {\large \red{model independent search for new physics {\tiny{}(effective theory)}:}} \
         \
         \newline \newline \
 
-        \only<3->{$$ \boldsymbol{\theta} = \lbrace \mathcal{C}_{7 , 9 , 10 , S , P , T , T5}^{(\prime)}  , ... \rbrace $$}
+        \only<3->{$$ \boldsymbol{\theta} = \text{{\tiny{}effective}}\mathrm{~couplings} $$}
         \only<4->{$$ \mathcal{D} = \mathrm{detector~events} $$}
         \only<5->{$$ \mathrm{M} = \mathrm{EFT , SM , ...} $$}
     }
@@ -268,111 +268,9 @@
 
 }
 
-\newcommand{\sqrtqsq}{\sqrt{q^2}}
-\slide{
-
-    \frametitle{Sensitive observables}
-
-    \begin{itemize}
-
-        \item {\large\textbf{$\boldsymbol{B\rightarrow K\mu^+\mu^-}$ angular distribution} }
-
-        \uncover<2->{$$
-            \frac{1}{\Gamma} \frac{\mbox{d}\Gamma}{\mbox{d}\!\cos\theta}
-            = \frac{3}{4} (1 - \red{F_H}) \sin^2\!\theta
-            + \frac{1}{2} \red{F_H}
-            + \red{A_{FB}} \cos\theta
-        $$}
-
-        \begin{align*}
-            \uncover<3->{\red{A_{FB}} \propto &
-            \mbox{Re}\big[(\mathcal{C}_{P} + \mathcal{C}_{P} ^\prime)\, \mathcal{C}_{T5} ^\ast
-                        + (\mathcal{C}_{S} + \mathcal{C}_{S} ^\prime)\, \mathcal{C}_{T}  ^\ast
-                        + \mathcal{O}(m_\ell/\sqrtqsq)\big] \Big/ \Gamma}
-            \\
-            \uncover<4->{\red{F_H} \propto & \Big[
-              \ldots \left(|\mathcal{C}_{T}|^2 + |\mathcal{C}_{T5}|^2\right)
-             + \ldots \left(|\mathcal{C}_{S} + \mathcal{C}_{S} ^\prime)|^2 + |\mathcal{C}_{P} + \mathcal{C}_{P} ^\prime|^2 \right) \\
-             & + \mathcal{O}(m_\ell/\sqrtqsq)
-            \Big] \Big/ \Gamma} \\
-        \end{align*}
-
-        \vspace{-9mm}
-
-        \uncover<5->{$$ F_{H}^\mathrm{SM} = \mathcal{O}(m_\ell ^2/ q^2) ~~~~~ A_{FB}^\mathrm{SM} = 0 $$}
-
-        \item {\large\textbf{$\boldsymbol{B_s\rightarrow \mu^+\mu^-}$ branching fraction} }
-
-        \vspace{-4mm}
-
-        \uncover<6->{\begin{align*}
-            \red{\mathcal{B}(B_s\rightarrow\mu^+\mu^-)} \propto | \mathcal{C}_{S} - \mathcal{C}_{S} ^\prime |^2 +
-            |( \mathcal{C}_{P} - \mathcal{C}_{P} ^\prime ) + \frac{2 m_\ell}{M_{B_s}}( \wilsoncten - \wilsonctenp ) |^2
-        \end{align*}}
-
-    \end{itemize}
-
-}
-
-\slide{
-
-    \frametitle{Methodology}
-
-    we want:
-    \newline
-    $$ P(\boldsymbol{\theta} | \mathcal{D}, \mathrm{M} ) \overset{\mathrm{Bayes}}{\propto} P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M})P(\boldsymbol{\theta} | \mathrm{M}) $$
-
-    \only<2->{
-
-        \vspace{1.6mm}
-
-        split theory and experiment - \emph{observables} $\boldsymbol{O}$:
-
-        \only<-5|handout:0>{$$ P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M})
-          = P(\mathcal{D} | \boldsymbol{O} (\boldsymbol{\theta} , \mathrm{M} )) $$}
-
-        \only<6->{$$ P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M})
-          = P(\mathcal{D} | \boldsymbol{O} (\boldsymbol{\theta} , \mathrm{M} ) , \underset{ \text{\textcolor{red}{\textbf{assumption} }} } {\cancel{\boldsymbol{\textcolor{red}{\theta , \mathrm{M}}}}} ) $$}
-
-        \vspace{-6.5mm}
-
-        \only<3->{
-
-            \begin{center}
-                \begin{columns}[t] % the "t" option specifies top vertical alignment
-
-                    \column{.5\textwidth}
-                        \begin{block}{\center theory}
-                            \begin{center}
-                                \only<-3|handout:0>{ ~ \vspace{8.4mm} ~ }
-                                \only<4->{~~~\emph{calculate} observables \newline
-                                $ \boldsymbol{O}(\boldsymbol{\theta} , \mathrm{M}) $}
-                            \end{center}
-                        \end{block}
-                        \only<4->{\center \includegraphics[height=1.5cm]{figures/theorist}}
-
-                    \column{.5\textwidth}
-                        \begin{block}{\center experiment}
-                            \begin{center}
-                                \only<-4|handout:0>{ ~ \vspace{8.4mm} ~ }
-                                \only<5->{~~~~~\emph{measure} observables \newline
-                                    \only<-5|handout:0>{$P\left(\mathcal{D} | \boldsymbol{O} \right)$}
-                                    \only<6->{$P\left(\mathcal{D} | \boldsymbol{O} , \cancel{ \textcolor{red}{\boldsymbol{\theta} , \mathrm{M} } } \right)$ }}
-                            \end{center}
-                        \end{block}
-                        \only<5->{\center \includegraphics[height=1.5cm]{figures/experimentalist}}
-
-                \end{columns}
-            \end{center}
-        }
-
-    }
-
-}
-
 \slide[c]{
 
-    \frametitle{Measurements $ P\left(\mathcal{D} | \boldsymbol{O} \right) $}
+    \frametitle{Experimental constraints}
 
     \begin{itemize}
         \item $B\rightarrow K\mu^+\mu^-$: $\mathcal{B} , \red{A_{FB}} , \red{F_H}$
@@ -395,39 +293,6 @@
             \item CDF~ 2012 {\tiny (\url{http://www-cdf.fnal.gov/physics/new/bottom/120628.blessed-b2smumu_96})}
         \end{itemize}
     \end{itemize}
-
-}
-
-\slide[c]{
-
-    \frametitle{Parameters $\boldsymbol{\theta}$}
-
-    {\large\textbf{scan parameters}}
-
-    \begin{itemize}
-        \item \red{Wilson coefficients $\mathcal{C}_{10} ^{(\prime)} , \mathcal{C}_S ^{(\prime)} , \mathcal{C}_P ^{(\prime)} , \mathcal{C}_T , \text{and} ~ \mathcal{C}_{T5}$}
-    \end{itemize}
-
-    \uncover<2->{{\large\textbf{nuisance parameters}}
-
-    \begin{itemize}
-        \item CKM matrix (4 parameters)
-        \item charm and bottom quark mass (2 parameters)
-        \item form factors
-              \begin{itemize}
-                  \item $B\rightarrow K^{\thinspace\thinspace\thinspace}$ (5 parameters)
-                  \item $B\rightarrow K^\ast$                             (6 parameters)
-              \end{itemize}
-        \item $B_s$ decay constant $f_{B_s}$
-        \item subleading corrections (11 parameters)
-    \end{itemize}}
-
-    \vspace{5mm}
-
-    \uncover<3->{{\large\textbf{theory calculation $\boldsymbol{O(\theta , M)}$:}}
-
-    \vspace{2.5mm}
-    \Large open-source implementation: EOS-package \newline \large \url{http://project.het.physik.tu-dortmund.de/eos/}}
 
 }
 
@@ -484,8 +349,6 @@
                                  \begin{itemize} \item[$\Rightarrow$] updated constraints \end{itemize}} \
 
                     \uncover<5->{\item no significant deviation from the SM}
-                    \newline
-                    \uncover<6->{\item need better theoretical control}
                 \end{itemize}
             }
 
