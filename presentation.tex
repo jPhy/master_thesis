@@ -165,15 +165,15 @@
 
     \frametitle{Adaptive importance sampling}
 
-    $$ \int P(x) \dx = \int \frac{P(x)}{p(x)} p(x) \dx
-    \approx \frac{1}{N} \sum^{N}_{n = 1} \frac{P(x_n)}{p(x_n)} \equiv \mu^{{N}} ~~ where ~~ x_n \sim p $$
+    $$ \int P(x) \dx = \int \frac{P(x)}{q(x)} q(x) \dx
+    \approx \frac{1}{N} \sum^{N}_{n = 1} \frac{P(x_n)}{q(x_n)} \equiv \mu^{{N}} ~~ where ~~ x_n \sim q $$
 
 
     \uncover<2->{squared uncertainty (variance):
 
-    $$ \varmuN = \frac{1}{N} \left[ \int \frac{P(x)}{p(x)} P(x) \dx - \left(\int P(x) \dx \right)^2 \right] $$}
+    $$ \varmuN = \frac{1}{N} \left[ \int \frac{P(x)}{q(x)} P(x) \dx - \left(\int P(x) \dx \right)^2 \right] $$}
 
-    \uncover<3->{\Huge\begin{center}\red{minimize the uncertainty $\varmuN$ with respect to $p$}\end{center} }
+    \uncover<3->{\Huge\begin{center}\red{minimize the uncertainty $\varmuN$ with respect to $q$}\end{center} }
 
 }
 
