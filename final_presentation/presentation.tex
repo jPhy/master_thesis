@@ -28,7 +28,8 @@
 \newcommand{\wilsonctenp}{\mathcal{C} ^{\prime} _{10}}
 \newcommand{\errorasymm}[3]{#1 \substack{\hspace{.05em} \scriptscriptstyle + \hspace{.05em} #2 \\ \scriptscriptstyle -#3} } % asymmetric uncertainties
 \newcommand{\gauss}{\mathcal{N}}
-\newcommand{\rmdx}[1]{\mbox{d} #1 \,} % differential d
+\newcommand{\diffd}[1]{\mbox{d} #1 \,} % differential d
+\newcommand{\dx}{\diffd{x}}
 \newcommand{\samples}{\boldsymbol{X}}
 \newcommand{\red}[1]{\textcolor{red}{#1}}
 
@@ -162,19 +163,19 @@
 
     \frametitle{\insertsubsectionhead}
 
-    $$ \int P(x) dx = \int \frac{P(x)}{p(x)} p(x) dx
+    $$ \int P(x) \dx = \int \frac{P(x)}{p(x)} p(x) \dx
     \approx \frac{1}{N} \sum^{N}_{n = 1} \frac{P(x_n)}{p(x_n)} \equiv \mu^{{N}} ~~ where ~~ x_n \sim p $$
 
 
     \only<2->{squared uncertainty (variance):
 
-    $$ \varmuN = \frac{1}{N} \left[ \int \frac{P(x)}{p(x)} P(x) dx - \left(\int P(x) dx \right)^2 \right] $$}
+    $$ \varmuN = \frac{1}{N} \left[ \int \frac{P(x)}{p(x)} P(x) \dx - \left(\int P(x) \dx \right)^2 \right] $$}
 
     \only<3->{\begin{itemize} \item minimize the uncertainty $\varmuN$ with respect to $p$}
 
         \only<4->{\begin{itemize}
-                      \item[--] it suffices to minimize: ~~ $\mathrm{log} \left( \int \frac{P(x)}{p(x)} P(x) dx \right)$}
-        \only<5->{    \item[--] by Jensen's inequality:     $\geq \int \mathrm{log} \left( \frac{P(x)}{p(x)} \right) P(x) dx
+                      \item[--] it suffices to minimize: ~~ $\mathrm{log} \left( \int \frac{P(x)}{p(x)} P(x) \dx \right)$}
+        \only<5->{    \item[--] by Jensen's inequality:     $\geq \int \mathrm{log} \left( \frac{P(x)}{p(x)} \right) P(x) \dx
                                                             \only<6->{\equiv \KLPp}$}
         \only<6->{    \vspace{1.5mm}
                       \item[--] known as the \emph{Kullback-Leibler divergence}}
@@ -205,8 +206,8 @@
 
         \begin{center}
 
-                \only<4 >{~$\varmuN - const =                         \mathrm{log} \left( \int \frac{P(x)}{p(x)} P(x) dx \right)  \geq \KLPp$}
-                \only<5->{ $\varmuN - const = \underbrace{\textstyle{}\mathrm{log} \left( \int \frac{P(x)}{p(x)} P(x) dx \right)} \geq \KLPp$}
+                \only<4 >{~$\varmuN - const =                         \mathrm{log} \left( \int \frac{P(x)}{p(x)} P(x) \dx \right)  \geq \KLPp$}
+                \only<5->{ $\varmuN - const = \underbrace{\textstyle{}\mathrm{log} \left( \int \frac{P(x)}{p(x)} P(x) \dx \right)} \geq \KLPp$}
 
         \end{center}
 
@@ -265,11 +266,9 @@
 
     \frametitle{\insertsubsectionhead}
 
-    \only<2->{without proof} \only<1>{\vspace{4.8mm}}
-
         \[ \text{minimize} ~ \KLPp \uncover<2->{\Leftrightarrow \text{maximize} ~ \log p(\boldsymbol{X} | \boldsymbol{\theta}) \equiv \log \prod^{N}_{n = 1} p(x_n | \boldsymbol{\theta})} \]
 
-    \only<3->{
+    \only<2->{
 
         \vspace{3mm}
 
@@ -277,7 +276,7 @@
 
         rewrite with arbitrary probability distribution $q(\boldsymbol{Z} , \boldsymbol{\theta})$
 
-        \only<4->{\footnotesize \[ \log p(\boldsymbol{X}) = \underbrace{\int \rmdx{\boldsymbol{Z}} \rmdx{\boldsymbol{\theta}} q(\boldsymbol{Z} , \boldsymbol{\theta}) \log \left[\frac{p(\samples, \boldsymbol{Z} , \boldsymbol{\theta})}{q(\boldsymbol{Z} , \boldsymbol{\theta})}\right]} + \underbrace{\int \rmdx{\boldsymbol{Z}} \rmdx{\boldsymbol{\theta}} q(\boldsymbol{Z} , \boldsymbol{\theta}) \log \left[\frac{q(\boldsymbol{Z} , \boldsymbol{\theta})}{p(\boldsymbol{Z} , \boldsymbol{\theta} | \samples)} \right] } \]
+        \only<3->{\footnotesize \[ \log p(\boldsymbol{X}) = \underbrace{\int  \diffd{\boldsymbol{Z}}  \diffd{\boldsymbol{\theta}} q(\boldsymbol{Z} , \boldsymbol{\theta}) \log \left[\frac{p(\samples, \boldsymbol{Z} , \boldsymbol{\theta})}{q(\boldsymbol{Z} , \boldsymbol{\theta})}\right]} + \underbrace{\int  \diffd{\boldsymbol{Z}}  \diffd{\boldsymbol{\theta}} q(\boldsymbol{Z} , \boldsymbol{\theta}) \log \left[\frac{q(\boldsymbol{Z} , \boldsymbol{\theta})}{p(\boldsymbol{Z} , \boldsymbol{\theta} | \samples)} \right] } \]
 
             \vspace{-2.5mm}
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ $\equiv \mathcal{L}\left[q\right]$ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ $\equiv \KLqp$
@@ -286,7 +285,9 @@
 
     }
 
-    \only<5->{\Large \textcolor{red}{\vspace{-8mm} \begin{center} assumption $q(\boldsymbol{Z} , \boldsymbol{\theta}) = q(\boldsymbol{Z})q(\boldsymbol{\theta})$ \\ $\Rightarrow$ EM-like algorithm \end{center}}}
+    \vspace{5mm}
+
+    \only<4->{\Large \textcolor{red}{\vspace{-8mm} \begin{center} assumption $q(\boldsymbol{Z} , \boldsymbol{\theta}) = q(\boldsymbol{Z})q(\boldsymbol{\theta})$ \\ $\Rightarrow$ iterative solution \end{center}}}
 
 }
 
