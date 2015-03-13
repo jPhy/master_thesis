@@ -54,16 +54,34 @@
     $$ P(\boldsymbol{\theta} | \mathcal{D}, \mathrm{M} ) = \frac{P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M})P(\boldsymbol{\theta} | \mathrm{M})}{P(\mathcal{D} | \mathrm{M} )}
        = \frac{P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M})P(\boldsymbol{\theta} | \mathrm{M})}{\int P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M})P(\boldsymbol{\theta} | \mathrm{M}) d\boldsymbol{\theta} }$$
 
-    \only<2->{ \
-        \newline \newline \
-        {\large \red{model independent search for new physics {\tiny{}(effective theory)}:}} \
-        \
-        \newline \newline \
+    \uncover<2->{ \
+                \newline \newline \
+                {\large \red{model independent search for new physics {\tiny{}(effective theory)}:}} \
+                \
+                \newline \newline \
+                }
 
-        \only<3->{$$ \boldsymbol{\theta} = \text{{\tiny{}effective}}\mathrm{~couplings} $$}
-        \only<4->{$$ \mathcal{D} = \mathrm{detector~events} $$}
-        \only<5->{$$ \mathrm{M} = \mathrm{EFT , SM , ...} $$}
-    }
+    \begin{columns}
+
+        \column{.25\textwidth} % left column and width
+        \begin{center}
+            \uncover<3->{\includegraphics[width=0.53\textwidth]{figures/feynman_sm}}
+        \end{center}
+
+        \column{.5\textwidth} % middle column and width
+        \begin{center}
+
+                \uncover<3->{$ \boldsymbol{\theta} = \text{{\tiny{}effective}}\mathrm{~couplings~} \mathcal{C}_i $ \vspace{2mm}}
+                \uncover<4->{$ \mathcal{D} = \mathrm{detector~events} $ \vspace{2mm}}
+                \uncover<5->{$ \mathrm{M} = \mathrm{EFT , SM , ...} $ \vspace{2mm}}
+        \end{center}
+
+        \column{.25\textwidth} % right column and width
+        \begin{center}
+            \uncover<3->{\includegraphics[width=0.53\textwidth]{figures/feynman_eft}}
+        \end{center}
+
+    \end{columns}
 
 }
 
