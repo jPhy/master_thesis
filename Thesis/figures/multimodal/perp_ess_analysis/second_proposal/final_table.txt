@@ -1,0 +1,16 @@
+original_algorithm_15_components: 
+chain_groups components_first perp_first ess_first components_final perp_final ess_final N_importance
+ means: [  2.00000000e+00   3.00000000e+01   4.88393670e-01   2.89440820e-01
+   3.00000000e+01   5.09222119e-01   3.02632215e-01   4.30200000e+04]
+ std_dev: [  0.00000000e+00   0.00000000e+00   5.15277208e-02   6.50576452e-02
+   0.00000000e+00   7.82396429e-03   1.88787836e-02   1.35124185e+04]
+
+
+
+
+vb_only: 
+chain_groups components_first perp_first ess_first components_final perp_final ess_final N_importance
+ means: [  2.00000000e+00   2.07000000e+00   5.00547433e-01   3.18660465e-01
+   2.07000000e+00   5.27409919e-01   3.48983667e-01   6.00000000e+03]
+ std_dev: [ 0.          0.2564324   0.04931873  0.06127503  0.2564324   0.0196996
+  0.03364788  0.        ]

@@ -1,0 +1,12 @@
+
+Notes to write the Thesis
+#########################
+
+o Title should not exceed one line, otherwise automatic formatting in table of contents fails.
+
+Including Graphics
+------------------
+
+o Use format .svg (scalable vector graphics) if vector graphics possible, .png otherwise. Note that .pdf cannot be treated by LibreOffice.
+
+o matplotlib figures: Save as .svg in matplotlib. Then open with Inkscape and make sure that page properties are set to produce a "Portrait" oriented page. Print to .svg file.
