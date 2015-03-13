@@ -27,7 +27,8 @@
 \newcommand{\wilsonctenp}{\mathcal{C} ^{\prime} _{10}}
 \newcommand{\errorasymm}[3]{#1 \substack{\hspace{.05em} \scriptscriptstyle + \hspace{.05em} #2 \\ \scriptscriptstyle -#3} } % asymmetric uncertainties
 \newcommand{\gauss}{\mathcal{N}}
-\newcommand{\rmdx}[1]{\mbox{d} #1 \,} % differential d
+\newcommand{\diffd}[1]{\mbox{d} #1 \,} % differential d
+\newcommand{\dx}{\diffd{x}}
 \newcommand{\samples}{\boldsymbol{X}}
 \newcommand{\red}[1]{\textcolor{red}{#1}}
 
@@ -164,13 +165,13 @@
 
     \frametitle{Adaptive importance sampling}
 
-    $$ \int P(x) dx = \int \frac{P(x)}{p(x)} p(x) dx
+    $$ \int P(x) \dx = \int \frac{P(x)}{p(x)} p(x) \dx
     \approx \frac{1}{N} \sum^{N}_{n = 1} \frac{P(x_n)}{p(x_n)} \equiv \mu^{{N}} ~~ where ~~ x_n \sim p $$
 
 
     \uncover<2->{squared uncertainty (variance):
 
-    $$ \varmuN = \frac{1}{N} \left[ \int \frac{P(x)}{p(x)} P(x) dx - \left(\int P(x) dx \right)^2 \right] $$}
+    $$ \varmuN = \frac{1}{N} \left[ \int \frac{P(x)}{p(x)} P(x) \dx - \left(\int P(x) \dx \right)^2 \right] $$}
 
     \uncover<3->{\Huge\begin{center}\red{minimize the uncertainty $\varmuN$ with respect to $p$}\end{center} }
 
