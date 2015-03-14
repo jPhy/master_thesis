@@ -21,9 +21,9 @@
 % ----------------------------------------------------------------------
 
 \newcommand{\slide}[2][t]{\begin{frame}[#1] \frametitle{\insertsection} #2 \end{frame}}
-\newcommand{\KLPp}[0]{KL( P\|{}p)}
+\newcommand{\KLFp}[0]{KL( F\|{}p)}
 \newcommand{\KLqp}[0]{KL( q\|{}p)}
-\newcommand{\varmuN}{var(\mu^{N})}
+\newcommand{\varmuN}{var(\hat{\mu}^{N})}
 \newcommand{\wilsoncten }{\mathcal{C} ^{      } _{10}}
 \newcommand{\wilsonctenp}{\mathcal{C} ^{\prime} _{10}}
 \newcommand{\errorasymm}[3]{#1 \substack{\hspace{.05em} \scriptscriptstyle + \hspace{.05em} #2 \\ \scriptscriptstyle -#3} } % asymmetric uncertainties
@@ -66,20 +66,20 @@
 
         \column{.25\textwidth} % left column and width
         \begin{center}
-            \uncover<3->{\includegraphics[width=0.53\textwidth]{figures/feynman_sm}}
+            \uncover<3->{\includegraphics[width=0.8\textwidth]{figures/feynman_sm}}
         \end{center}
 
         \column{.5\textwidth} % middle column and width
         \begin{center}
 
-                \uncover<3->{$ \boldsymbol{\theta} = \text{{\tiny{}effective}}\mathrm{~couplings~} \mathcal{C}_i $ \vspace{2mm}}
+                \uncover<3->{$ \boldsymbol{\theta} = \mathrm{effective~couplings~} \mathcal{C}_i , ... $ \vspace{2mm}}
                 \uncover<4->{$ \mathcal{D} = \mathrm{detector~events} $ \vspace{2mm}}
                 \uncover<5->{$ \mathrm{M} = \mathrm{EFT , SM , ...} $ \vspace{2mm}}
         \end{center}
 
         \column{.25\textwidth} % right column and width
         \begin{center}
-            \uncover<3->{\includegraphics[width=0.53\textwidth]{figures/feynman_eft}}
+            \uncover<3->{\includegraphics[width=0.8\textwidth]{figures/feynman_eft}}
         \end{center}
 
     \end{columns}
@@ -185,20 +185,20 @@
 
     \frametitle{\insertsubsectionhead}
 
-    $$ \int P(x) \dx = \int \frac{P(x)}{p(x)} p(x) \dx
-    \approx \frac{1}{N} \sum^{N}_{n = 1} \frac{P(x_n)}{p(x_n)} \equiv \mu^{{N}} ~~ where ~~ x_n \sim p $$
+    $$ \int F(x) \dx = \int \frac{F(x)}{p(x)} p(x) \dx
+    \approx \frac{1}{N} \sum^{N}_{n = 1} \frac{F(x_n)}{p(x_n)} \equiv \hat{\mu}^{{N}} ~~ where ~~ x_n \sim p $$
 
 
     \only<2->{squared uncertainty (variance):
 
-    $$ \varmuN = \frac{1}{N} \left[ \int \frac{P(x)}{p(x)} P(x) \dx - \left(\int P(x) \dx \right)^2 \right] $$}
+    $$ \varmuN = \frac{1}{N} \left[ \int \frac{F(x)}{p(x)} F(x) \dx - \left(\int F(x) \dx \right)^2 \right] $$}
 
-    \only<3->{\begin{itemize} \item minimize the uncertainty $\varmuN$ with respect to $p$}
+    \only<3->{\begin{itemize} \item minimize $\varmuN$ with respect to the \emph{proposal} $p$}
 
         \only<4->{\begin{itemize}
-                      \item[--] it suffices to minimize: ~~ $\mathrm{log} \left( \int \frac{P(x)}{p(x)} P(x) \dx \right)$}
-        \only<5->{    \item[--] by Jensen's inequality:     $\geq \int \mathrm{log} \left( \frac{P(x)}{p(x)} \right) P(x) \dx
-                                                            \only<6->{\equiv \KLPp}$}
+                      \item[--] it suffices to minimize: ~~ $\mathrm{log} \left( \int \frac{F(x)}{p(x)} F(x) \dx \right)$}
+        \only<5->{    \item[--] by Jensen's inequality:     $\geq \int \mathrm{log} \left( \frac{F(x)}{p(x)} \right) F(x) \dx
+                                                            \only<6->{\equiv \KLFp}$}
         \only<6->{    \vspace{1.5mm}
                       \item[--] known as the \emph{Kullback-Leibler divergence}}
         \only<4->{\end{itemize}}
@@ -215,9 +215,9 @@
         \begin{center}
             \begin{tabular}{lcrcc}
 
-                \only<2->{$0 \leq \KLPp$   & and & $  \KLPp = 0$ & $\Leftrightarrow$ & $P=p$ \\}
+                \only<2->{$0 \leq \KLFp$   & and & $  \KLFp = 0$ & $\Leftrightarrow$ & $F=p$ \\}
                 \\ % empty row
-                \only<3->{$0 \leq \varmuN$ & and & $\varmuN = 0$ & $\Leftrightarrow$ & $P=p$ \\}
+                \only<3->{$0 \leq \varmuN$ & and & $\varmuN = 0$ & $\Leftrightarrow$ & $F=p$ \\}
 
             \end{tabular}
         \end{center} \vspace{5mm}
@@ -228,8 +228,8 @@
 
         \begin{center}
 
-                \only<4 >{~$\varmuN - const =                         \mathrm{log} \left( \int \frac{P(x)}{p(x)} P(x) \dx \right)  \geq \KLPp$}
-                \only<5->{ $\varmuN - const = \underbrace{\textstyle{}\mathrm{log} \left( \int \frac{P(x)}{p(x)} P(x) \dx \right)} \geq \KLPp$}
+                \only<4 >{~$\varmuN - const =                         \mathrm{log} \left( \int \frac{F(x)}{p(x)} F(x) \dx \right)  \geq \KLFp$}
+                \only<5->{ $\varmuN - const = \underbrace{\textstyle{}\mathrm{log} \left( \int \frac{F(x)}{p(x)} F(x) \dx \right)} \geq \KLFp$}
 
         \end{center}
 
@@ -237,7 +237,7 @@
 
     }
 
-    \only<6->{\vspace{4mm}{}\begin{center}\Large{}\textcolor{red}{minimize $\KLPp$ and hope to approach the unique global minimum $P=p$}{}\end{center}}
+    \only<6->{\vspace{4mm}{}\begin{center}\Large{}\textcolor{red}{minimize $\KLFp$ and hope to approach the unique global minimum $F=p$}{}\end{center}}
 
 }
 
@@ -288,7 +288,7 @@
 
     \frametitle{\insertsubsectionhead}
 
-        \[ \text{minimize} ~ \KLPp \uncover<2->{\Leftrightarrow \text{maximize} ~ \log p(\boldsymbol{X} | \boldsymbol{\theta}) \equiv \log \prod^{N}_{n = 1} p(x_n | \boldsymbol{\theta})} \]
+        \[ \text{minimize} ~ \KLFp \uncover<2->{\Leftrightarrow \text{maximize} ~ \log p(\boldsymbol{X} | \boldsymbol{\theta}) \equiv \log \prod^{N}_{n = 1} p(x_n | \boldsymbol{\theta})} \]
 
     \only<2->{
 
