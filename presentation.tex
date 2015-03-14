@@ -22,7 +22,7 @@
 \newcommand{\slide}[2][t]{\begin{frame}[#1] \frametitle{\insertsection} #2 \end{frame}}
 \newcommand{\KLPp}[0]{KL( P\|{}p)}
 \newcommand{\KLqp}[0]{KL( q\|{}p)}
-\newcommand{\varmuN}{var(\mu^{N})}
+\newcommand{\varmuN}{var(\hat{\mu}^{N})}
 \newcommand{\wilsoncten }{\mathcal{C} ^{      } _{10}}
 \newcommand{\wilsonctenp}{\mathcal{C} ^{\prime} _{10}}
 \newcommand{\errorasymm}[3]{#1 \substack{\hspace{.05em} \scriptscriptstyle + \hspace{.05em} #2 \\ \scriptscriptstyle -#3} } % asymmetric uncertainties
@@ -65,20 +65,20 @@
 
         \column{.25\textwidth} % left column and width
         \begin{center}
-            \uncover<3->{\includegraphics[width=0.53\textwidth]{figures/feynman_sm}}
+            \uncover<3->{\includegraphics[width=0.8\textwidth]{figures/feynman_sm}}
         \end{center}
 
         \column{.5\textwidth} % middle column and width
         \begin{center}
 
-                \uncover<3->{$ \boldsymbol{\theta} = \text{{\tiny{}effective}}\mathrm{~couplings~} \mathcal{C}_i $ \vspace{2mm}}
+                \uncover<3->{$ \boldsymbol{\theta} = \mathrm{effective~couplings~} \mathcal{C}_i , ...$ \vspace{2mm}}
                 \uncover<4->{$ \mathcal{D} = \mathrm{detector~events} $ \vspace{2mm}}
                 \uncover<5->{$ \mathrm{M} = \mathrm{EFT , SM , ...} $ \vspace{2mm}}
         \end{center}
 
         \column{.25\textwidth} % right column and width
         \begin{center}
-            \uncover<3->{\includegraphics[width=0.53\textwidth]{figures/feynman_eft}}
+            \uncover<3->{\includegraphics[width=0.8\textwidth]{figures/feynman_eft}}
         \end{center}
 
     \end{columns}
@@ -184,14 +184,14 @@
     \frametitle{Adaptive importance sampling}
 
     $$ \int P(x) \dx = \int \frac{P(x)}{q(x)} q(x) \dx
-    \approx \frac{1}{N} \sum^{N}_{n = 1} \frac{P(x_n)}{q(x_n)} \equiv \mu^{{N}} ~~ where ~~ x_n \sim q $$
+    \approx \frac{1}{N} \sum^{N}_{n = 1} \frac{P(x_n)}{q(x_n)} \equiv \hat{\mu}^{{N}} ~~ where ~~ x_n \sim q $$
 
 
     \uncover<2->{squared uncertainty (variance):
 
     $$ \varmuN = \frac{1}{N} \left[ \int \frac{P(x)}{q(x)} P(x) \dx - \left(\int P(x) \dx \right)^2 \right] $$}
 
-    \uncover<3->{\Huge\begin{center}\red{minimize the uncertainty $\varmuN$ with respect to $q$}\end{center} }
+    \uncover<3->{\Huge\begin{center}\red{minimize $\varmuN$ with respect to the \emph{proposal} $q$}\end{center} }
 
 }
 
@@ -314,7 +314,7 @@
 
 \slide[c]{
 
-    \frametitle{Joint fit of $\mathcal{C}_{10} ^{(\prime)} , \mathcal{C}_S ^{(\prime)} , \mathcal{C}_P ^{(\prime)} , \mathcal{C}_T , \text{and} ~ \mathcal{C}_{T5}$}
+    \frametitle{Joint fit of $\mathcal{C}_{10} ^{(\prime)} , \mathcal{C}_S ^{(\prime)} , \mathcal{C}_P ^{(\prime)} , \mathcal{C}_T , \mathcal{C}_{T5}$,\tiny \thinspace and 29 nuisance parameters}
 
     \vspace{6mm}
 
