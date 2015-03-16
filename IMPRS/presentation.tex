@@ -1,0 +1,396 @@
+%% 15min talk
+
+\documentclass[english]{beamer}
+\usetheme{Warsaw}
+\setbeamertemplate{navigation symbols}{} % remove the navigation symbols
+\setbeamertemplate{headline}{} % remove headline
+\setbeamertemplate{footline}[frame number]
+
+\usepackage{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+\usepackage{wasysym}
+\usepackage{diagmac2}
+\usepackage{cancel}
+
+\title{Beyond-the-standard-model contributions to rare B decays analyzed with variational-Bayes enhanced adaptive importance sampling}
+\author{Stephan Jahn}
+\date{March 16, 2015}
+
+% ----------------------------------------------------------------------
+
+\newcommand{\slide}[2][t]{\begin{frame}[#1] \frametitle{\insertsection} #2 \end{frame}}
+\newcommand{\KLPp}[0]{KL( P\|{}p)}
+\newcommand{\KLqp}[0]{KL( q\|{}p)}
+\newcommand{\varmuN}{var(\hat{\mu}^{N})}
+\newcommand{\wilsoncten }{\mathcal{C} ^{      } _{10}}
+\newcommand{\wilsonctenp}{\mathcal{C} ^{\prime} _{10}}
+\newcommand{\errorasymm}[3]{#1 \substack{\hspace{.05em} \scriptscriptstyle + \hspace{.05em} #2 \\ \scriptscriptstyle -#3} } % asymmetric uncertainties
+\newcommand{\gauss}{\mathcal{N}}
+\newcommand{\diffd}[1]{\mbox{d} #1 \,} % differential d
+\newcommand{\dx}{\diffd{x}}
+\newcommand{\samples}{\boldsymbol{X}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+
+\setbeamercolor{block title}{bg=blue, fg=white}
+
+\begin{document}
+
+% ----------------------- title page, unnumbered -----------------------
+
+{
+\setbeamertemplate{footline}{}
+\frame[nopagenumbering,noframenumbering]{\titlepage}
+}
+
+% -------------------------- overview section --------------------------
+
+\section{Overview}
+
+\slide[t]{
+
+    Bayes' formula:
+    \newline \newline
+    $$ P(\boldsymbol{\theta} | \mathcal{D}, \mathrm{M} ) = \frac{P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M})P(\boldsymbol{\theta} | \mathrm{M})}{P(\mathcal{D} | \mathrm{M} )}
+       = \frac{P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M})P(\boldsymbol{\theta} | \mathrm{M})}{\int P(\mathcal{D}|\boldsymbol{\theta}, \mathrm{M})P(\boldsymbol{\theta} | \mathrm{M}) d\boldsymbol{\theta} }$$
+
+    \uncover<2->{ \
+                \newline \newline \
+                {\large \red{model independent search for new physics {\tiny{}(effective theory)}:}} \
+                \
+                \newline \newline \
+                }
+
+    \begin{columns}
+
+        \column{.25\textwidth} % left column and width
+        \begin{center}
+            \uncover<3->{\includegraphics[width=0.8\textwidth]{figures/feynman_sm}}
+        \end{center}
+
+        \column{.5\textwidth} % middle column and width
+        \begin{center}
+
+                \uncover<3->{$ \boldsymbol{\theta} = \mathrm{effective~couplings~} \mathcal{C}_i , ...$ \vspace{2mm}}
+                \uncover<4->{$ \mathcal{D} = \mathrm{detector~events} $ \vspace{2mm}}
+                \uncover<5->{$ \mathrm{M} = \mathrm{EFT , SM , ...} $ \vspace{2mm}}
+        \end{center}
+
+        \column{.25\textwidth} % right column and width
+        \begin{center}
+            \uncover<3->{\includegraphics[width=0.8\textwidth]{figures/feynman_eft}}
+        \end{center}
+
+    \end{columns}
+
+}
+
+
+\slide[t]{
+
+{\large\textbf{Goals}}
+
+\begin{columns}[t] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
+
+\column{.45\textwidth} % Left column and width
+
+\only<2->{\begin{itemize}
+              \item draw marginal plots of the posterior
+              \
+              \newline
+
+              \hspace{-1.2cm} \includegraphics[width=1.01\textwidth]{figures/C10p_CP}
+
+          \end{itemize}}
+
+\column{.5\textwidth} % Right column and width
+
+\only<3->{\begin{itemize}
+          \item compare models \newline $\mathrm{NP} \leftrightarrow \mathrm{SM}$
+          \end{itemize}
+
+              $$ \frac{P(\mathrm{NP}|\mathcal{D})}{P(\mathrm{SM}|\mathcal{D})} =
+                 \frac{P(\mathcal{D}|\mathrm{NP})}{P(\mathcal{D}|\mathrm{SM})} \cdot \frac{P(\mathrm{NP})}{P(\mathrm{SM})} $$
+
+              $$ P(\mathrm{M} | \mathcal{D} ) = \frac{P(\mathcal{D} | \mathrm{M})P(\mathrm{M})}{P(\mathcal{D})} $$
+
+          \begin{itemize}
+          \item[]
+              \begin{itemize}
+                  \item[] \only<4->{\hspace{-0.1\textwidth} $\frac{P(\mathrm{NP}|\mathcal{D})}{P(\mathrm{SM}|\mathcal{D})} > 1$ new physics \smiley{} \newline}
+                  \item[] \only<5->{\hspace{-0.1\textwidth} $\frac{P(\mathrm{NP}|\mathcal{D})}{P(\mathrm{SM}|\mathcal{D})} < 1$ confirm SM \frownie{}}
+              \end{itemize}
+          \end{itemize}}
+
+\end{columns}
+
+}
+
+
+
+
+
+\slide[t]{
+
+{\large\textbf{Difficulties}}
+
+\begin{columns}[t] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
+
+\column{.45\textwidth} % Left column and width
+
+\vspace{0.65cm} % to center the text
+
+\only<2->{\begin{itemize}}
+\only<2->{\item curse of dimensionality}
+\only<3->{\item multimodality}
+\only<4->{\item degeneracies}
+\only<2->{\end{itemize}}
+
+\only<5->{\Huge \textcolor{red}{no standard algorithm so far}}
+
+\column{.5\textwidth} % Right column and width
+
+\vspace{-8mm}
+
+\begin{center}
+\only<3->{\includegraphics[height=0.4\textheight]{figures/C10_C10p}}
+
+\only<4->{\includegraphics[height=0.43\textheight]{figures/example_for_degeneracy}}
+\end{center}
+
+
+\end{columns}
+
+}
+
+% ------------------------------ toc page ------------------------------
+
+\begin{frame}
+\frametitle{Contents}
+\tableofcontents
+\end{frame}
+
+% ----------------------------- VB section -----------------------------
+
+\section{Adaptive importance sampling with the variational-Bayes approach}
+
+\begin{frame}
+\frametitle{\insertsectionhead}
+\tableofcontents[currentsection]
+\end{frame}
+
+\slide[c]{
+
+    \frametitle{Adaptive importance sampling}
+
+    $$ \int P(x) \dx = \int \frac{P(x)}{q(x)} q(x) \dx
+    \approx \frac{1}{N} \sum^{N}_{n = 1} \frac{P(x_n)}{q(x_n)} \equiv \hat{\mu}^{{N}} ~~ where ~~ x_n \sim q $$
+
+
+    \uncover<2->{squared uncertainty (variance):
+
+    $$ \varmuN = \frac{1}{N} \left[ \int \frac{P(x)}{q(x)} P(x) \dx - \left(\int P(x) \dx \right)^2 \right] $$}
+
+    \uncover<3->{\Huge\begin{center}\red{minimize $\varmuN$ with respect to the \emph{proposal} $q$}\end{center} }
+
+}
+
+\slide[c]{
+
+    \includegraphics[width=\textwidth]{figures/algorithm}
+
+}
+
+\slide{
+
+    \frametitle{{\fontfamily{qcr}\selectfont pypmc}}
+
+    \vspace{3mm}
+
+    %                                         trim= l b r t  ; crop the (not clickable) link on top and write it below
+    \includegraphics[width=\textwidth,page=6, trim= 0 0 0 5cm, clip]{figures/presentation_22_april}
+
+
+
+    \begin{center}
+        \url{https://pypi.python.org/pypi/pypmc}
+    \end{center}
+
+}
+
+% ------------------------- B-physics section --------------------------
+
+\renewcommand{\slide}[2][t]{\begin{frame}[#1] \frametitle{\insertsubsectionhead} #2 \end{frame}}
+
+\section{Model independent search for new physics}
+
+\begin{frame}
+\frametitle{\insertsectionhead}
+\tableofcontents[currentsection]
+\end{frame}
+
+\slide[c]{
+
+    \frametitle{Motivation}
+
+    {\large\textbf{The standard model (SM) of particle physics cannot explain:}}
+
+    \begin{itemize}
+
+        \item dark matter
+        \item neutrino masses
+        \item hierarchy problem %TODO: look up what exactly it is
+        \item strong CP problem
+        \item ...
+
+    \end{itemize}
+
+    \vspace{5mm}
+
+    \begin{center}
+        \uncover<2->{ {\Huge \red{new physics (NP) required}} } \\
+        \uncover<3->{ {\large \red{exact structure unknown $\Rightarrow$ model independent analysis}} }
+    \end{center}
+
+}
+
+\newcommand{\redsecond}[1]{\uncover<2->{\textcolor{red}{#1}}}
+\slide{
+
+    \frametitle{Effective theory}
+
+    effective Lagrangian for $ b \to s \ell^+ \ell^- $ (\only<1>{$\mathrm{SM}$}\only<2>{\red{beyond}-$\mathrm{SM}$}):
+
+    $$ \mathcal{L}_{int} = \frac{4 G_F}{\sqrt{2}} \frac{\alpha_e}{4\pi} V_{tb}^{} V_{ts}^\ast \sum_i \mathcal{C}_i \mathcal{O}_i + ... + \text{h.c.} $$
+
+    % ~ \newline
+
+    \begin{center}
+      \begin{tabular}{cc}
+          \small $ \mathcal{O}_{9} ^{\redsecond{(\prime)}} = \left[\bar{s} \gamma_\mu^{} P_{L\redsecond{(R)}} b\right]\!\left[\bar{\ell} \gamma^\mu \ell\right] $
+                & \small $  \mathcal{O}_{10}^{\redsecond{(\prime)}} = \left[\bar{s} \gamma_\mu^{} P_{L\redsecond{(R)}} b\right]\!\left[\bar{\ell} \gamma^\mu \gamma_5 \ell\right] $ \\[1cm]
+          \Large $ \begin{aligned}
+                \redsecond{\mathcal{O}_S^{(\prime)}}    & \redsecond{= \left[\bar{s} P_{R\redsecond{(L)}} b\right]\!\left[\bar{\ell} \ell\right]} \\[5mm]
+                \redsecond{\mathcal{O}_T}               & \redsecond{= \left[\bar{s} \sigma_{\mu\nu}^{} b\right]\!\left[\bar{\ell} \sigma^{\mu\nu} \ell\right] }
+          \end{aligned} $ & \Large $ \begin{aligned}
+                \redsecond{\mathcal{O}_P^{(\prime)}}    & \redsecond{= \left[\bar{s} P_{R(L)} b\right]\!\left[\bar{\ell} \gamma_5 \ell\right] } \\[5mm]
+                \redsecond{\mathcal{O}_{T5}}            & \redsecond{= \left[\bar{s} \sigma_{\mu\nu}^{} b\right]\!\left[\bar{\ell} \sigma^{\mu\nu} \gamma_5 \ell\right] }
+          \end{aligned} $
+     \end{tabular}
+
+    \only<1>{\vspace{-2cm}\includegraphics[width=0.5\textwidth]{figures/theo_to_obs}}
+
+    \end{center}
+
+}
+
+\slide[c]{
+
+    \frametitle{Experimental constraints}
+
+    \begin{itemize}
+        \item $B\rightarrow K\mu^+\mu^-$: $\mathcal{B} , \red{A_{FB}} , \red{F_H}$
+        \begin{itemize}
+            \item \red{LHCb 2014 {\tiny (\href{http://arXiv.org/abs/1403.8044}{arXiv:1403.8044} , \href{http://arXiv.org/abs/1403.8045}{arXiv:1403.8045})}}
+            \item CDF~ 2012 {\tiny (\url{http://www-cdf.fnal.gov/physics/new/bottom/120628.blessed-b2smumu_96})}
+        \end{itemize}
+
+        \item $B_s\rightarrow\mu^+\mu^-$: $\mathcal{B}$
+
+        \begin{itemize}
+            \item \red{LHCb+CMS 2014 {\tiny({\href{http://arXiv.org/abs/1411.4413}{arXiv:1411.4413}})}}
+        \end{itemize}
+
+        \item $B\rightarrow K^\ast\mu^+\mu^-$: $\mathcal{B}$
+
+        \begin{itemize}
+            \item LHCb 2013 {\tiny({\href{http://arXiv.org/abs/1304.6325}{arXiv:1304.6325}})}
+            \item CMS~ 2013 {\tiny({\href{http://arXiv.org/abs/1308.3409}{arXiv:1308.3409}})}
+            \item CDF~ 2012 {\tiny (\url{http://www-cdf.fnal.gov/physics/new/bottom/120628.blessed-b2smumu_96})}
+        \end{itemize}
+    \end{itemize}
+
+}
+
+\slide[c]{
+
+    \frametitle{Joint fit of $\mathcal{C}_{10} ^{(\prime)} , \mathcal{C}_S ^{(\prime)} , \mathcal{C}_P ^{(\prime)} , \mathcal{C}_T , \mathcal{C}_{T5}$,\tiny \thinspace and 29 nuisance parameters}
+
+    \vspace{6mm}
+
+    \begin{columns}[c]
+        \column{0.65\textwidth}
+            \includegraphics[width=\textwidth]{figures/Wilson_coeff_2d}
+
+        \column{0.35\textwidth}
+            \begin{itemize}
+                \uncover<2->{\item first \emph{simultaneous} fit}
+                \uncover<3->{\item interference $\mathcal{C}_{10} ^{(\prime)} \leftrightarrow \mathcal{C}_{S,P} ^{(\prime)}$
+                        in $ \mathcal{B}(B_s\rightarrow \mu^+\mu^-) $
+                            \begin{itemize}
+                                \uncover<4->{\item[$\Rightarrow$] larger uncertainty than obtained for fixed $\mathcal{C}_{10} ^{(\prime)} = \mathcal{C}_{10} ^{(\prime) \mathrm{SM}}$ \newline {\tiny \href{http://arXiv.org/abs/1205.5811}{arXiv:1205.5811}, \href{http://arXiv.org/abs/1206.0273}{arXiv:1206.0273}, \href{http://arXiv.org/abs/1407.7044}{arXiv:1407.7044}}}
+                            \end{itemize}
+                      }
+            \end{itemize}
+            \vspace{6.5mm}
+
+    \end{columns}
+
+}
+
+\section{Summary}
+
+\slide[c]{
+
+    \frametitle{\insertsectionhead}
+
+    \begin{columns}[t] % [t]: top alignment; [c]: center alignment
+
+        \column{0.5\textwidth}
+            \uncover<2->{
+                \begin{center}
+                    {\begin{center}\large\textbf{algorithm to sample and integrate in $\boldsymbol{dim=\mathcal{O}(40)}$}\end{center}}
+                    \vspace{9mm}
+                    \includegraphics[width=0.9\textwidth]{figures/algorithm}
+                \end{center}
+            }
+
+
+        \column{0.5\textwidth}
+            \uncover<3->{
+                {\begin{center}\large\textbf{model-independent search for new physics}\end{center}}
+
+                \begin{itemize}
+                    \uncover<4->{\item \red{simultaneous} fit of $\mathcal{C}_{10} ^{(\prime)} , \mathcal{C}_S ^{(\prime)} , \mathcal{C}_P ^{(\prime)} , \mathcal{C}_T , \text{and} ~ \mathcal{C}_{T5}$
+                                 \begin{itemize} \item[$\Rightarrow$] updated constraints \end{itemize}} \
+
+                    \uncover<5->{\item no significant deviation from the SM}
+                \end{itemize}
+            }
+
+
+    \end{columns}
+
+}
+
+\slide[t,nopagenumbering,noframenumbering]{
+
+    \frametitle{Nuisance parameters}
+
+    \begin{center}
+        \includegraphics[width=0.9\textwidth]{figures/FF_ft0}
+    \end{center}
+
+}
+
+\slide[nopagenumbering,noframenumbering]{
+
+    \frametitle{Nuisance parameters}
+
+    \begin{center}
+        \includegraphics[width=0.9\textwidth]{figures/SL_large_recoil}
+    \end{center}
+
+}
+
+\end{document}
